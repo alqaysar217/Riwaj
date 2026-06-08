@@ -57,16 +57,20 @@ export function MerchantSidebar() {
 
   return (
     <Sidebar side="right" className="border-l bg-white">
-      <SidebarHeader className="h-20 flex items-center justify-center border-b px-6">
-        <Link href="/merchant/dashboard" className="flex items-center gap-3">
-          <Image 
-            src="/logo.png" 
-            alt="رواج" 
-            width={42} 
-            height={42} 
-            className="object-contain"
-          />
-          <span className="text-2xl font-headline font-bold text-primary">رواج</span>
+      <SidebarHeader className="h-24 flex items-center justify-start border-b px-6">
+        <Link href="/merchant/dashboard" className="flex items-center gap-4 group">
+          <div className="relative">
+             {/* Glow Effect */}
+             <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+             <Image 
+              src="/logo.png" 
+              alt="رواج" 
+              width={52} 
+              height={52} 
+              className="object-contain relative z-10 drop-shadow-[0_4px_12px_rgba(15,118,110,0.25)] transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+          <span className="text-3xl font-headline font-bold text-primary tracking-tight">رواج</span>
         </Link>
       </SidebarHeader>
 
