@@ -1,8 +1,8 @@
-
 "use client"
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Search, ShoppingCart, User, Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -24,8 +24,18 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="text-2xl font-headline font-bold text-primary">رواج</span>
+        <Link href="/" className="flex items-center gap-2 shrink-0 group">
+          <div className="relative">
+            <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <Image 
+              src="/logo.png" 
+              alt="رواج" 
+              width={36} 
+              height={36} 
+              className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+          <span className="text-2xl font-headline font-bold text-primary tracking-tight">رواج</span>
         </Link>
 
         {/* Search Bar */}
@@ -34,33 +44,33 @@ export function Header() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="ابحث عن البن، العسل، أو الحرف اليدوية..." 
-            className="pr-10 bg-muted/30 border-none focus-visible:ring-1 focus-visible:ring-primary/20"
+            className="pr-10 bg-muted/30 border-none focus-visible:ring-1 focus-visible:ring-primary/20 rounded-xl"
           />
-          <Button type="submit" variant="ghost" size="icon" className="absolute right-0 top-0 h-full hover:bg-transparent">
-            <Search className="w-4 h-4 text-muted-foreground" />
+          <Button type="submit" variant="ghost" size="icon" className="absolute right-0 top-0 h-full hover:bg-transparent text-muted-foreground hover:text-primary transition-colors">
+            <Search className="w-4 h-4" />
           </Button>
         </form>
 
         {/* Actions */}
         <div className="flex items-center gap-1 sm:gap-3">
-          <Button variant="ghost" size="icon" className="md:hidden" asChild>
+          <Button variant="ghost" size="icon" className="md:hidden text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl" asChild>
             <Link href="/search">
               <Search className="w-5 h-5" />
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" className="relative" asChild>
+          <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl" asChild>
             <Link href="/notifications">
               <Bell className="w-5 h-5" />
-              <Badge className="absolute -top-1 -right-1 w-4 h-4 p-0 flex items-center justify-center bg-secondary text-[8px]">2</Badge>
+              <Badge className="absolute top-1 left-1 w-4 h-4 p-0 flex items-center justify-center bg-secondary text-white text-[8px] border-2 border-white">2</Badge>
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" asChild>
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl" asChild>
             <Link href="/cart">
               <ShoppingCart className="w-5 h-5" />
             </Link>
           </Button>
           <div className="hidden sm:block">
-            <Button variant="ghost" size="icon" asChild>
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl" asChild>
               <Link href="/profile">
                 <User className="w-5 h-5" />
               </Link>
