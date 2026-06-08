@@ -42,7 +42,9 @@ import {
   CheckCircle2,
   Edit2,
   Copy,
-  MessageCircle
+  MessageCircle,
+  MapPin,
+  PlusCircle
 } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { cn } from "@/lib/utils"
@@ -64,6 +66,7 @@ export default function CartPage() {
   const [showNote, setShowNote] = useState(false)
   const [showCoupon, setShowCoupon] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState<string>("")
+  const [selectedAddressId, setSelectedAddressId] = useState<string>("")
   const [note, setNote] = useState("")
   const [coupon, setCoupon] = useState("")
   const [walletBalance] = useState(50000)
@@ -73,6 +76,11 @@ export default function CartPage() {
     { id: "busairi", name: "شركة البسيري للصرافة", account: "7654321", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/busairi/100/100" },
     { id: "dawood", name: "بن دول للصرافة", account: "9876543", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/dawood/100/100" },
     { id: "amjad", name: "أمجاد حضرموت", account: "1122334", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/amjad/100/100" },
+  ]
+
+  const savedAddresses = [
+    { id: "addr1", title: "المنزل", details: "صنعاء، حي حدة، شارع الخمسين" },
+    { id: "addr2", title: "العمل", details: "صنعاء، التحرير، عمارة البركة" },
   ]
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)
@@ -141,7 +149,7 @@ export default function CartPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-6">
-            {/* Products Table - Enhanced for Mobile Visibility */}
+            {/* Products Table */}
             <div className="bg-white rounded-3xl border shadow-sm overflow-hidden">
               <div className="overflow-x-auto no-scrollbar">
                 <Table className="min-w-[400px] md:min-w-full">
@@ -346,6 +354,57 @@ export default function CartPage() {
                 </div>
               )}
             </div>
+
+            {/* Shipping Address Selection */}
+            {paymentMethod && (
+              <div className="bg-white p-6 rounded-3xl border shadow-sm space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex items-center justify-between">
+                  <h2 className="font-headline font-bold text-lg text-primary flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-secondary" /> عنوان التوصيل
+                  </h2>
+                  <Button variant="ghost" size="sm" asChild className="text-primary hover:bg-primary/5 text-xs font-bold gap-1">
+                    <Link href="/addresses">
+                      <PlusCircle className="w-3.5 h-3.5" /> إضافة عنوان جديد
+                    </Link>
+                  </Button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {savedAddresses.map((address) => (
+                    <div 
+                      key={address.id}
+                      onClick={() => setSelectedAddressId(address.id)}
+                      className={cn(
+                        "p-4 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 relative overflow-hidden group",
+                        selectedAddressId === address.id 
+                          ? "border-primary bg-primary/[0.02] shadow-md ring-1 ring-primary" 
+                          : "bg-white border-border hover:border-primary/40"
+                      )}
+                    >
+                      <div className={cn(
+                        "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                        selectedAddressId === address.id ? "bg-primary text-white" : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
+                      )}>
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-sm mb-0.5">{address.title}</p>
+                        <p className="text-[11px] text-muted-foreground leading-tight line-clamp-1">{address.details}</p>
+                      </div>
+                      {selectedAddressId === address.id && (
+                        <div className="absolute top-2 left-2">
+                          <CheckCircle2 className="w-4 h-4 text-primary" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                
+                {!selectedAddressId && (
+                  <p className="text-[10px] text-destructive font-bold animate-pulse">يرجى اختيار عنوان لتوصيل الطلب</p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Checkout Sidebar */}
@@ -373,7 +432,7 @@ export default function CartPage() {
 
               <div className="space-y-3">
                 <Button 
-                  disabled={!paymentMethod || (paymentMethod === 'wallet' && walletBalance < total)}
+                  disabled={!paymentMethod || !selectedAddressId || (paymentMethod === 'wallet' && walletBalance < total)}
                   className="w-full bg-secondary hover:bg-secondary/90 text-white h-14 text-lg font-bold rounded-2xl shadow-lg shadow-secondary/20 gap-2"
                 >
                   تأكيد وإتمام الشراء <CheckCircle2 className="w-5 h-5" />
