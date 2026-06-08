@@ -1,10 +1,11 @@
+
 "use client"
 
 import { useState } from "react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
-import { MapPin, Plus, ArrowRight, Trash2, X } from "lucide-react"
+import { MapPin, Plus, ArrowRight, Trash2, Navigation, User } from "lucide-react"
 import Link from "next/link"
 import {
   Dialog,
@@ -16,6 +17,13 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export default function AddressesPage() {
   const [addresses, setAddresses] = useState([
@@ -23,14 +31,31 @@ export default function AddressesPage() {
     { id: 2, title: "العمل", details: "صنعاء، التحرير، عمارة البركة", phone: "77XXXXXXX" },
   ])
 
-  const [newAddress, setNewAddress] = useState({ title: "", details: "", phone: "" })
+  const [addressType, setAddressType] = useState<string>("home")
+  const [newAddress, setNewAddress] = useState({ 
+    title: "", 
+    details: "", 
+    phone: "",
+    recipientName: "" 
+  })
   const [isOpen, setIsOpen] = useState(false)
 
   const handleAddAddress = () => {
-    if (newAddress.title && newAddress.details && newAddress.phone) {
+    let finalTitle = ""
+    if (addressType === "home") finalTitle = "المنزل"
+    else if (addressType === "work") finalTitle = "العمل"
+    else finalTitle = newAddress.title || "عنوان مخصص"
+
+    if (newAddress.details && newAddress.phone) {
       const id = Date.now()
-      setAddresses([...addresses, { ...newAddress, id }])
-      setNewAddress({ title: "", details: "", phone: "" })
+      setAddresses([...addresses, { 
+        id, 
+        title: finalTitle, 
+        details: newAddress.details, 
+        phone: newAddress.phone 
+      }])
+      setNewAddress({ title: "", details: "", phone: "", recipientName: "" })
+      setAddressType("home")
       setIsOpen(false)
     }
   }
@@ -58,21 +83,50 @@ export default function AddressesPage() {
                   <Plus className="w-4 h-4" /> إضافة عنوان
                 </Button>
               </DialogTrigger>
-              <DialogContent className="rounded-3xl sm:max-w-md border-none shadow-2xl">
+              <DialogContent className="rounded-3xl sm:max-w-md border-none shadow-2xl [&>button]:left-4 [&>button]:right-auto">
                 <DialogHeader className="text-right">
                   <DialogTitle className="text-xl font-headline font-bold text-primary">إضافة عنوان جديد</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4 py-6">
                   <div className="space-y-2">
-                    <Label htmlFor="title" className="text-right block font-bold text-xs">لقب العنوان (مثلاً: المنزل، المكتب)</Label>
-                    <Input 
-                      id="title" 
-                      value={newAddress.title}
-                      onChange={(e) => setNewAddress({...newAddress, title: e.target.value})}
-                      placeholder="مثال: المنزل" 
-                      className="rounded-xl h-12 bg-muted/30 border-none"
-                    />
+                    <Label className="text-right block font-bold text-xs">نوع العنوان</Label>
+                    <Select value={addressType} onValueChange={setAddressType}>
+                      <SelectTrigger className="rounded-xl h-12 bg-muted/30 border-none">
+                        <SelectValue placeholder="اختر نوع العنوان" />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-xl">
+                        <SelectItem value="home">المنزل</SelectItem>
+                        <SelectItem value="work">العمل</SelectItem>
+                        <SelectItem value="other">أخرى</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
+
+                  {addressType === "other" && (
+                    <>
+                      <div className="space-y-2">
+                        <Label htmlFor="recipientName" className="text-right block font-bold text-xs">اسم مستلم الطلب</Label>
+                        <Input 
+                          id="recipientName" 
+                          value={newAddress.recipientName}
+                          onChange={(e) => setNewAddress({...newAddress, recipientName: e.target.value})}
+                          placeholder="مثلاً: محمد علي" 
+                          className="rounded-xl h-12 bg-muted/30 border-none"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="title" className="text-right block font-bold text-xs">لقب العنوان</Label>
+                        <Input 
+                          id="title" 
+                          value={newAddress.title}
+                          onChange={(e) => setNewAddress({...newAddress, title: e.target.value})}
+                          placeholder="مثلاً: المزرعة، الاستراحة" 
+                          className="rounded-xl h-12 bg-muted/30 border-none"
+                        />
+                      </div>
+                    </>
+                  )}
+
                   <div className="space-y-2">
                     <Label htmlFor="details" className="text-right block font-bold text-xs">العنوان بالتفصيل</Label>
                     <Input 
@@ -83,6 +137,7 @@ export default function AddressesPage() {
                       className="rounded-xl h-12 bg-muted/30 border-none"
                     />
                   </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-right block font-bold text-xs">رقم الهاتف للتواصل</Label>
                     <Input 
@@ -94,6 +149,10 @@ export default function AddressesPage() {
                       dir="ltr"
                     />
                   </div>
+
+                  <Button variant="outline" className="w-full rounded-xl h-12 border-primary/20 text-primary gap-2 hover:bg-primary/5 font-bold">
+                    <Navigation className="w-4 h-4" /> تحديد موقعي بالأحداثيات على الخريطة
+                  </Button>
                 </div>
                 <DialogFooter className="flex gap-3 sm:justify-start">
                   <Button className="flex-1 rounded-xl h-12 font-bold bg-primary hover:bg-primary/90" onClick={handleAddAddress}>حفظ العنوان</Button>
@@ -114,9 +173,6 @@ export default function AddressesPage() {
                     <div className="flex justify-between mb-1">
                       <h3 className="font-bold text-base">{address.title}</h3>
                       <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-primary rounded-full hover:bg-primary/10">
-                          <Plus className="w-4 h-4 rotate-45" /> {/* This serves as a generic icon for edit/action for now */}
-                        </Button>
                         <Button 
                           variant="ghost" 
                           size="icon" 
