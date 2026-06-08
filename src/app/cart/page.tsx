@@ -172,7 +172,7 @@ export default function CartPage() {
                             </TableCell>
                           </TableRow>
                         </DialogTrigger>
-                        <DialogContent className="rounded-[32px] sm:max-w-md border-none shadow-2xl p-0 overflow-hidden">
+                        <DialogContent className="rounded-[32px] w-[92vw] max-w-md sm:max-w-sm border-none shadow-2xl p-0 overflow-hidden [&>button]:left-4 [&>button]:right-auto">
                           <DialogHeader className="p-6 pb-0">
                             <DialogTitle className="text-xl font-headline font-bold text-primary text-right">تعديل المنتج</DialogTitle>
                           </DialogHeader>
