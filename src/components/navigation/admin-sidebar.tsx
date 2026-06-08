@@ -3,6 +3,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -29,6 +30,7 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -58,11 +60,21 @@ export function AdminSidebar() {
 
   return (
     <Sidebar side="right" className="border-l bg-white">
-      <SidebarHeader className="h-20 flex items-center justify-center border-b px-6">
-        <Link href="/admin" className="flex items-center gap-2">
-          <span className="text-3xl font-headline font-bold text-primary">رواج</span>
-          <span className="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full border border-primary/20">المدير العام</span>
+      <SidebarHeader className="h-20 flex items-center justify-between border-b px-6">
+        <Link href="/admin" className="flex items-center gap-3">
+          <Image 
+            src="/logo.png" 
+            alt="رواج" 
+            width={38} 
+            height={38} 
+            className="object-contain rounded-lg"
+          />
+          <div className="flex flex-col">
+            <span className="text-2xl font-headline font-bold text-primary leading-tight">رواج</span>
+            <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">المدير العام</span>
+          </div>
         </Link>
+        <SidebarTrigger className="text-primary hover:bg-primary/5 rounded-xl" />
       </SidebarHeader>
 
       <SidebarContent className="p-4">

@@ -3,6 +3,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -28,6 +29,7 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -55,12 +57,19 @@ export function MerchantSidebar() {
   };
 
   return (
-    <Sidebar side="right" className="border-l bg-white hidden md:flex">
-      <SidebarHeader className="h-20 flex items-center justify-center border-b px-6">
-        <Link href="/merchant/dashboard" className="flex items-center gap-2">
-          <span className="text-3xl font-headline font-bold text-primary">رواج</span>
-          <span className="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full border border-secondary/20">التاجر</span>
+    <Sidebar side="right" className="border-l bg-white">
+      <SidebarHeader className="h-20 flex items-center justify-between border-b px-6">
+        <Link href="/merchant/dashboard" className="flex items-center gap-3">
+          <Image 
+            src="/logo.png" 
+            alt="رواج" 
+            width={38} 
+            height={38} 
+            className="object-contain rounded-lg"
+          />
+          <span className="text-2xl font-headline font-bold text-primary">رواج</span>
         </Link>
+        <SidebarTrigger className="text-primary hover:bg-primary/5 rounded-xl" />
       </SidebarHeader>
 
       <SidebarContent className="p-4">
