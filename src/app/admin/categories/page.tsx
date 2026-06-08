@@ -118,7 +118,7 @@ export default function AdminCategories() {
   return (
     <div className="space-y-8 pb-20">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-8 rounded-[35px] border shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-6 rounded-xl border shadow-sm">
         <div className="space-y-1">
           <h1 className="text-3xl font-headline font-bold text-primary tracking-tight">إدارة الفئات</h1>
           <p className="text-muted-foreground text-sm font-medium">تنظيم هيكلية المنتجات وتسهيل عملية التصفح للمشتري في سوق رواج</p>
@@ -126,52 +126,52 @@ export default function AdminCategories() {
         
         <Button 
           onClick={handleOpenAdd}
-          className="rounded-2xl h-14 bg-primary hover:bg-primary/90 gap-2 px-8 shadow-xl shadow-primary/20 text-lg font-bold transition-all hover:scale-105 active:scale-95"
+          className="rounded-xl h-12 bg-primary hover:bg-primary/90 gap-2 px-8 shadow-lg shadow-primary/10 text-base font-bold transition-all"
         >
-          <Plus className="w-6 h-6" /> إضافة فئة جديدة
+          <Plus className="w-5 h-5" /> إضافة فئة جديدة
         </Button>
       </div>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {categories.map((cat) => {
           const CategoryIcon = getIconComponent(cat.iconId);
           return (
-            <Card key={cat.id} className="border-none shadow-xl shadow-black/[0.03] rounded-[45px] overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 bg-white relative border border-transparent hover:border-primary/10">
+            <Card key={cat.id} className="border-none shadow-md rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 bg-white border border-transparent hover:border-primary/10">
               <div className="relative h-44">
                  <Image 
                   src={cat.image} 
                   alt={cat.name} 
                   fill 
-                  className="object-cover opacity-90 group-hover:scale-110 transition-transform duration-1000" 
+                  className="object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
-                 <div className="absolute bottom-6 right-6 flex items-center gap-4 text-white">
-                    <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-2xl group-hover:rotate-12 transition-transform duration-500">
-                      <CategoryIcon className="w-7 h-7" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                 <div className="absolute bottom-4 right-4 flex items-center gap-3 text-white">
+                    <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-xl group-hover:rotate-6 transition-transform">
+                      <CategoryIcon className="w-5 h-5" />
                     </div>
                     <div className="space-y-0.5">
-                      <h3 className="font-bold text-xl leading-none">{cat.name}</h3>
-                      <p className="text-[10px] text-white/70 font-bold uppercase tracking-[0.2em]">{cat.count} منتج متوفر</p>
+                      <h3 className="font-bold text-lg leading-none">{cat.name}</h3>
+                      <p className="text-[9px] text-white/70 font-bold uppercase tracking-wider">{cat.count} منتج متوفر</p>
                     </div>
                  </div>
               </div>
-              <CardContent className="p-6">
-                 <div className="flex gap-3">
+              <CardContent className="p-4">
+                 <div className="flex gap-2">
                     <Button 
                       variant="outline" 
-                      className="flex-1 rounded-2xl h-12 border-primary/10 text-primary font-bold gap-2 text-xs hover:bg-primary/5 hover:border-primary/20 transition-all"
+                      className="flex-1 rounded-lg h-10 border-primary/10 text-primary font-bold gap-2 text-xs hover:bg-primary/5 transition-all"
                       onClick={() => handleOpenEdit(cat)}
                     >
-                       <Edit2 className="w-4 h-4" /> تعديل البيانات
+                       <Edit2 className="w-3.5 h-3.5" /> تعديل
                     </Button>
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="w-12 h-12 rounded-2xl bg-red-50 text-destructive hover:bg-red-500 hover:text-white transition-all shadow-sm" 
+                      className="w-10 h-10 rounded-lg bg-red-50 text-destructive hover:bg-red-500 hover:text-white transition-all shadow-sm" 
                       onClick={() => handleDelete(cat.id, cat.name)}
                     >
-                       <Trash2 className="w-5 h-5" />
+                       <Trash2 className="w-4 h-4" />
                     </Button>
                  </div>
               </CardContent>
@@ -182,35 +182,35 @@ export default function AdminCategories() {
 
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="rounded-[50px] sm:max-w-md border-none shadow-2xl p-0 overflow-hidden [&>button]:left-8 [&>button]:right-auto">
-          <DialogHeader className="p-10 bg-muted/30 border-b">
-            <DialogTitle className="text-3xl font-headline font-bold text-primary text-right flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner">
-                {editingCategory ? <Edit2 className="w-6 h-6" /> : <Plus className="w-7 h-7" />}
+        <DialogContent className="rounded-xl sm:max-w-md border-none shadow-2xl p-0 overflow-hidden [&>button]:left-6 [&>button]:right-auto">
+          <DialogHeader className="p-6 bg-muted/30 border-b">
+            <DialogTitle className="text-xl font-headline font-bold text-primary text-right flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                {editingCategory ? <Edit2 className="w-5 h-5" /> : <Plus className="w-6 h-6" />}
               </div>
               {editingCategory ? 'تعديل فئة' : 'إنشاء فئة جديدة'}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="p-10 space-y-8">
+          <div className="p-6 space-y-6">
             <div className="space-y-6">
-              <div className="space-y-3">
-                 <Label className="text-xs font-bold text-muted-foreground pr-2 flex items-center gap-2">
-                   <Type className="w-4 h-4 text-primary" /> اسم الفئة (سيظهر للعملاء)
+              <div className="space-y-2">
+                 <Label className="text-xs font-bold text-muted-foreground pr-1 flex items-center gap-2">
+                   <Type className="w-3.5 h-3.5 text-primary" /> اسم الفئة
                  </Label>
                  <Input 
                   placeholder="مثلاً: مأكولات يمنية، فضيات وهدايا..." 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="h-16 rounded-[22px] bg-muted/20 border-none px-8 font-bold text-lg focus-visible:ring-2 focus-visible:ring-primary/20" 
+                  className="h-12 rounded-lg bg-muted/20 border-none px-4 font-bold focus-visible:ring-1 focus-visible:ring-primary/20" 
                 />
               </div>
 
-              <div className="space-y-4">
-                 <Label className="text-xs font-bold text-muted-foreground pr-2 flex items-center gap-2">
-                   <Sparkles className="w-4 h-4 text-secondary" /> أيقونة الفئة الرمزية
+              <div className="space-y-3">
+                 <Label className="text-xs font-bold text-muted-foreground pr-1 flex items-center gap-2">
+                   <Sparkles className="w-3.5 h-3.5 text-secondary" /> الأيقونة الرمزية
                  </Label>
-                 <div className="grid grid-cols-4 gap-4">
+                 <div className="grid grid-cols-4 gap-2">
                     {AVAILABLE_ICONS.map((item) => {
                       const Icon = item.icon;
                       return (
@@ -218,34 +218,34 @@ export default function AdminCategories() {
                           key={item.id} 
                           onClick={() => setFormData({...formData, iconId: item.id})}
                           className={cn(
-                            "aspect-square rounded-[24px] flex flex-col items-center justify-center cursor-pointer transition-all border-2 border-transparent",
+                            "aspect-square rounded-lg flex flex-col items-center justify-center cursor-pointer transition-all border",
                             formData.iconId === item.id 
-                              ? "bg-primary text-white border-primary shadow-xl shadow-primary/20 scale-105" 
-                              : "bg-muted/30 hover:border-primary/20 text-muted-foreground"
+                              ? "bg-primary text-white border-primary shadow-md" 
+                              : "bg-muted/30 border-transparent hover:border-primary/20 text-muted-foreground"
                           )}
                         >
-                           <Icon className="w-6 h-6 mb-1.5" />
-                           <span className="text-[9px] font-bold uppercase tracking-wider">{item.label}</span>
+                           <Icon className="w-5 h-5 mb-1" />
+                           <span className="text-[8px] font-bold uppercase">{item.label}</span>
                         </div>
                       )
                     })}
                  </div>
               </div>
 
-              <div className="space-y-3">
-                 <Label className="text-xs font-bold text-muted-foreground pr-2 flex items-center gap-2">
-                   <ImageIcon className="w-4 h-4 text-primary" /> صورة غلاف الفئة
+              <div className="space-y-2">
+                 <Label className="text-xs font-bold text-muted-foreground pr-1 flex items-center gap-2">
+                   <ImageIcon className="w-3.5 h-3.5 text-primary" /> صورة الغلاف
                  </Label>
                  <div className="relative group">
-                    <div className="h-40 bg-muted/20 border-2 border-dashed border-primary/10 rounded-[35px] flex flex-col items-center justify-center text-muted-foreground gap-3 cursor-pointer hover:bg-primary/5 transition-all overflow-hidden relative shadow-inner">
+                    <div className="h-32 bg-muted/20 border-2 border-dashed border-primary/10 rounded-xl flex flex-col items-center justify-center text-muted-foreground gap-2 cursor-pointer hover:bg-primary/5 transition-all overflow-hidden relative">
                       {formData.image ? (
                         <Image src={formData.image} alt="Preview" fill className="object-cover" />
                       ) : (
                         <>
-                          <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-sm">
-                            <ImageIcon className="w-6 h-6 text-primary/40" />
+                          <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                            <ImageIcon className="w-5 h-5 text-primary/40" />
                           </div>
-                          <span className="text-[11px] font-bold text-primary/60">اضغط لرفع صورة إبداعية</span>
+                          <span className="text-[10px] font-bold text-primary/60">اضغط لرفع صورة</span>
                         </>
                       )}
                     </div>
@@ -265,16 +265,16 @@ export default function AdminCategories() {
               </div>
             </div>
 
-            <div className="flex gap-4 pt-4">
+            <div className="flex gap-3 pt-2">
               <Button 
-                className="flex-[2] h-16 rounded-[24px] bg-primary hover:bg-primary/90 font-bold text-xl gap-3 shadow-2xl shadow-primary/20 transition-all hover:scale-[1.02]" 
+                className="flex-[2] h-12 rounded-lg bg-primary hover:bg-primary/90 font-bold text-base gap-2 shadow-lg shadow-primary/10 transition-all" 
                 onClick={handleSave}
               >
-                <Check className="w-6 h-6" /> {editingCategory ? 'حفظ التعديلات' : 'إطلاق الفئة الآن'}
+                <Check className="w-5 h-5" /> {editingCategory ? 'حفظ التعديلات' : 'إطلاق الفئة'}
               </Button>
               <Button 
                 variant="ghost" 
-                className="flex-1 h-16 rounded-[24px] font-bold text-muted-foreground hover:bg-muted" 
+                className="flex-1 h-12 rounded-lg font-bold text-muted-foreground" 
                 onClick={() => setIsDialogOpen(false)}
               >
                 إلغاء
