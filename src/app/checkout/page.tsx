@@ -1,3 +1,5 @@
+
+import Image from "next/image"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
