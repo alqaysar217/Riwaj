@@ -277,8 +277,8 @@ export default function CartPage() {
               <h2 className="font-headline font-bold text-lg text-primary flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-secondary" /> طريقة الدفع
               </h2>
-              <Select value={paymentMethod} onValueChange={setPaymentMethod}>
-                <SelectTrigger className="rounded-2xl h-14 bg-muted/30 border-none font-bold">
+              <Select value={paymentMethod} onValueChange={setPaymentMethod} dir="rtl">
+                <SelectTrigger className="rounded-2xl h-14 bg-muted/30 border-none font-bold text-right" dir="rtl">
                   <SelectValue placeholder="اختر طريقة الدفع المفضلة" />
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl">
