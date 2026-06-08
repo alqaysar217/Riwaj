@@ -65,7 +65,7 @@ export default function SearchPage() {
   // Filter Logic for Products
   const filteredProducts = useMemo(() => {
     return ALL_PRODUCTS.filter(product => {
-      const matchesSearch = product.title.includes(searchInput) || product.storeName.includes(searchInput)
+      const matchesSearch = product.title.toLowerCase().includes(searchInput.toLowerCase()) || product.storeName.toLowerCase().includes(searchInput.toLowerCase())
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category)
       const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1]
       return matchesSearch && matchesCategory && matchesPrice
@@ -79,7 +79,7 @@ export default function SearchPage() {
   // Filter Logic for Stores
   const filteredStores = useMemo(() => {
     return ALL_STORES.filter(store => {
-      const matchesSearch = store.name.includes(searchInput) || store.category.includes(searchInput)
+      const matchesSearch = store.name.toLowerCase().includes(searchInput.toLowerCase()) || store.category.toLowerCase().includes(searchInput.toLowerCase())
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(store.category)
       return matchesSearch && matchesCategory
     })
@@ -122,17 +122,17 @@ export default function SearchPage() {
 
         {/* Search Scope Tabs & Filter Button */}
         <Tabs defaultValue="products" className="w-full" dir="rtl">
-          <div className="flex items-center justify-between mb-6">
-            <TabsList className="bg-primary/5 p-1.5 rounded-2xl h-14 border border-primary/10 shadow-inner">
+          <div className="flex items-center gap-3 mb-8">
+            <TabsList className="bg-primary/5 p-1 rounded-2xl h-12 border border-primary/10 shadow-inner flex-1">
               <TabsTrigger 
                 value="products" 
-                className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg px-6 font-bold text-xs gap-2 transition-all duration-300"
+                className="flex-1 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
               >
                 <ShoppingBag className="w-3.5 h-3.5" /> المنتجات
               </TabsTrigger>
               <TabsTrigger 
                 value="stores" 
-                className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg px-6 font-bold text-xs gap-2 transition-all duration-300"
+                className="flex-1 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
               >
                 <Store className="w-3.5 h-3.5" /> المتاجر
               </TabsTrigger>
@@ -140,10 +140,10 @@ export default function SearchPage() {
 
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="sm" className="rounded-xl gap-2 border-primary/20 text-primary font-bold shadow-sm h-11 px-4 hover:bg-primary/5">
-                  <SlidersHorizontal className="w-4 h-4" /> تصفية
+                <Button variant="outline" size="icon" className="rounded-2xl shrink-0 border-primary/20 text-primary font-bold shadow-sm h-12 w-12 hover:bg-primary/5 relative">
+                  <SlidersHorizontal className="w-5 h-5" />
                   {(selectedCategories.length > 0) && (
-                    <span className="w-4 h-4 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center border-2 border-white">
                       {selectedCategories.length}
                     </span>
                   )}
