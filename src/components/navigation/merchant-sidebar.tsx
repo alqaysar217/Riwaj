@@ -14,7 +14,8 @@ import {
   Settings,
   HelpCircle,
   LogOut,
-  ChevronLeft
+  ChevronLeft,
+  Ticket
 } from "lucide-react";
 import {
   Sidebar,
@@ -36,12 +37,13 @@ const NAV_ITEMS = [
   { label: "المنتجات", icon: Package, href: "/merchant/products" },
   { label: "الطلبات", icon: ShoppingCart, href: "/merchant/orders" },
   { label: "المحادثات", icon: MessageSquare, href: "/merchant/messages" },
+  { label: "الكوبونات", icon: Ticket, href: "/merchant/coupons" },
   { label: "بروفايل المتجر", icon: Store, href: "/merchant/store" },
 ];
 
 const TOOLS_ITEMS = [
-  { label: "التقارير", icon: BarChart3, href: "/merchant/reports" },
-  { label: "الإعدادات", icon: Settings, href: "/merchant/settings" },
+  { label: "التقارير المالية", icon: BarChart3, href: "/merchant/reports" },
+  { label: "إعدادات الحساب", icon: Settings, href: "/merchant/settings" },
 ];
 
 export function MerchantSidebar() {
