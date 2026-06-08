@@ -69,9 +69,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Main Image Section - Reduced size on desktop and height on mobile */}
-          <div className="lg:col-span-4">
-            <div className="relative aspect-square md:aspect-[4/5] rounded-3xl overflow-hidden border bg-white shadow-sm max-w-md mx-auto lg:max-w-none">
+          {/* Main Image Section - Compact Size */}
+          <div className="lg:col-span-4 flex justify-center lg:justify-start">
+            <div className="relative aspect-[4/3] md:aspect-square w-full max-w-sm rounded-3xl overflow-hidden border bg-white shadow-sm">
               <Image 
                 src={product.image} 
                 alt={product.title} 
@@ -79,23 +79,23 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 className="object-cover"
                 priority
               />
-              <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-8 h-8">
-                  <Heart className="w-4 h-4 text-destructive" />
+              <div className="absolute top-3 left-3 flex flex-col gap-2">
+                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-7 h-7">
+                  <Heart className="w-3.5 h-3.5 text-destructive" />
                 </Button>
-                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-8 h-8">
-                  <Share2 className="w-4 h-4" />
+                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-7 h-7">
+                  <Share2 className="w-3.5 h-3.5" />
                 </Button>
               </div>
-              <div className="absolute bottom-4 right-4">
-                <Badge className="bg-primary/90 backdrop-blur-sm text-white px-3 py-1 font-bold text-[10px]">
+              <div className="absolute bottom-3 right-3">
+                <Badge className="bg-primary/90 backdrop-blur-sm text-white px-2 py-0.5 font-bold text-[9px]">
                   {product.category}
                 </Badge>
               </div>
             </div>
           </div>
 
-          {/* Product Details Info Section - Expanded span */}
+          {/* Product Details Info Section */}
           <div className="lg:col-span-8 space-y-6">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -105,7 +105,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   </Badge>
                 )}
               </div>
-              <h1 className="text-2xl md:text-3xl font-headline font-bold text-primary leading-tight">
+              <h1 className="text-2xl font-headline font-bold text-primary leading-tight">
                 {product.title}
               </h1>
               
