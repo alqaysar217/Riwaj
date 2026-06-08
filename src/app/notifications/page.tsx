@@ -4,9 +4,19 @@
 import { useState } from "react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
-import { Bell, Package, Tag, Info, ChevronLeft, CheckCircle2 } from "lucide-react"
+import { 
+  Bell, 
+  Package, 
+  Tag, 
+  Info, 
+  ChevronLeft, 
+  CheckCircle2, 
+  MessageSquare, 
+  ShoppingBag, 
+  Store, 
+  ShieldAlert 
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
 const NOTIFICATIONS = [
@@ -30,20 +40,56 @@ const NOTIFICATIONS = [
   },
   {
     id: 3,
+    title: "رسالة جديدة من التاجر",
+    description: "لديك رسالة جديدة من متجر خولان بخصوص استفسارك الأخير.",
+    time: "منذ 6 ساعات",
+    type: "info",
+    icon: MessageSquare,
+    isNew: true
+  },
+  {
+    id: 4,
+    title: "منتجات تنتظرك في السلة",
+    description: "لا تنسَ إكمال عملية الشراء للمنتجات الموجودة في سلتك قبل نفاد الكمية.",
+    time: "منذ 8 ساعات",
+    type: "info",
+    icon: ShoppingBag,
+    isNew: false
+  },
+  {
+    id: 5,
     title: "تنبيه أمان",
-    description: "تم تسجيل الدخول إلى حسابك من متصفح جديد.",
+    description: "تم تسجيل الدخول إلى حسابك من متصفح جديد في مدينة صنعاء.",
     time: "أمس",
     type: "info",
     icon: Info,
     isNew: false
   },
   {
-    id: 4,
+    id: 6,
+    title: "متجر جديد انضم إلينا",
+    description: "نرحب بمتجر 'فضيات تعز' المتخصص في الحرف اليدوية التقليدية.",
+    time: "أمس",
+    type: "offers",
+    icon: Store,
+    isNew: false
+  },
+  {
+    id: 7,
     title: "تم استلام الطلب",
     description: "شكراً لشرائك من متجر خولان، نتمنى أن تنال التجربة إعجابك.",
     time: "قبل يومين",
     type: "orders",
     icon: CheckCircle2,
+    isNew: false
+  },
+  {
+    id: 8,
+    title: "تحديث في شروط الخدمة",
+    description: "لقد قمنا بتحديث سياسة الخصوصية وشروط الاستخدام لضمان أمانك.",
+    time: "قبل 3 أيام",
+    type: "info",
+    icon: ShieldAlert,
     isNew: false
   }
 ]
