@@ -15,13 +15,13 @@ export default function AdminLayout({
 }) {
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-muted/20" dir="ltr">
+      <div className="flex min-h-screen w-full bg-muted/20" dir="rtl">
         <AdminSidebar />
-        <div className="flex-1 flex flex-col min-w-0" dir="rtl">
+        <div className="flex-1 flex flex-col min-w-0">
           {/* Top Bar for Admin */}
           <header className="h-20 border-b bg-white flex items-center justify-between px-4 sticky top-0 z-40">
             <div className="flex items-center gap-4 flex-1">
-              <SidebarTrigger className="text-primary hover:bg-primary/5" />
+              <SidebarTrigger className="text-primary hover:bg-primary/5 rounded-xl h-10 w-10" />
               <div className="md:hidden flex items-center gap-2 mr-2">
                 <Image src="/logo.png" alt="رواج" width={32} height={32} className="object-contain" />
                 <span className="text-xl font-headline font-bold text-primary">رواج</span>

@@ -16,13 +16,13 @@ export default function MerchantLayout({
 }) {
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-background" dir="ltr">
+      <div className="flex min-h-screen w-full bg-background" dir="rtl">
         <MerchantSidebar />
-        <div className="flex-1 flex flex-col min-w-0" dir="rtl">
+        <div className="flex-1 flex flex-col min-w-0">
           {/* Dashboard Top Bar */}
           <header className="h-16 border-b bg-white/80 backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-40">
             <div className="flex items-center gap-4">
-              <SidebarTrigger className="text-primary hover:bg-primary/5" />
+              <SidebarTrigger className="text-primary hover:bg-primary/5 rounded-xl h-9 w-9" />
               <div className="md:hidden flex items-center gap-2">
                 <Image src="/logo.png" alt="رواج" width={30} height={30} className="object-contain" />
                 <span className="text-xl font-headline font-bold text-primary">رواج</span>

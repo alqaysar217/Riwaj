@@ -55,18 +55,18 @@ export function MerchantSidebar() {
   };
 
   return (
-    <Sidebar side="left" className="border-r bg-white" dir="rtl">
-      <SidebarHeader className="h-24 flex items-center justify-start border-b px-6">
-        <Link href="/merchant/dashboard" className="flex items-center gap-4 group">
+    <Sidebar side="right" className="border-l bg-white" dir="rtl">
+      <SidebarHeader className="h-24 flex items-center justify-start px-4 border-b">
+        <Link href="/merchant/dashboard" className="flex items-center gap-3 group">
           <div className="relative">
-             {/* Glow Effect */}
+             {/* Glowing effect behind logo */}
              <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
              <Image 
               src="/logo.png" 
               alt="رواج" 
-              width={52} 
+              width={54} 
               height={52} 
-              className="object-contain relative z-10 drop-shadow-[0_4px_12px_rgba(15,118,110,0.25)] transition-transform duration-300 group-hover:scale-110"
+              className="object-contain relative z-10 drop-shadow-[0_4px_12px_rgba(15,118,110,0.3)] transition-transform duration-300 group-hover:scale-110"
             />
           </div>
           <span className="text-3xl font-headline font-bold text-primary tracking-tight">رواج</span>
@@ -75,7 +75,7 @@ export function MerchantSidebar() {
 
       <SidebarContent className="p-4">
         <SidebarGroup>
-          <SidebarGroupLabel className="px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">إدارة المتجر</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">إدارة المتجر</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {NAV_ITEMS.map((item) => {
@@ -94,8 +94,8 @@ export function MerchantSidebar() {
                     >
                       <Link href={item.href} className="flex items-center gap-3 w-full">
                         <item.icon className={cn("w-5 h-5 transition-colors", active ? "text-white" : "text-primary")} />
-                        <span className={cn("font-bold text-sm transition-colors", active ? "text-white" : "")}>{item.label}</span>
-                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-left-2 duration-300 text-white" />}
+                        <span className={cn("font-bold text-sm transition-colors", active ? "text-white" : "text-foreground")}>{item.label}</span>
+                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-right-2 duration-300 text-white" />}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -106,7 +106,7 @@ export function MerchantSidebar() {
         </SidebarGroup>
 
         <SidebarGroup className="mt-4">
-          <SidebarGroupLabel className="px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">أدوات إضافية</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">أدوات إضافية</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {TOOLS_ITEMS.map((item) => {
@@ -125,8 +125,8 @@ export function MerchantSidebar() {
                     >
                       <Link href={item.href} className="flex items-center gap-3 w-full">
                         <item.icon className={cn("w-5 h-5 transition-colors", active ? "text-white" : "text-primary")} />
-                        <span className={cn("font-bold text-sm transition-colors", active ? "text-white" : "")}>{item.label}</span>
-                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-left-2 duration-300 text-white" />}
+                        <span className={cn("font-bold text-sm transition-colors", active ? "text-white" : "text-foreground")}>{item.label}</span>
+                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-right-2 duration-300 text-white" />}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
