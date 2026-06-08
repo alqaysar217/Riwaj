@@ -13,7 +13,6 @@ import {
   Store,
   BarChart3,
   Settings,
-  HelpCircle,
   LogOut,
   ChevronLeft,
   Ticket
@@ -56,7 +55,7 @@ export function MerchantSidebar() {
   };
 
   return (
-    <Sidebar side="right" className="border-l bg-white">
+    <Sidebar side="left" className="border-r bg-white" dir="rtl">
       <SidebarHeader className="h-24 flex items-center justify-start border-b px-6">
         <Link href="/merchant/dashboard" className="flex items-center gap-4 group">
           <div className="relative">

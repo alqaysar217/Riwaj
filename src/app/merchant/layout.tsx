@@ -2,7 +2,7 @@
 'use client';
 
 import { MerchantBottomNav } from "@/components/navigation/merchant-bottom-nav"
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { MerchantSidebar } from "@/components/navigation/merchant-sidebar"
 import { Bell, Search, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -16,11 +16,11 @@ export default function MerchantLayout({
 }) {
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-background" dir="rtl">
+      <div className="flex min-h-screen w-full bg-background" dir="ltr">
         <MerchantSidebar />
-        <SidebarInset className="flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0" dir="rtl">
           {/* Dashboard Top Bar */}
-          <header className="h-16 border-b bg-white/80 backdrop-blur-md flex items-center justify-between px-4 md:px-8 sticky top-0 z-40">
+          <header className="h-16 border-b bg-white/80 backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-40">
             <div className="flex items-center gap-4">
               <SidebarTrigger className="text-primary hover:bg-primary/5" />
               <div className="md:hidden flex items-center gap-2">
@@ -47,11 +47,11 @@ export default function MerchantLayout({
             </div>
           </header>
 
-          <main className="flex-1 pb-24 md:pb-8">
+          <main className="flex-1 pb-24 md:pb-8 p-0">
             {children}
           </main>
           <MerchantBottomNav />
-        </SidebarInset>
+        </div>
       </div>
     </SidebarProvider>
   )

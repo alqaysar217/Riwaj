@@ -1,7 +1,7 @@
 
 'use client';
 
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/navigation/admin-sidebar";
 import { Bell, Search, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -15,11 +15,11 @@ export default function AdminLayout({
 }) {
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-muted/20" dir="rtl">
+      <div className="flex min-h-screen w-full bg-muted/20" dir="ltr">
         <AdminSidebar />
-        <SidebarInset className="flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0" dir="rtl">
           {/* Top Bar for Admin */}
-          <header className="h-20 border-b bg-white flex items-center justify-between px-4 md:px-8 sticky top-0 z-40">
+          <header className="h-20 border-b bg-white flex items-center justify-between px-4 sticky top-0 z-40">
             <div className="flex items-center gap-4 flex-1">
               <SidebarTrigger className="text-primary hover:bg-primary/5" />
               <div className="md:hidden flex items-center gap-2 mr-2">
@@ -56,7 +56,7 @@ export default function AdminLayout({
           <main className="flex-1 p-4 md:p-8">
             {children}
           </main>
-        </SidebarInset>
+        </div>
       </div>
     </SidebarProvider>
   );
