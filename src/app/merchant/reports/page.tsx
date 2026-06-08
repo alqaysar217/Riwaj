@@ -1,17 +1,16 @@
-
 'use client';
 
 import { 
   TrendingUp, 
   ArrowUpRight, 
   ArrowDownRight, 
-  Calendar,
-  Download,
-  Filter,
-  DollarSign,
-  ShoppingBag,
-  Package,
-  Users
+  Calendar, 
+  Download, 
+  Filter, 
+  DollarSign, 
+  ShoppingBag, 
+  Package, 
+  Users 
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -21,12 +20,13 @@ import {
   XAxis, 
   YAxis, 
   ResponsiveContainer, 
-  Cell,
-  CartesianGrid,
-  Tooltip,
-  AreaChart,
-  Area
+  Cell, 
+  CartesianGrid, 
+  Tooltip, 
+  AreaChart, 
+  Area 
 } from "recharts"
+import { cn } from "@/lib/utils"
 
 const SALES_DATA = [
   { name: 'السبت', value: 4000 },
