@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, User, Package, MapPin, Settings, HelpCircle, LogOut, Bell, Shield } from "lucide-react"
+import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield } from "lucide-react"
 import Link from "next/link"
 
 const MENU_ITEMS = [
@@ -10,7 +10,6 @@ const MENU_ITEMS = [
   { icon: Bell, label: "التنبيهات", href: "/notifications" },
   { icon: MapPin, label: "عناويني", href: "/addresses" },
   { icon: Shield, label: "الأمان والخصوصية", href: "/privacy" },
-  { icon: Settings, label: "إعدادات الحساب", href: "/settings" },
   { icon: HelpCircle, label: "مركز المساعدة", href: "/help" },
 ]
 
@@ -32,7 +31,9 @@ export default function ProfilePage() {
             </Avatar>
             <h1 className="text-2xl font-headline font-bold">أحمد محمد</h1>
             <p className="text-white/70 text-sm mb-4">ahmed.m@example.com</p>
-            <Button variant="secondary" size="sm" className="rounded-full px-6 font-bold">تعديل الملف الشخصي</Button>
+            <Button variant="secondary" size="sm" className="rounded-full px-6 font-bold" asChild>
+              <Link href="/settings">تعديل الملف الشخصي</Link>
+            </Button>
           </div>
 
           {/* Stats Bar */}
