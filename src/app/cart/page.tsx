@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/hooks/use-toast"
 import {
   Table,
   TableBody,
@@ -35,11 +36,13 @@ import {
   MessageSquare, 
   Ticket, 
   Wallet, 
-  Banknote,
   ChevronDown,
   ChevronUp,
   CreditCard,
-  CheckCircle2
+  CheckCircle2,
+  Edit2,
+  Copy,
+  MessageCircle
 } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { cn } from "@/lib/utils"
@@ -52,6 +55,7 @@ import {
 } from "@/components/ui/dialog"
 
 export default function CartPage() {
+  const { toast } = useToast()
   const [cartItems, setCartItems] = useState([
     { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
     { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
@@ -83,6 +87,14 @@ export default function CartPage() {
 
   const removeItem = (id: string) => {
     setCartItems(prev => prev.filter(item => item.id !== id))
+  }
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    toast({
+      title: "تم النسخ!",
+      description: `تم نسخ رقم الحساب ${text} إلى الحافظة.`,
+    })
   }
 
   if (cartItems.length === 0) {
@@ -138,7 +150,8 @@ export default function CartPage() {
                       <TableHead className="text-right font-bold text-primary">المنتج</TableHead>
                       <TableHead className="text-center font-bold text-primary">الكمية</TableHead>
                       <TableHead className="text-center font-bold text-primary">السعر</TableHead>
-                      <TableHead className="text-left font-bold text-primary">الإجمالي</TableHead>
+                      <TableHead className="text-center font-bold text-primary">الإجمالي</TableHead>
+                      <TableHead className="text-center font-bold text-primary">إجراء</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -147,42 +160,52 @@ export default function CartPage() {
                         <DialogTrigger asChild>
                           <TableRow className="cursor-pointer hover:bg-muted/10 transition-colors">
                             <TableCell className="text-right">
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-12 h-12 rounded-lg overflow-hidden border shrink-0">
-                                  <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
-                                </div>
-                                <span className="font-bold text-sm line-clamp-1">{item.title}</span>
-                              </div>
+                              <span className="font-bold text-[11px] sm:text-sm line-clamp-2">{item.title}</span>
                             </TableCell>
-                            <TableCell className="text-center font-bold">{item.quantity}</TableCell>
-                            <TableCell className="text-center text-xs">{item.price} ر.ي</TableCell>
-                            <TableCell className="text-left font-bold text-primary">{item.price * item.quantity} ر.ي</TableCell>
+                            <TableCell className="text-center font-bold text-xs">{item.quantity}</TableCell>
+                            <TableCell className="text-center text-[10px] sm:text-xs whitespace-nowrap">{item.price} ر.ي</TableCell>
+                            <TableCell className="text-center font-bold text-primary text-[11px] sm:text-sm whitespace-nowrap">{item.price * item.quantity} ر.ي</TableCell>
+                            <TableCell className="text-center">
+                              <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-primary">
+                                <Edit2 className="w-4 h-4" />
+                              </Button>
+                            </TableCell>
                           </TableRow>
                         </DialogTrigger>
-                        <DialogContent className="rounded-3xl sm:max-w-md border-none shadow-2xl">
-                          <DialogHeader>
+                        <DialogContent className="rounded-[32px] sm:max-w-md border-none shadow-2xl p-0 overflow-hidden">
+                          <DialogHeader className="p-6 pb-0">
                             <DialogTitle className="text-xl font-headline font-bold text-primary text-right">تعديل المنتج</DialogTitle>
                           </DialogHeader>
-                          <div className="flex flex-col items-center gap-6 py-6">
-                            <div className="relative w-32 h-32 rounded-2xl overflow-hidden border shadow-sm">
-                              <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
+                          <div className="p-6 space-y-6">
+                            <div className="flex gap-4 bg-muted/20 p-4 rounded-3xl border border-dashed">
+                              <div className="relative w-24 h-24 rounded-2xl overflow-hidden border bg-white shrink-0">
+                                <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
+                              </div>
+                              <div className="flex-1 space-y-1">
+                                <h3 className="font-bold text-sm leading-tight">{item.title}</h3>
+                                <p className="text-primary font-bold text-lg">{item.price} <span className="text-[10px]">ر.ي</span></p>
+                                <p className="text-xs text-muted-foreground">الإجمالي: <span className="text-foreground font-bold">{item.price * item.quantity} ر.ي</span></p>
+                              </div>
                             </div>
-                            <div className="text-center">
-                              <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                              <p className="text-primary font-bold">{item.price} ر.ي</p>
-                            </div>
-                            <div className="flex items-center gap-4 bg-muted/30 rounded-2xl p-2 border">
-                              <Button variant="secondary" size="icon" className="rounded-xl" onClick={() => updateQuantity(item.id, 1)}>
-                                <Plus className="w-4 h-4" />
+                            
+                            <div className="flex flex-col gap-4">
+                              <div className="flex items-center justify-between bg-muted/30 rounded-2xl p-3 border">
+                                <span className="font-bold text-xs pr-2">تعديل الكمية</span>
+                                <div className="flex items-center gap-4">
+                                  <Button variant="secondary" size="icon" className="rounded-xl h-10 w-10 shadow-sm" onClick={() => updateQuantity(item.id, 1)}>
+                                    <Plus className="w-4 h-4" />
+                                  </Button>
+                                  <span className="w-8 text-center text-lg font-bold">{item.quantity}</span>
+                                  <Button variant="secondary" size="icon" className="rounded-xl h-10 w-10 shadow-sm" onClick={() => updateQuantity(item.id, -1)}>
+                                    <Minus className="w-4 h-4" />
+                                  </Button>
+                                </div>
+                              </div>
+                              
+                              <Button variant="destructive" className="w-full rounded-2xl gap-2 h-12 font-bold" onClick={() => removeItem(item.id)}>
+                                <Trash2 className="w-4 h-4" /> حذف المنتج من السلة
                               </Button>
-                              <span className="w-8 text-center text-lg font-bold">{item.quantity}</span>
-                              <Button variant="secondary" size="icon" className="rounded-xl" onClick={() => updateQuantity(item.id, -1)}>
-                                <Minus className="w-4 h-4" />
-                              </Button>
                             </div>
-                            <Button variant="destructive" className="w-full rounded-xl gap-2 h-12" onClick={() => removeItem(item.id)}>
-                              <Trash2 className="w-4 h-4" /> حذف من السلة
-                            </Button>
                           </div>
                         </DialogContent>
                       </Dialog>
@@ -201,7 +224,7 @@ export default function CartPage() {
                 >
                   <div className="flex items-center gap-2">
                     <MessageSquare className="w-4 h-4" />
-                    هل تريد إضافة ملاحظة؟
+                    هل تريد إضافة ملاحظة للطلب؟
                   </div>
                   {showNote ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
@@ -209,7 +232,7 @@ export default function CartPage() {
                   <div className="space-y-3 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                     <Textarea 
                       placeholder="أضف تعليمات خاصة للطلب هنا..." 
-                      className="rounded-2xl bg-muted/20 border-none resize-none"
+                      className="rounded-2xl bg-muted/20 border-none resize-none h-24"
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
                     />
@@ -255,7 +278,7 @@ export default function CartPage() {
                 <SelectContent className="rounded-2xl">
                   <SelectItem value="cod">الدفع عند الاستلام</SelectItem>
                   <SelectItem value="wallet">الدفع من المحفظة</SelectItem>
-                  <SelectItem value="accounts">الدفع عبر حساباتنا</SelectItem>
+                  <SelectItem value="accounts">الدفع عبر حساباتنا البنكية</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -276,21 +299,43 @@ export default function CartPage() {
               )}
 
               {paymentMethod === "accounts" && (
-                <div className="space-y-4 animate-in fade-in zoom-in-95 duration-500">
-                  <p className="text-xs font-bold text-muted-foreground">اختر الحساب المناسب لك للتحويل:</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {banks.map((bank) => (
-                      <div key={bank.id} className="bg-white p-4 rounded-2xl border flex items-center gap-4 hover:border-primary/40 transition-all group">
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden border bg-muted">
-                          <Image src={bank.logo} alt={bank.name} fill className="object-cover" />
+                <div className="space-y-6 animate-in fade-in zoom-in-95 duration-500">
+                  <div className="space-y-4">
+                    <p className="text-xs font-bold text-muted-foreground flex items-center gap-2">
+                      <span className="w-1 h-1 bg-primary rounded-full" /> اختر الحساب المناسب لك للتحويل:
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {banks.map((bank) => (
+                        <div key={bank.id} className="bg-white p-4 rounded-2xl border flex items-center gap-4 hover:border-primary/40 transition-all group relative">
+                          <div className="relative w-12 h-12 rounded-xl overflow-hidden border bg-muted shrink-0">
+                            <Image src={bank.logo} alt={bank.name} fill className="object-cover" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-bold text-xs truncate mb-0.5">{bank.name}</p>
+                            <div 
+                              className="flex items-center gap-1.5 cursor-pointer hover:text-primary transition-colors"
+                              onClick={() => copyToClipboard(bank.account)}
+                            >
+                              <p className="text-[11px] text-primary font-bold" dir="ltr">{bank.account}</p>
+                              <Copy className="w-3 h-3 text-muted-foreground" />
+                            </div>
+                            <p className="text-[9px] text-muted-foreground truncate">{bank.owner}</p>
+                          </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-bold text-xs truncate">{bank.name}</p>
-                          <p className="text-[10px] text-primary font-bold" dir="ltr">{bank.account}</p>
-                          <p className="text-[9px] text-muted-foreground truncate">{bank.owner}</p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-secondary/10 p-5 rounded-2xl border border-secondary/20 flex gap-4">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-secondary shadow-sm shrink-0">
+                      <MessageCircle className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-primary mb-1">ملاحظة هامة جداً:</p>
+                      <p className="text-[11px] text-muted-foreground leading-relaxed">
+                        بعد عملية الإيداع يرجى تصوير السند وإرساله واتساب على الرقم اليمني <span className="text-primary font-bold" dir="ltr">775258830</span> ليتسنى لنا تأكيد طلبكم وشحنه فوراً.
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}
