@@ -34,44 +34,37 @@ export default function RegisterPage() {
       <main className="flex-1 max-w-md mx-auto w-full space-y-8 pb-12">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-headline font-bold text-primary">انضم إلى رواج</h1>
-          <p className="text-muted-foreground text-sm font-medium">اختر نوع الحساب وابدأ رحلتك معنا</p>
+          <p className="text-muted-foreground text-sm font-medium">ابدأ رحلتك في أكبر سوق للمنتجات اليمنية</p>
         </div>
 
-        {/* Role Selection */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Improved Role Selection - Single Row Segmented Control */}
+        <div className="bg-muted/30 p-1.5 rounded-2xl flex relative h-14 border border-border/50">
           <div 
+            className={cn(
+              "absolute inset-y-1.5 rounded-xl bg-white shadow-md transition-all duration-300 ease-in-out w-[calc(50%-6px)]",
+              role === 'customer' ? "right-1.5" : "right-[calc(50%+1.5px)]"
+            )}
+          />
+          <button 
+            type="button"
             onClick={() => setRole('customer')}
             className={cn(
-              "p-4 rounded-3xl border-2 cursor-pointer transition-all flex flex-col items-center gap-3 relative overflow-hidden",
-              role === 'customer' ? "border-primary bg-primary/5" : "border-border bg-white"
+              "flex-1 z-10 flex items-center justify-center gap-2 font-bold text-sm transition-colors",
+              role === 'customer' ? "text-primary" : "text-muted-foreground"
             )}
           >
-            <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center transition-colors", role === 'customer' ? "bg-primary text-white" : "bg-muted text-muted-foreground")}>
-              <ShoppingBag className="w-6 h-6" />
-            </div>
-            <div className="text-center">
-              <p className="font-bold text-sm">مشتري</p>
-              <p className="text-[10px] text-muted-foreground">أريد التسوق</p>
-            </div>
-            {role === 'customer' && <CheckCircle2 className="absolute top-2 left-2 w-4 h-4 text-primary" />}
-          </div>
-
-          <div 
+            <ShoppingBag className="w-4 h-4" /> مشتري
+          </button>
+          <button 
+            type="button"
             onClick={() => setRole('merchant')}
             className={cn(
-              "p-4 rounded-3xl border-2 cursor-pointer transition-all flex flex-col items-center gap-3 relative overflow-hidden",
-              role === 'merchant' ? "border-primary bg-primary/5" : "border-border bg-white"
+              "flex-1 z-10 flex items-center justify-center gap-2 font-bold text-sm transition-colors",
+              role === 'merchant' ? "text-primary" : "text-muted-foreground"
             )}
           >
-            <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center transition-colors", role === 'merchant' ? "bg-primary text-white" : "bg-muted text-muted-foreground")}>
-              <Store className="w-6 h-6" />
-            </div>
-            <div className="text-center">
-              <p className="font-bold text-sm">تاجر</p>
-              <p className="text-[10px] text-muted-foreground">أريد البيع</p>
-            </div>
-            {role === 'merchant' && <CheckCircle2 className="absolute top-2 left-2 w-4 h-4 text-primary" />}
-          </div>
+            <Store className="w-4 h-4" /> تاجر
+          </button>
         </div>
 
         <form onSubmit={handleRegister} className="space-y-5">
@@ -106,7 +99,7 @@ export default function RegisterPage() {
           </div>
 
           <Button type="submit" className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-lg shadow-primary/20 gap-2">
-            {role === 'merchant' ? 'متابعة لإنشاء المتجر' : 'إنشاء الحساب الآن'} <UserPlus className="w-5 h-5" />
+            {role === 'merchant' ? 'متابعة لتوثيق المتجر' : 'إنشاء الحساب الآن'} <UserPlus className="w-5 h-5" />
           </Button>
         </form>
 
