@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react"
@@ -76,7 +75,7 @@ export default function MerchantMessages() {
             <div>
               <h3 className="font-bold text-sm text-primary">{activeChat.user}</h3>
               <p className="text-[10px] text-green-600 font-bold flex items-center gap-1">
-                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> متصل الآن
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> متصل الآن
               </p>
             </div>
           </div>
