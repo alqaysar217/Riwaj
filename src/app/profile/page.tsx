@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Header } from "@/components/layout/header"
@@ -55,16 +54,6 @@ export default function ProfilePage() {
                   >
                     <Link href="/settings">
                       <Settings2 className="w-3 h-3" /> تعديل الملف
-                    </Link>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="rounded-full h-8 px-4 font-bold text-[10px] gap-1.5 border-white/20 text-white hover:bg-white/10" 
-                    asChild
-                  >
-                    <Link href="/merchant/dashboard">
-                      <Store className="w-3 h-3" /> لوحة التاجر
                     </Link>
                   </Button>
                 </div>
