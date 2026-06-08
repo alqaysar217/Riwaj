@@ -29,7 +29,6 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -58,18 +57,17 @@ export function MerchantSidebar() {
 
   return (
     <Sidebar side="right" className="border-l bg-white">
-      <SidebarHeader className="h-20 flex items-center justify-between border-b px-6">
+      <SidebarHeader className="h-20 flex items-center justify-center border-b px-6">
         <Link href="/merchant/dashboard" className="flex items-center gap-3">
           <Image 
             src="/logo.png" 
             alt="رواج" 
-            width={38} 
-            height={38} 
+            width={42} 
+            height={42} 
             className="object-contain"
           />
           <span className="text-2xl font-headline font-bold text-primary">رواج</span>
         </Link>
-        <SidebarTrigger className="text-primary hover:bg-primary/5 rounded-xl" />
       </SidebarHeader>
 
       <SidebarContent className="p-4">
