@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { 
@@ -48,6 +48,11 @@ const MERCHANT_PRODUCTS = [
 export default function MerchantProducts() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setFilter] = useState("all")
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const filteredProducts = useMemo(() => {
     return MERCHANT_PRODUCTS.filter(product => {
@@ -168,7 +173,9 @@ export default function MerchantProducts() {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3 mb-3 mt-1">
-                  <p className="text-primary font-bold text-base">{product.price.toLocaleString()} <span className="text-[10px]">ر.ي</span></p>
+                  <p className="text-primary font-bold text-base">
+                    {isMounted ? product.price.toLocaleString() : product.price} <span className="text-[10px]">ر.ي</span>
+                  </p>
                   <div className="flex items-center gap-1 text-[10px] bg-secondary/10 px-2 py-0.5 rounded-lg text-secondary font-bold">
                     <Star className="w-3 h-3 fill-secondary" />
                     <span>{product.rating}</span>

@@ -1,6 +1,7 @@
 
 'use client';
 
+import { useState, useEffect } from "react"
 import { 
   TrendingUp, 
   Users, 
@@ -13,11 +14,11 @@ import {
   CheckCircle2,
   Clock,
   ExternalLink
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+} from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 import {
   BarChart,
   Bar,
@@ -27,7 +28,7 @@ import {
   Tooltip as ChartTooltip,
   ResponsiveContainer,
   Cell
-} from "recharts";
+} from "recharts"
 
 const STATS = [
   { label: "إجمالي المبيعات", value: "4,250,000 ر.ي", trend: "+15.2%", isPositive: true, icon: TrendingUp },
@@ -52,6 +53,12 @@ const RECENT_STORES = [
 ];
 
 export default function AdminDashboard() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
     <div className="space-y-8">
       <div className="flex items-end justify-between">
@@ -121,7 +128,9 @@ export default function AdminDashboard() {
                       return (
                         <div className="bg-white p-4 rounded-xl shadow-xl border border-primary/10">
                           <p className="text-xs font-bold text-muted-foreground mb-1">{payload[0].payload.month}</p>
-                          <p className="text-lg font-bold text-primary">{payload[0].value?.toLocaleString()} ر.ي</p>
+                          <p className="text-lg font-bold text-primary">
+                            {isMounted ? payload[0].value?.toLocaleString() : payload[0].value} ر.ي
+                          </p>
                         </div>
                       );
                     }
