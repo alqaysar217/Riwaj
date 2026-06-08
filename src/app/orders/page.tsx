@@ -25,16 +25,16 @@ export default function OrdersPage() {
               <ClipboardList className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-3xl font-headline font-bold text-primary">طلباتي</h1>
-              <p className="text-muted-foreground text-sm">تتبع حالة طلباتك الحالية والسابقة</p>
+              <h1 className="text-2xl font-headline font-bold text-primary">طلباتي</h1>
+              <p className="text-muted-foreground text-xs">تتبع حالة طلباتك الحالية والسابقة</p>
             </div>
           </div>
 
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 rounded-xl mb-8">
-              <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">الكل</TabsTrigger>
-              <TabsTrigger value="ongoing" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">جارية</TabsTrigger>
-              <TabsTrigger value="delivered" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">مكتملة</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 rounded-xl mb-6">
+              <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs">الكل</TabsTrigger>
+              <TabsTrigger value="ongoing" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs">جارية</TabsTrigger>
+              <TabsTrigger value="delivered" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs">مكتملة</TabsTrigger>
             </TabsList>
 
             <TabsContent value="all" className="space-y-4">
@@ -69,15 +69,15 @@ export default function OrdersPage() {
 
 function OrderCard({ id, date, total, status, itemsCount, image }: any) {
   return (
-    <div className="bg-white p-5 rounded-2xl border shadow-sm hover:shadow-md transition-all group">
+    <div className="bg-white p-4 rounded-2xl border shadow-sm hover:shadow-md transition-all group">
       <div className="flex justify-between items-start mb-4">
-        <div className="flex gap-4">
-          <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-muted">
+        <div className="flex gap-3">
+          <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-muted">
             <Image src={image} alt="" fill className="object-cover" />
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-1">طلب رقم: {id}</h3>
-            <div className="flex items-center gap-2 text-muted-foreground text-xs">
+            <h3 className="font-bold text-sm mb-1">طلب رقم: {id}</h3>
+            <div className="flex items-center gap-1.5 text-muted-foreground text-[10px]">
               <Clock className="w-3 h-3" />
               <span>{date}</span>
             </div>
@@ -90,20 +90,20 @@ function OrderCard({ id, date, total, status, itemsCount, image }: any) {
         </Badge>
       </div>
 
-      <div className="flex items-center justify-between py-4 border-t border-dashed">
-        <div className="flex items-center gap-6">
+      <div className="flex items-center justify-between py-3 border-t border-dashed">
+        <div className="flex items-center gap-4">
           <div>
-            <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold tracking-wider">عدد المنتجات</p>
-            <p className="font-bold">{itemsCount}</p>
+            <p className="text-[8px] text-muted-foreground mb-0.5 uppercase font-bold tracking-wider">عدد المنتجات</p>
+            <p className="font-bold text-xs">{itemsCount}</p>
           </div>
           <div>
-            <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold tracking-wider">الإجمالي</p>
-            <p className="font-bold text-primary">{total} ر.ي</p>
+            <p className="text-[8px] text-muted-foreground mb-0.5 uppercase font-bold tracking-wider">الإجمالي</p>
+            <p className="font-bold text-xs text-primary">{total} ر.ي</p>
           </div>
         </div>
-        <Button variant="outline" size="sm" asChild className="rounded-full gap-2 text-xs border-primary/20 hover:bg-primary/5">
+        <Button variant="outline" size="sm" asChild className="rounded-full h-8 text-[10px] px-3 border-primary/20 hover:bg-primary/5">
           <Link href={`/orders/${id}`}>
-            التفاصيل <ChevronLeft className="w-3 h-3" />
+            التفاصيل <ChevronLeft className="w-3 h-3 mr-1" />
           </Link>
         </Button>
       </div>
@@ -113,11 +113,11 @@ function OrderCard({ id, date, total, status, itemsCount, image }: any) {
 
 function EmptyOrders() {
   return (
-    <div className="text-center py-20 bg-muted/20 rounded-3xl border border-dashed">
-      <Package className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-20" />
-      <h3 className="font-bold text-xl mb-2">لا توجد طلبات بعد</h3>
-      <p className="text-muted-foreground text-sm mb-8">ابدأ رحلة التسوق الآن واكتشف كنوز اليمن</p>
-      <Button asChild className="bg-primary hover:bg-primary/90 rounded-full px-8">
+    <div className="text-center py-16 bg-muted/20 rounded-3xl border border-dashed">
+      <Package className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-20" />
+      <h3 className="font-bold text-lg mb-1">لا توجد طلبات بعد</h3>
+      <p className="text-muted-foreground text-xs mb-6">ابدأ رحلة التسوق الآن واكتشف كنوز اليمن</p>
+      <Button asChild className="bg-primary hover:bg-primary/90 rounded-full px-8 h-10 text-sm">
         <Link href="/">تسوق الآن</Link>
       </Button>
     </div>

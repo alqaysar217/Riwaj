@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
-import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, ShoppingBag } from "lucide-react"
+import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, ShoppingBag, ChevronLeft } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 const CATEGORIES = [
@@ -27,22 +27,22 @@ export default function CategoriesPage() {
           <p className="text-muted-foreground text-sm">تصفح المنتجات اليمنية حسب التصنيف</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {CATEGORIES.map((cat) => (
-            <Link key={cat.id} href={`/categories/${cat.name}`} className="group relative block aspect-[4/5] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+            <Link key={cat.id} href={`/categories/${cat.name}`} className="group relative block aspect-[4/5] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500">
               <Image 
                 src={cat.image || ""} 
                 alt={cat.name} 
                 fill 
                 className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-white text-center">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-3 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
-                  <cat.icon className="w-6 h-6 stroke-[1.5]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+              <div className="absolute inset-0 flex flex-col items-center justify-end p-4 text-white text-center">
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-3 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
+                  <cat.icon className="w-5 h-5 stroke-[1.5]" />
                 </div>
-                <h3 className="font-bold text-lg mb-1">{cat.name}</h3>
-                <p className="text-white/70 text-xs">{cat.count} منتج</p>
+                <h3 className="font-bold text-base mb-1">{cat.name}</h3>
+                <p className="text-white/70 text-[10px]">{cat.count} منتج</p>
               </div>
             </Link>
           ))}

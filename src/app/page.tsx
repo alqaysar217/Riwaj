@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, ShieldCheck } from "lucide-react"
+import { ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, Zap, Star } from "lucide-react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
@@ -8,11 +8,11 @@ import { ProductCard } from "@/components/product/product-card"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 const CATEGORIES = [
-  { name: "بن يمني", icon: Coffee, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
-  { name: "عسل سدر", icon: Droplets, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
-  { name: "بخور", icon: Wind, image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl },
-  { name: "حرف يدوية", icon: Palette, image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl },
-  { name: "ملابس", icon: Shirt, image: "https://picsum.photos/seed/clothes/400/400" },
+  { name: "بن يمني", icon: Coffee },
+  { name: "عسل سدر", icon: Droplets },
+  { name: "بخور", icon: Wind },
+  { name: "حرف يدوية", icon: Palette },
+  { name: "ملابس", icon: Shirt },
 ]
 
 const FEATURED_PRODUCTS = [
@@ -29,7 +29,7 @@ export default function Home() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative h-[250px] md:h-[450px] overflow-hidden">
+        <section className="relative h-[250px] md:h-[400px] overflow-hidden">
           <Image 
             src={PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || ""}
             alt="Yemeni Heritage"
@@ -37,56 +37,54 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent flex flex-col justify-center px-6 md:px-20 text-white">
-            <h1 className="text-3xl md:text-5xl font-headline font-bold mb-4 max-w-md">أصالة اليمن في كل منتج</h1>
-            <p className="text-sm md:text-lg mb-6 max-w-sm opacity-90 leading-relaxed">اكتشف كنوز اليمن من البن الفاخر والعسل الملكي والحرف اليدوية الأصيلة.</p>
-            <div className="flex gap-3">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white border-none px-8 font-bold">تسوق الآن</Button>
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-black hidden sm:flex">عن رواج</Button>
+          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent flex flex-col justify-center px-6 md:px-20 text-white">
+            <h1 className="text-2xl md:text-5xl font-headline font-bold mb-3 max-w-md">أصالة اليمن في كل منتج</h1>
+            <p className="text-xs md:text-lg mb-6 max-w-sm opacity-90 leading-relaxed">اكتشف كنوز اليمن من البن الفاخر والعسل الملكي والحرف اليدوية الأصيلة.</p>
+            <div className="flex gap-2">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white border-none px-6 font-bold text-sm md:text-base">تسوق الآن</Button>
             </div>
           </div>
         </section>
 
-        {/* Categories Grid */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-headline font-bold">تسوق حسب الفئة</h2>
-            <Link href="/categories" className="text-primary text-sm font-medium flex items-center gap-1">
-              عرض الكل <ChevronLeft className="w-4 h-4" />
+        {/* Small Horizontal Categories (Filter Style) */}
+        <section className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-headline font-bold text-primary">تصفح الفئات</h2>
+            <Link href="/categories" className="text-primary text-xs font-medium flex items-center gap-1">
+              عرض الكل <ChevronLeft className="w-3 h-3" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          <div className="flex overflow-x-auto pb-2 gap-2 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
             {CATEGORIES.map((cat, i) => (
-              <Link key={i} href={`/categories/${cat.name}`} className="group relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
-                <Image 
-                  src={cat.image || ""} 
-                  alt={cat.name} 
-                  fill 
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-2 text-center">
-                  <cat.icon className="w-8 h-8 mb-2 stroke-[1.5]" />
-                  <span className="font-bold text-sm">{cat.name}</span>
+              <Link 
+                key={i} 
+                href={`/categories/${cat.name}`} 
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border hover:border-primary hover:bg-primary/5 transition-all shadow-sm shrink-0 group"
+              >
+                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <cat.icon className="w-3.5 h-3.5" />
                 </div>
+                <span className="text-sm font-bold whitespace-nowrap">{cat.name}</span>
               </Link>
             ))}
           </div>
         </section>
 
         {/* Featured Products */}
-        <section className="bg-white py-12">
+        <section className="bg-white py-8">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-2xl font-headline font-bold text-primary">وصلنا حديثاً</h2>
-                <p className="text-muted-foreground text-sm">أحدث المنتجات من الأسر المنتجة والحرفيين</p>
+                <h2 className="text-xl font-headline font-bold text-primary flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-secondary" /> وصلنا حديثاً
+                </h2>
+                <p className="text-muted-foreground text-xs">أحدث المنتجات من الأسر المنتجة والحرفيين</p>
               </div>
-              <Button variant="ghost" asChild className="text-primary hover:bg-primary/5">
-                <Link href="/categories/all">عرض المزيد</Link>
+              <Button variant="ghost" size="sm" asChild className="text-primary hover:bg-primary/5 text-xs">
+                <Link href="/categories">عرض المزيد</Link>
               </Button>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {FEATURED_PRODUCTS.map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))}
@@ -94,38 +92,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Promotional Banner */}
-        <section className="container mx-auto px-4 py-12">
-          <div className="bg-primary/5 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-            <div className="absolute -left-12 -top-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl" />
-            <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-            
-            <div className="flex-1 z-10 text-center md:text-right">
-              <span className="bg-secondary text-white px-3 py-1 rounded-full text-xs font-bold mb-4 inline-block">قصة نجاح</span>
-              <h2 className="text-2xl md:text-3xl font-headline font-bold mb-4 text-primary">تمكين الأسر المنتجة اليمنية</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                رواج ليس مجرد سوق، بل هو جسر يربط بين المبدعين في القرى والمدن اليمنية وبين العالم. نضمن لك الجودة ونضمن لهم عائداً عادلاً.
-              </p>
-              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-8" asChild>
-                <Link href="/stores">اكتشف المتاجر</Link>
-              </Button>
-            </div>
-            <div className="flex-1 relative w-full aspect-video md:aspect-auto h-[250px] rounded-2xl overflow-hidden z-10">
-              <Image 
-                src={PlaceHolderImages.find(i => i.id === "store-banner")?.imageUrl || ""}
-                alt="Productive Families"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Best Selling Products */}
-        <section className="py-12">
+        {/* Best Selling Section */}
+        <section className="py-8">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-headline font-bold mb-8 text-primary">الأكثر مبيعاً</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <h2 className="text-xl font-headline font-bold mb-6 text-primary flex items-center gap-2">
+              <Star className="w-5 h-5 text-secondary fill-secondary" /> الأكثر مبيعاً
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {FEATURED_PRODUCTS.slice().reverse().map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))}
