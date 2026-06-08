@@ -19,7 +19,6 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 
@@ -49,7 +48,7 @@ export default function MerchantOrders() {
         <div className="relative flex-1 group">
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <Input 
-            placeholder="بحث برقم الطلب أو اسم العميل..." 
+            placeholder="بحث برقم الطلب..." 
             className="h-12 pr-10 rounded-2xl bg-white border-none shadow-sm"
           />
         </div>
@@ -89,9 +88,6 @@ export default function MerchantOrders() {
                     </div>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <MoreVertical className="w-4 h-4 text-muted-foreground" />
-                </Button>
               </div>
 
               <div className="bg-muted/20 p-4 rounded-2xl mb-4 space-y-2">
@@ -104,24 +100,14 @@ export default function MerchantOrders() {
                     <Phone className="w-3.5 h-3.5" />
                   </Button>
                 </div>
-                <div className="flex items-center justify-between text-[10px] font-bold text-muted-foreground">
-                  <span>عدد المنتجات: {order.itemsCount}</span>
-                  <span>طريقة الدفع: {order.payment === 'cod' ? 'عند الاستلام' : order.payment === 'wallet' ? 'المحفظة' : 'تحويل بنكي'}</span>
-                </div>
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[8px] text-muted-foreground mb-0.5 font-bold uppercase tracking-wider">الإجمالي الكلي</p>
+                  <p className="text-[8px] text-muted-foreground mb-0.5 font-bold uppercase tracking-wider">الإجمالي</p>
                   <p className="font-bold text-lg text-primary">{order.total}</p>
                 </div>
                 <div className="flex gap-2">
-                  {order.status === 'pending' && (
-                    <Button size="sm" className="rounded-xl h-10 px-6 font-bold bg-primary hover:bg-primary/90">قبول الطلب</Button>
-                  )}
-                  {order.status === 'processing' && (
-                    <Button size="sm" className="rounded-xl h-10 px-6 font-bold bg-secondary hover:bg-secondary/90 text-white">شحن الطلب</Button>
-                  )}
                   <Button variant="outline" size="sm" asChild className="rounded-xl h-10 px-4 font-bold border-primary/20 text-primary">
                     <Link href={`/merchant/orders/${order.id}`}>التفاصيل</Link>
                   </Button>

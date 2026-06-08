@@ -1,11 +1,9 @@
 
 'use client';
 
-import { useState } from "react"
 import { 
   TrendingUp, 
   ShoppingBag, 
-  Users, 
   Star, 
   ArrowUpRight, 
   ArrowDownRight, 
@@ -14,7 +12,8 @@ import {
   Package,
   CheckCircle2,
   Clock,
-  AlertCircle
+  AlertCircle,
+  MessageSquare
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -32,6 +31,7 @@ import {
   Cell 
 } from "recharts"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 const STATS = [
   { label: "إجمالي المبيعات", value: "245,000 ر.ي", trend: "+12.5%", isPositive: true, icon: TrendingUp },
@@ -59,21 +59,19 @@ const RECENT_ORDERS = [
 export default function MerchantDashboard() {
   return (
     <div className="container mx-auto px-4 py-6 space-y-8">
-      {/* Welcome Header */}
       <div className="flex justify-between items-end">
         <div>
           <h1 className="text-2xl font-headline font-bold text-primary">لوحة التحكم</h1>
-          <p className="text-muted-foreground text-xs font-medium">أهلاً بك مجدداً في متجر محامص الجبال</p>
+          <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-wider">متجر محامص الجبال</p>
         </div>
         <Button variant="outline" size="sm" className="rounded-full h-10 border-primary/20 text-primary gap-2">
           <Calendar className="w-4 h-4" /> الأسبوع الحالي
         </Button>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {STATS.map((stat, i) => (
-          <Card key={i} className="border-none shadow-sm rounded-3xl overflow-hidden group hover:shadow-md transition-all">
+          <Card key={i} className="border-none shadow-sm rounded-[24px] overflow-hidden group hover:shadow-md transition-all">
             <CardContent className="p-5 space-y-3">
               <div className="flex justify-between items-center">
                 <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
@@ -97,10 +95,9 @@ export default function MerchantDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Sales Chart */}
         <Card className="lg:col-span-8 border-none shadow-sm rounded-[32px] overflow-hidden">
           <CardHeader className="flex flex-row items-center justify-between pb-8">
-            <CardTitle className="text-base font-bold text-primary">أداء المبيعات اليومي</CardTitle>
+            <CardTitle className="text-base font-bold text-primary">أداء المبيعات</CardTitle>
             <Link href="/merchant/reports" className="text-xs font-bold text-primary hover:underline">عرض التقارير</Link>
           </CardHeader>
           <CardContent className="h-[250px] pr-0">
@@ -113,7 +110,6 @@ export default function MerchantDashboard() {
                   tick={{ fontSize: 10, fontWeight: 700, fill: '#6B7280' }} 
                 />
                 <YAxis hide />
-                <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar 
                   dataKey="sales" 
                   radius={[6, 6, 0, 0]} 
@@ -128,7 +124,6 @@ export default function MerchantDashboard() {
           </CardContent>
         </Card>
 
-        {/* Quick Actions */}
         <Card className="lg:col-span-4 border-none shadow-sm rounded-[32px] bg-primary text-white p-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-32 h-32 bg-secondary/20 rounded-full -ml-16 -mt-16 blur-3xl" />
           <h3 className="text-xl font-headline font-bold mb-6 relative z-10">إجراءات سريعة</h3>
@@ -137,7 +132,7 @@ export default function MerchantDashboard() {
               <Link href="/merchant/products/add" className="w-full flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <Package className="w-5 h-5" />
-                  <span className="font-bold">إضافة منتج جديد</span>
+                  <span className="font-bold">إضافة منتج</span>
                 </div>
                 <ChevronLeft className="w-4 h-4 group-hover:translate-x-[-4px] transition-transform" />
               </Link>
@@ -146,7 +141,7 @@ export default function MerchantDashboard() {
               <Link href="/merchant/orders" className="w-full flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <ShoppingBag className="w-5 h-5" />
-                  <span className="font-bold">إدارة الطلبات</span>
+                  <span className="font-bold">الطلبات</span>
                 </div>
                 <ChevronLeft className="w-4 h-4 group-hover:translate-x-[-4px] transition-transform" />
               </Link>
@@ -155,7 +150,7 @@ export default function MerchantDashboard() {
               <Link href="/merchant/messages" className="w-full flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <MessageSquare className="w-5 h-5" />
-                  <span className="font-bold">محادثات العملاء</span>
+                  <span className="font-bold">المحادثات</span>
                 </div>
                 <ChevronLeft className="w-4 h-4 group-hover:translate-x-[-4px] transition-transform" />
               </Link>
@@ -164,7 +159,6 @@ export default function MerchantDashboard() {
         </Card>
       </div>
 
-      {/* Recent Orders Table */}
       <Card className="border-none shadow-sm rounded-[32px] overflow-hidden">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-base font-bold text-primary">آخر الطلبات</CardTitle>
@@ -192,10 +186,6 @@ export default function MerchantDashboard() {
                 </div>
                 <div className="text-left">
                   <p className="font-bold text-sm text-primary">{order.total}</p>
-                  <p className="text-[9px] font-bold uppercase tracking-wider opacity-60">
-                    {order.status === 'pending' ? 'بانتظار التأكيد' : 
-                     order.status === 'processing' ? 'جاري التجهيز' : 'مكتمل'}
-                  </p>
                 </div>
               </div>
             ))}
