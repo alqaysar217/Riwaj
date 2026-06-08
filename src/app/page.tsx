@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, Zap, Star } from "lucide-react"
@@ -6,6 +9,7 @@ import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product/product-card"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
+import Autoplay from "embla-carousel-autoplay"
 import {
   Carousel,
   CarouselContent,
@@ -47,9 +51,17 @@ export default function Home() {
       <Header />
       
       <main>
-        {/* Hero Section with Carousel */}
+        {/* Hero Section with Carousel - Now with Autoplay */}
         <section className="container mx-auto px-4 pt-6">
-          <Carousel className="w-full" opts={{ loop: true }}>
+          <Carousel 
+            className="w-full" 
+            opts={{ loop: true }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+          >
             <CarouselContent>
               {HERO_SLIDES.map((slide, index) => (
                 <CarouselItem key={index}>
