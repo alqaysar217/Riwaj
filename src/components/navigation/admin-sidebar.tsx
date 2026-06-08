@@ -67,12 +67,9 @@ export function AdminSidebar() {
             alt="رواج" 
             width={38} 
             height={38} 
-            className="object-contain rounded-lg"
+            className="object-contain"
           />
-          <div className="flex flex-col">
-            <span className="text-2xl font-headline font-bold text-primary leading-tight">رواج</span>
-            <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">المدير العام</span>
-          </div>
+          <span className="text-2xl font-headline font-bold text-primary">رواج</span>
         </Link>
         <SidebarTrigger className="text-primary hover:bg-primary/5 rounded-xl" />
       </SidebarHeader>

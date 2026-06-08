@@ -65,7 +65,7 @@ export function MerchantSidebar() {
             alt="رواج" 
             width={38} 
             height={38} 
-            className="object-contain rounded-lg"
+            className="object-contain"
           />
           <span className="text-2xl font-headline font-bold text-primary">رواج</span>
         </Link>
