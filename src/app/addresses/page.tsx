@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { MapPin, Plus, ArrowRight, Trash2, Navigation, User, Phone, Tag, Type, Loader2 } from "lucide-react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import {
   Dialog,
   DialogContent,
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select"
 
 export default function AddressesPage() {
+  const router = useRouter()
   const [addresses, setAddresses] = useState([
     { id: 1, title: "المنزل", details: "صنعاء، حي حدة، شارع الخمسين", phone: "77XXXXXXX" },
     { id: 2, title: "العمل", details: "صنعاء، التحرير، عمارة البركة", phone: "77XXXXXXX" },
@@ -95,9 +96,12 @@ export default function AddressesPage() {
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <Link href="/profile" className="w-10 h-10 bg-white rounded-full flex items-center justify-center border shadow-sm text-primary hover:bg-primary/5 transition-colors">
+              <button 
+                onClick={() => router.back()} 
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center border shadow-sm text-primary hover:bg-primary/5 transition-colors"
+              >
                 <ArrowRight className="w-5 h-5" />
-              </Link>
+              </button>
               <h1 className="text-2xl font-headline font-bold text-primary">عناويني</h1>
             </div>
             
