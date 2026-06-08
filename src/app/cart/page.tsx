@@ -1,25 +1,89 @@
 
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Trash2, Plus, Minus, ArrowLeft, ShieldCheck, ShoppingBag, ArrowRight } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { 
+  Trash2, 
+  Plus, 
+  Minus, 
+  ArrowRight, 
+  ShieldCheck, 
+  ShoppingBag, 
+  MessageSquare, 
+  Ticket, 
+  Wallet, 
+  Banknote,
+  ChevronDown,
+  ChevronUp,
+  CreditCard,
+  CheckCircle2
+} from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
+import { cn } from "@/lib/utils"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function CartPage() {
-  // بيانات تجريبية للسلة
-  const cartItems = [
+  const [cartItems, setCartItems] = useState([
     { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
     { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
+  ])
+
+  const [showNote, setShowNote] = useState(false)
+  const [showCoupon, setShowCoupon] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState<string>("")
+  const [note, setNote] = useState("")
+  const [coupon, setCoupon] = useState("")
+  const [walletBalance] = useState(50000)
+
+  const banks = [
+    { id: "kuraimi", name: "بنك الكريمي", account: "1234567", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/kuraimi/100/100" },
+    { id: "busairi", name: "شركة البسيري للصرافة", account: "7654321", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/busairi/100/100" },
+    { id: "dawood", name: "بن دول للصرافة", account: "9876543", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/dawood/100/100" },
+    { id: "amjad", name: "أمجاد حضرموت", account: "1122334", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/amjad/100/100" },
   ]
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)
   const shipping = 1000
   const total = subtotal + shipping
+
+  const updateQuantity = (id: string, delta: number) => {
+    setCartItems(prev => prev.map(item => 
+      item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+    ))
+  }
+
+  const removeItem = (id: string) => {
+    setCartItems(prev => prev.filter(item => item.id !== id))
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -45,7 +109,6 @@ export default function CartPage() {
       <Header />
       
       <main className="container mx-auto px-4 py-8">
-        {/* Breadcrumb / Back button */}
         <div className="mb-6">
           <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-primary p-0">
             <Link href="/" className="flex items-center gap-1 font-bold text-xs">
@@ -60,69 +123,184 @@ export default function CartPage() {
           </div>
           <div>
             <h1 className="text-2xl font-headline font-bold text-primary">سلة التسوق</h1>
-            <p className="text-muted-foreground text-xs">لديك {cartItems.length} منتجات في سلتك</p>
+            <p className="text-muted-foreground text-xs">إدارة منتجاتك وإتمام عملية الشراء</p>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Cart Items List */}
-          <div className="lg:col-span-8 space-y-4">
-            {cartItems.map((item) => (
-              <div key={item.id} className="bg-white p-4 rounded-3xl border shadow-sm flex gap-4 group hover:border-primary/20 transition-all">
-                {/* Product Image */}
-                <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shrink-0 border bg-muted">
-                  <Image 
-                    src={item.image || ""} 
-                    alt={item.title} 
-                    fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-500" 
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-between py-1">
-                  <div className="flex justify-between items-start gap-2">
-                    <div>
-                      <h3 className="font-bold text-sm sm:text-base leading-tight mb-1 group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-primary font-bold text-sm">{item.price} ر.ي</p>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="text-destructive hover:text-destructive hover:bg-destructive/5 -mt-1 rounded-full w-8 h-8"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </div>
-
-                  <div className="flex items-end justify-between mt-2">
-                    {/* Quantity Selector */}
-                    <div className="flex items-center bg-muted/30 rounded-xl p-1 border">
-                      <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg hover:bg-white text-primary">
-                        <Plus className="w-3.5 h-3.5" />
-                      </Button>
-                      <span className="w-8 text-center text-xs font-bold">{item.quantity}</span>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg hover:bg-white text-primary">
-                        <Minus className="w-3.5 h-3.5" />
-                      </Button>
-                    </div>
-                    
-                    <div className="text-left">
-                      <p className="text-[10px] text-muted-foreground font-medium mb-0.5">الإجمالي الفرعي</p>
-                      <p className="font-bold text-primary text-base">{item.price * item.quantity} ر.ي</p>
-                    </div>
-                  </div>
-                </div>
+          <div className="lg:col-span-8 space-y-6">
+            {/* Products Table */}
+            <div className="bg-white rounded-3xl border shadow-sm overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader className="bg-muted/30">
+                    <TableRow>
+                      <TableHead className="text-right font-bold text-primary">المنتج</TableHead>
+                      <TableHead className="text-center font-bold text-primary">الكمية</TableHead>
+                      <TableHead className="text-center font-bold text-primary">السعر</TableHead>
+                      <TableHead className="text-left font-bold text-primary">الإجمالي</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {cartItems.map((item) => (
+                      <Dialog key={item.id}>
+                        <DialogTrigger asChild>
+                          <TableRow className="cursor-pointer hover:bg-muted/10 transition-colors">
+                            <TableCell className="text-right">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-12 h-12 rounded-lg overflow-hidden border shrink-0">
+                                  <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
+                                </div>
+                                <span className="font-bold text-sm line-clamp-1">{item.title}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-center font-bold">{item.quantity}</TableCell>
+                            <TableCell className="text-center text-xs">{item.price} ر.ي</TableCell>
+                            <TableCell className="text-left font-bold text-primary">{item.price * item.quantity} ر.ي</TableCell>
+                          </TableRow>
+                        </DialogTrigger>
+                        <DialogContent className="rounded-3xl sm:max-w-md border-none shadow-2xl">
+                          <DialogHeader>
+                            <DialogTitle className="text-xl font-headline font-bold text-primary text-right">تعديل المنتج</DialogTitle>
+                          </DialogHeader>
+                          <div className="flex flex-col items-center gap-6 py-6">
+                            <div className="relative w-32 h-32 rounded-2xl overflow-hidden border shadow-sm">
+                              <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
+                            </div>
+                            <div className="text-center">
+                              <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                              <p className="text-primary font-bold">{item.price} ر.ي</p>
+                            </div>
+                            <div className="flex items-center gap-4 bg-muted/30 rounded-2xl p-2 border">
+                              <Button variant="secondary" size="icon" className="rounded-xl" onClick={() => updateQuantity(item.id, 1)}>
+                                <Plus className="w-4 h-4" />
+                              </Button>
+                              <span className="w-8 text-center text-lg font-bold">{item.quantity}</span>
+                              <Button variant="secondary" size="icon" className="rounded-xl" onClick={() => updateQuantity(item.id, -1)}>
+                                <Minus className="w-4 h-4" />
+                              </Button>
+                            </div>
+                            <Button variant="destructive" className="w-full rounded-xl gap-2 h-12" onClick={() => removeItem(item.id)}>
+                              <Trash2 className="w-4 h-4" /> حذف من السلة
+                            </Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
-            ))}
+            </div>
+
+            {/* Notes & Coupon Sections */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white p-5 rounded-3xl border shadow-sm space-y-3">
+                <button 
+                  onClick={() => setShowNote(!showNote)}
+                  className="flex items-center justify-between w-full font-bold text-sm text-primary group"
+                >
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="w-4 h-4" />
+                    هل تريد إضافة ملاحظة؟
+                  </div>
+                  {showNote ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </button>
+                {showNote && (
+                  <div className="space-y-3 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Textarea 
+                      placeholder="أضف تعليمات خاصة للطلب هنا..." 
+                      className="rounded-2xl bg-muted/20 border-none resize-none"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                    />
+                    <Button className="w-full rounded-xl h-10 text-xs font-bold" onClick={() => setShowNote(false)}>حفظ الملاحظة</Button>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white p-5 rounded-3xl border shadow-sm space-y-3">
+                <button 
+                  onClick={() => setShowCoupon(!showCoupon)}
+                  className="flex items-center justify-between w-full font-bold text-sm text-primary group"
+                >
+                  <div className="flex items-center gap-2">
+                    <Ticket className="w-4 h-4" />
+                    هل لديك كوبون خصم؟
+                  </div>
+                  {showCoupon ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </button>
+                {showCoupon && (
+                  <div className="flex gap-2 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Input 
+                      placeholder="أدخل الرمز" 
+                      className="rounded-xl bg-muted/20 border-none h-10"
+                      value={coupon}
+                      onChange={(e) => setCoupon(e.target.value)}
+                    />
+                    <Button variant="secondary" className="rounded-xl px-6 h-10 text-xs font-bold">تطبيق</Button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Payment Selection */}
+            <div className="bg-white p-6 rounded-3xl border shadow-sm space-y-6">
+              <h2 className="font-headline font-bold text-lg text-primary flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-secondary" /> طريقة الدفع
+              </h2>
+              <Select value={paymentMethod} onValueChange={setPaymentMethod}>
+                <SelectTrigger className="rounded-2xl h-14 bg-muted/30 border-none font-bold">
+                  <SelectValue placeholder="اختر طريقة الدفع المفضلة" />
+                </SelectTrigger>
+                <SelectContent className="rounded-2xl">
+                  <SelectItem value="cod">الدفع عند الاستلام</SelectItem>
+                  <SelectItem value="wallet">الدفع من المحفظة</SelectItem>
+                  <SelectItem value="accounts">الدفع عبر حساباتنا</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {/* Conditional Payment Views */}
+              {paymentMethod === "wallet" && (
+                <div className="bg-primary/5 p-6 rounded-2xl border border-primary/10 flex flex-col items-center gap-3 animate-in fade-in zoom-in-95 duration-500">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
+                    <Wallet className="w-8 h-8" />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs text-muted-foreground font-bold mb-1">رصيدك المتاح في المحفظة</p>
+                    <p className="text-2xl font-bold text-primary">{walletBalance} ر.ي</p>
+                  </div>
+                  {walletBalance < total && (
+                    <p className="text-[10px] text-destructive font-bold">عذراً، الرصيد غير كافٍ لإتمام العملية</p>
+                  )}
+                </div>
+              )}
+
+              {paymentMethod === "accounts" && (
+                <div className="space-y-4 animate-in fade-in zoom-in-95 duration-500">
+                  <p className="text-xs font-bold text-muted-foreground">اختر الحساب المناسب لك للتحويل:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {banks.map((bank) => (
+                      <div key={bank.id} className="bg-white p-4 rounded-2xl border flex items-center gap-4 hover:border-primary/40 transition-all group">
+                        <div className="relative w-12 h-12 rounded-xl overflow-hidden border bg-muted">
+                          <Image src={bank.logo} alt={bank.name} fill className="object-cover" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-xs truncate">{bank.name}</p>
+                          <p className="text-[10px] text-primary font-bold" dir="ltr">{bank.account}</p>
+                          <p className="text-[9px] text-muted-foreground truncate">{bank.owner}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Order Summary */}
+          {/* Checkout Sidebar */}
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white p-6 rounded-3xl border shadow-sm sticky top-24">
-              <h2 className="font-headline font-bold text-xl mb-6 text-primary">ملخص الطلب</h2>
+              <h2 className="font-headline font-bold text-xl mb-6 text-primary">ملخص الفاتورة</h2>
               
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
@@ -143,15 +321,17 @@ export default function CartPage() {
               </div>
 
               <div className="space-y-3">
-                <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-white h-12 text-base font-bold rounded-2xl shadow-lg shadow-secondary/20">
-                  <Link href="/checkout">إتمام عملية الشراء</Link>
+                <Button 
+                  disabled={!paymentMethod || (paymentMethod === 'wallet' && walletBalance < total)}
+                  className="w-full bg-secondary hover:bg-secondary/90 text-white h-14 text-lg font-bold rounded-2xl shadow-lg shadow-secondary/20 gap-2"
+                >
+                  تأكيد وإتمام الشراء <CheckCircle2 className="w-5 h-5" />
                 </Button>
                 <Button variant="outline" asChild className="w-full border-primary/20 text-muted-foreground hover:text-primary hover:bg-primary/5 h-12 rounded-2xl font-bold gap-2">
-                  <Link href="/">مواصلة التسوق <ArrowLeft className="w-4 h-4" /></Link>
+                  <Link href="/">مواصلة التسوق</Link>
                 </Button>
               </div>
 
-              {/* Secure Checkout Banner */}
               <div className="mt-8 pt-6 border-t border-dashed">
                 <div className="bg-primary/5 p-4 rounded-2xl border border-primary/10 flex items-center gap-3">
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm shrink-0">
