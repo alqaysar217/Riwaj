@@ -31,18 +31,12 @@ const FEATURED_PRODUCTS = [
 
 const HERO_SLIDES = [
   {
-    title: "أصالة اليمن في كل منتج",
-    description: "اكتشف كنوز اليمن من البن الفاخر والعسل الملكي والحرف اليدوية الأصيلة.",
     image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "",
   },
   {
-    title: "عسل سدر ملكي فاخر",
-    description: "نقدم لكم أجود أنواع العسل اليمني من وديان حضرموت وشبوة.",
     image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "",
   },
   {
-    title: "حرف يدوية من قلب صنعاء",
-    description: "منتجات تحاكي التاريخ وتجسد مهارة الحرفي اليمني الأصيل.",
     image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl || "",
   },
 ]
@@ -59,27 +53,14 @@ export default function Home() {
             <CarouselContent>
               {HERO_SLIDES.map((slide, index) => (
                 <CarouselItem key={index}>
-                  <div className="relative h-[250px] md:h-[450px] overflow-hidden rounded-3xl shadow-xl">
+                  <div className="relative h-[160px] md:h-[350px] overflow-hidden rounded-3xl shadow-md">
                     <Image 
                       src={slide.image}
-                      alt={slide.title}
+                      alt="رواج - سوق المنتجات اليمنية"
                       fill
                       className="object-cover"
                       priority={index === 0}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent flex flex-col justify-center px-8 md:px-16 text-white">
-                      <h1 className="text-2xl md:text-5xl font-headline font-bold mb-3 max-w-md leading-tight">
-                        {slide.title}
-                      </h1>
-                      <p className="text-xs md:text-lg mb-6 max-w-sm opacity-90 leading-relaxed">
-                        {slide.description}
-                      </p>
-                      <div className="flex gap-2">
-                        <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white border-none px-8 font-bold text-sm md:text-base rounded-full shadow-lg transition-transform hover:scale-105">
-                          تسوق الآن
-                        </Button>
-                      </div>
-                    </div>
                   </div>
                 </CarouselItem>
               ))}
