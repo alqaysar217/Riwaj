@@ -4,83 +4,161 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, MapPin, ShieldCheck, ArrowLeft } from "lucide-react"
+import { Star, MapPin, ShieldCheck, ArrowLeft, ShoppingBag } from "lucide-react"
 
 const STORES = [
-  { id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, location: "صعدة", products: 45, verified: true, avatar: "https://picsum.photos/seed/store1/100/100" },
-  { id: "2", name: "عسل الوادي", category: "العسل الطبيعي", rating: 4.9, location: "دوعن، حضرموت", products: 12, verified: true, avatar: "https://picsum.photos/seed/store2/100/100" },
-  { id: "3", name: "تراث صنعاء", category: "الحرف اليدوية", rating: 4.6, location: "صنعاء القديمة", products: 89, verified: false, avatar: "https://picsum.photos/seed/store3/100/100" },
-  { id: "4", name: "بخور عدني", category: "البخور والعطور", rating: 4.7, location: "عدن", products: 34, verified: true, avatar: "https://picsum.photos/seed/store4/100/100" },
-  { id: "5", name: "مشغولات فضية", category: "الإكسسوارات", rating: 4.5, location: "صنعاء", products: 22, verified: true, avatar: "https://picsum.photos/seed/store5/100/100" },
+  { 
+    id: "1", 
+    name: "محامص الجبال", 
+    category: "البن والقهوة", 
+    rating: 4.8, 
+    location: "صنعاء", 
+    products: 45, 
+    verified: true, 
+    avatar: "https://picsum.photos/seed/store1/100/100",
+    banner: "https://picsum.photos/seed/b1/600/200"
+  },
+  { 
+    id: "2", 
+    name: "عسل الوادي", 
+    category: "العسل الطبيعي", 
+    rating: 4.9, 
+    location: "دوعن", 
+    products: 12, 
+    verified: true, 
+    avatar: "https://picsum.photos/seed/store2/100/100",
+    banner: "https://picsum.photos/seed/b2/600/200"
+  },
+  { 
+    id: "3", 
+    name: "تراث حضرموت", 
+    category: "الحرف اليدوية", 
+    rating: 4.6, 
+    location: "تريم", 
+    products: 89, 
+    verified: false, 
+    avatar: "https://picsum.photos/seed/store3/100/100",
+    banner: "https://picsum.photos/seed/b3/600/200"
+  },
+  { 
+    id: "4", 
+    name: "بخور عدني", 
+    category: "البخور والعطور", 
+    rating: 4.7, 
+    location: "عدن", 
+    products: 34, 
+    verified: true, 
+    avatar: "https://picsum.photos/seed/store4/100/100",
+    banner: "https://picsum.photos/seed/b4/600/200"
+  },
+  { 
+    id: "5", 
+    name: "منتجات مأرب", 
+    category: "مأكولات شعبية", 
+    rating: 4.5, 
+    location: "مأرب", 
+    products: 22, 
+    verified: true, 
+    avatar: "https://picsum.photos/seed/store5/100/100",
+    banner: "https://picsum.photos/seed/b5/600/200"
+  },
+  { 
+    id: "6", 
+    name: "منسوجات المكلا", 
+    category: "ملابس تقليدية", 
+    rating: 4.8, 
+    location: "المكلا", 
+    products: 18, 
+    verified: true, 
+    avatar: "https://picsum.photos/seed/store6/100/100",
+    banner: "https://picsum.photos/seed/b6/600/200"
+  },
 ]
+
+const CATEGORIES = ["الكل", "البن", "العسل", "الحرف", "الملابس", "العطور"]
 
 export default function StoresDirectoryPage() {
   return (
     <div className="pb-24">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-headline font-bold text-primary">متاجر الحرفيين</h1>
-            <p className="text-muted-foreground">اكتشف أفضل المتاجر والأسر المنتجة في اليمن</p>
-          </div>
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            <Badge className="bg-primary text-white cursor-pointer px-4">الكل</Badge>
-            <Badge variant="outline" className="cursor-pointer px-4 whitespace-nowrap">البن والقهوة</Badge>
-            <Badge variant="outline" className="cursor-pointer px-4 whitespace-nowrap">العسل</Badge>
-            <Badge variant="outline" className="cursor-pointer px-4 whitespace-nowrap">الحرف</Badge>
-          </div>
+      <main className="container mx-auto px-4 py-6">
+        {/* Header Section */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-headline font-bold text-primary mb-1">متاجر الحرفيين</h1>
+          <p className="text-muted-foreground text-xs">اكتشف أفضل المتاجر والأسر المنتجة في اليمن</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Horizontal Filters */}
+        <div className="flex overflow-x-auto pb-4 gap-2 no-scrollbar -mx-4 px-4">
+          {CATEGORIES.map((cat, i) => (
+            <button
+              key={i}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                i === 0 
+                ? "bg-primary text-white border-primary shadow-sm" 
+                : "bg-white text-muted-foreground border-border hover:border-primary/30"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Stores Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {STORES.map((store) => (
             <Link key={store.id} href={`/stores/${store.id}`}>
-              <Card className="hover:shadow-md transition-all group overflow-hidden border-none shadow-sm">
+              <Card className="overflow-hidden border-none shadow-sm hover:shadow-md transition-all group bg-white rounded-2xl">
                 <CardContent className="p-0">
-                  <div className="h-24 bg-gradient-to-l from-primary/10 to-secondary/10 relative">
-                    <div className="absolute -bottom-6 right-6">
-                      <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-4 border-white shadow-sm">
+                  {/* Banner Image */}
+                  <div className="relative h-24 bg-muted">
+                    <Image 
+                      src={store.banner} 
+                      alt="" 
+                      fill 
+                      className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </div>
+                  
+                  <div className="p-4 relative">
+                    {/* Store Avatar Overlapping Banner */}
+                    <div className="absolute -top-10 right-4">
+                      <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-4 border-white shadow-md bg-white">
                         <Image src={store.avatar} alt={store.name} fill className="object-cover" />
                       </div>
                     </div>
-                  </div>
-                  <div className="p-6 pt-8">
-                    <div className="flex justify-between items-start mb-2">
+
+                    <div className="mt-6 flex justify-between items-start">
                       <div>
-                        <div className="flex items-center gap-1">
-                          <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{store.name}</h3>
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <h3 className="font-bold text-base group-hover:text-primary transition-colors">{store.name}</h3>
                           {store.verified && <ShieldCheck className="w-4 h-4 text-green-600" />}
                         </div>
-                        <p className="text-sm text-muted-foreground">{store.category}</p>
+                        <p className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
+                          <ShoppingBag className="w-3 h-3" /> {store.category}
+                        </p>
                       </div>
-                      <div className="flex items-center gap-1 bg-secondary/10 px-2 py-1 rounded text-secondary font-bold text-xs">
+                      <div className="flex items-center gap-1 bg-secondary/10 px-2 py-1 rounded-lg text-secondary font-bold text-[10px]">
                         <Star className="w-3 h-3 fill-secondary" />
                         {store.rating}
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        {store.location}
+                    <div className="flex items-center gap-4 mt-4 py-3 border-t border-muted">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-6 h-6 rounded-full bg-primary/5 flex items-center justify-center text-primary">
+                          <MapPin className="w-3 h-3" />
+                        </div>
+                        <span className="text-[11px] font-bold">{store.location}</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <span className="font-bold text-primary">{store.products}</span> منتج
+                      <div className="flex items-center gap-1.5 mr-auto">
+                        <span className="text-[11px] text-muted-foreground">
+                          <span className="text-primary font-bold">{store.products}</span> منتج
+                        </span>
+                        <ArrowLeft className="w-3 h-3 text-muted-foreground group-hover:translate-x-[-4px] transition-transform" />
                       </div>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                      <div className="flex -space-x-2 space-x-reverse overflow-hidden">
-                        {[1, 2, 3].map((i) => (
-                          <div key={i} className="inline-block h-8 w-8 rounded-full border-2 border-white bg-muted relative">
-                            <Image src={`https://picsum.photos/seed/p${store.id}${i}/50/50`} alt="" fill className="object-cover rounded-full" />
-                          </div>
-                        ))}
-                      </div>
-                      <span className="text-xs text-muted-foreground flex items-center mr-auto">
-                        شاهد المنتجات <ArrowLeft className="w-3 h-3 mr-1" />
-                      </span>
                     </div>
                   </div>
                 </CardContent>
