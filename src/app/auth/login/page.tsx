@@ -8,15 +8,31 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Mail, Lock, Eye, EyeOff, ArrowRight, LogIn } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, ArrowRight, LogIn, ShieldAlert } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
+import { useToast } from "@/hooks/use-toast"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const router = useRouter()
+  const { toast } = useToast()
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Admin login logic
+    if (email === "admin" && password === "admin") {
+      toast({
+        title: "مرحباً أيها المدير",
+        description: "جاري توجيهك إلى لوحة الإدارة المركزية.",
+      })
+      router.push('/admin')
+      return
+    }
+
+    // Default user login
     router.push('/')
   }
 
@@ -52,12 +68,13 @@ export default function LoginPage() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
-                  <Mail className="w-3.5 h-3.5 text-primary" /> البريد الإلكتروني
+                  <Mail className="w-3.5 h-3.5 text-primary" /> البريد الإلكتروني أو اسم المستخدم
                 </Label>
                 <Input 
                   id="email" 
-                  type="email" 
-                  placeholder="example@mail.com" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin" 
                   className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-right" 
                   required
                 />
@@ -76,6 +93,8 @@ export default function LoginPage() {
                   <Input 
                     id="password" 
                     type={showPassword ? "text" : "password"} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••" 
                     className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-right" 
                     required
@@ -95,6 +114,13 @@ export default function LoginPage() {
               تسجيل الدخول <LogIn className="w-5 h-5" />
             </Button>
           </form>
+
+          {email === "admin" && (
+            <div className="bg-orange-50 p-3 rounded-xl border border-orange-100 flex items-center gap-2 animate-pulse">
+               <ShieldAlert className="w-4 h-4 text-orange-600" />
+               <p className="text-[10px] text-orange-700 font-bold">نمط الدخول كمدير للنظام مفعل.</p>
+            </div>
+          )}
 
           <div className="pt-4 text-center space-y-4">
             <p className="text-xs text-muted-foreground font-medium">ليس لديك حساب بعد؟</p>
