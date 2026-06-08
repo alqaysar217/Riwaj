@@ -112,7 +112,7 @@ export default function StoresDirectoryPage() {
           <p className="text-muted-foreground text-xs">اكتشف أفضل المتاجر والأسر المنتجة في اليمن</p>
         </div>
 
-        {/* Horizontal Filters - Improved Actionability */}
+        {/* Horizontal Filters - Unified Design */}
         <div className="flex overflow-x-auto pb-6 gap-2 no-scrollbar -mx-4 px-4">
           {STORE_CATEGORIES.map((cat, i) => (
             <button
