@@ -1,7 +1,6 @@
-
 'use client';
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,16 +18,19 @@ import {
   FileText, 
   Image as ImageIcon,
   Upload,
-  Check
+  Check,
+  X
 } from "lucide-react"
 import { generateStoreDescription } from "@/ai/flows/generate-store-description"
 import { useToast } from "@/hooks/use-toast"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 export default function MerchantOnboarding() {
   const [step, setStep] = useState(1)
   const [isGenerating, setIsGenerating] = useState(false)
   const [docType, setDocType] = useState<'id' | 'passport'>('id')
+  
   const [formData, setFormData] = useState({
     name: "",
     type: "",
@@ -36,8 +38,36 @@ export default function MerchantOnboarding() {
     offerings: "",
     description: ""
   })
+
+  const [images, setImages] = useState<{
+    idFront: string | null;
+    idBack: string | null;
+    passport: string | null;
+    logo: string | null;
+  }>({
+    idFront: null,
+    idBack: null,
+    passport: null,
+    logo: null,
+  })
+
   const { toast } = useToast()
   const router = useRouter()
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, key: keyof typeof images) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImages(prev => ({ ...prev, [key]: reader.result as string }))
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const removeImage = (key: keyof typeof images) => {
+    setImages(prev => ({ ...prev, [key]: null }))
+  }
 
   const handleGenerateDescription = async () => {
     if (!formData.type || !formData.location || !formData.offerings) {
@@ -70,6 +100,41 @@ export default function MerchantOnboarding() {
     router.push('/merchant/dashboard')
   }
 
+  const ImageUploadBox = ({ id, label, value, onChange, onRemove, height = "h-32" }: any) => (
+    <div className="space-y-2">
+      <Label className="text-xs font-bold text-muted-foreground">{label}</Label>
+      <div className={cn(
+        "relative border-2 border-dashed border-muted rounded-2xl flex flex-col items-center justify-center gap-2 bg-muted/5 cursor-pointer hover:bg-muted/10 transition-colors overflow-hidden",
+        height,
+        value && "border-primary/50 bg-primary/5"
+      )}>
+        {value ? (
+          <>
+            <img src={value} alt={label} className="w-full h-full object-cover" />
+            <button 
+              onClick={(e) => { e.preventDefault(); onRemove(); }}
+              className="absolute top-2 left-2 p-1.5 bg-destructive text-white rounded-full shadow-lg"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </>
+        ) : (
+          <label htmlFor={id} className="w-full h-full flex flex-col items-center justify-center cursor-pointer gap-2">
+            <Upload className="w-5 h-5 text-muted-foreground" />
+            <span className="text-[10px] font-bold text-muted-foreground">اضغط لرفع الصورة</span>
+            <input 
+              id={id} 
+              type="file" 
+              accept="image/*" 
+              className="hidden" 
+              onChange={onChange} 
+            />
+          </label>
+        )}
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-md mx-auto space-y-8 pt-8">
@@ -88,47 +153,47 @@ export default function MerchantOnboarding() {
           <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                   <Store className="w-3.5 h-3.5 text-primary" /> اسم المتجر
                 </Label>
                 <Input 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   placeholder="مثلاً: محامص الجبال" 
-                  className="h-14 rounded-2xl bg-muted/30 border-none px-6" 
+                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" 
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                   <ShoppingBag className="w-3.5 h-3.5 text-primary" /> نوع النشاط التجاري
                 </Label>
                 <Input 
                   value={formData.type}
                   onChange={(e) => setFormData({...formData, type: e.target.value})}
                   placeholder="مثلاً: محمصة بن، منحل عسل، حرف يدوية" 
-                  className="h-14 rounded-2xl bg-muted/30 border-none px-6" 
+                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" 
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                   <MapPin className="w-3.5 h-3.5 text-primary" /> الموقع الرئيسي
                 </Label>
                 <Input 
                   value={formData.location}
                   onChange={(e) => setFormData({...formData, location: e.target.value})}
                   placeholder="مثلاً: صنعاء، حضرموت، عدن" 
-                  className="h-14 rounded-2xl bg-muted/30 border-none px-6" 
+                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" 
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                   <Sparkles className="w-3.5 h-3.5 text-secondary" /> أهم المنتجات
                 </Label>
                 <Input 
                   value={formData.offerings}
                   onChange={(e) => setFormData({...formData, offerings: e.target.value})}
                   placeholder="بن مطري، عسل سدر، بخور عدني..." 
-                  className="h-14 rounded-2xl bg-muted/30 border-none px-6" 
+                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" 
                 />
               </div>
             </div>
@@ -138,7 +203,7 @@ export default function MerchantOnboarding() {
           </div>
         )}
 
-        {/* Step 2: Identity Verification (New) */}
+        {/* Step 2: Identity Verification */}
         {step === 2 && (
           <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
             <div className="space-y-2">
@@ -174,29 +239,30 @@ export default function MerchantOnboarding() {
             <div className="space-y-4">
               {docType === 'id' ? (
                 <>
-                  <div className="space-y-2">
-                    <Label className="text-xs font-bold text-muted-foreground">صورة البطاقة (الوجه الأمامي)</Label>
-                    <div className="h-32 border-2 border-dashed border-muted rounded-2xl flex flex-col items-center justify-center gap-2 bg-muted/5 cursor-pointer hover:bg-muted/10 transition-colors">
-                      <Upload className="w-5 h-5 text-muted-foreground" />
-                      <span className="text-[10px] font-bold text-muted-foreground">اضغط لرفع الصورة</span>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label className="text-xs font-bold text-muted-foreground">صورة البطاقة (الوجه الخلفي)</Label>
-                    <div className="h-32 border-2 border-dashed border-muted rounded-2xl flex flex-col items-center justify-center gap-2 bg-muted/5 cursor-pointer hover:bg-muted/10 transition-colors">
-                      <Upload className="w-5 h-5 text-muted-foreground" />
-                      <span className="text-[10px] font-bold text-muted-foreground">اضغط لرفع الصورة</span>
-                    </div>
-                  </div>
+                  <ImageUploadBox 
+                    id="id-front" 
+                    label="صورة البطاقة (الوجه الأمامي)" 
+                    value={images.idFront} 
+                    onChange={(e: any) => handleFileChange(e, 'idFront')}
+                    onRemove={() => removeImage('idFront')}
+                  />
+                  <ImageUploadBox 
+                    id="id-back" 
+                    label="صورة البطاقة (الوجه الخلفي)" 
+                    value={images.idBack} 
+                    onChange={(e: any) => handleFileChange(e, 'idBack')}
+                    onRemove={() => removeImage('idBack')}
+                  />
                 </>
               ) : (
-                <div className="space-y-2">
-                  <Label className="text-xs font-bold text-muted-foreground">صورة صفحة البيانات في الجواز</Label>
-                  <div className="h-48 border-2 border-dashed border-muted rounded-2xl flex flex-col items-center justify-center gap-2 bg-muted/5 cursor-pointer hover:bg-muted/10 transition-colors">
-                    <Upload className="w-6 h-6 text-muted-foreground" />
-                    <span className="text-[10px] font-bold text-muted-foreground">اضغط لرفع صورة واضحة</span>
-                  </div>
-                </div>
+                <ImageUploadBox 
+                  id="passport" 
+                  label="صورة صفحة البيانات في الجواز" 
+                  value={images.passport} 
+                  onChange={(e: any) => handleFileChange(e, 'passport')}
+                  onRemove={() => removeImage('passport')}
+                  height="h-48"
+                />
               )}
             </div>
 
@@ -214,11 +280,22 @@ export default function MerchantOnboarding() {
               <div className="bg-primary/5 p-6 rounded-[2.5rem] border border-dashed border-primary/20 flex flex-col items-center gap-3">
                 <div className="relative">
                   <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-primary shadow-lg border-4 border-white overflow-hidden">
-                    <Camera className="w-8 h-8 opacity-20" />
+                    {images.logo ? (
+                      <img src={images.logo} alt="Logo Preview" className="w-full h-full object-cover" />
+                    ) : (
+                      <Camera className="w-8 h-8 opacity-20" />
+                    )}
                   </div>
-                  <button className="absolute bottom-0 right-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center border-2 border-white shadow-md">
+                  <label htmlFor="logo-upload" className="absolute bottom-0 right-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center border-2 border-white shadow-md cursor-pointer hover:scale-110 transition-transform">
                     <Upload className="w-4 h-4" />
-                  </button>
+                    <input 
+                      id="logo-upload" 
+                      type="file" 
+                      accept="image/*" 
+                      className="hidden" 
+                      onChange={(e) => handleFileChange(e, 'logo')} 
+                    />
+                  </label>
                 </div>
                 <div className="text-center">
                   <p className="text-xs font-bold text-primary">شعار المتجر أو صورة شخصية</p>
@@ -244,7 +321,7 @@ export default function MerchantOnboarding() {
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   placeholder="أخبر العملاء عن قصتك وجودة منتجاتك..." 
-                  className="rounded-2xl bg-muted/30 border-none p-6 min-h-[150px] resize-none" 
+                  className="rounded-2xl bg-muted/30 border-none p-6 min-h-[150px] resize-none text-right" 
                 />
               </div>
             </div>
