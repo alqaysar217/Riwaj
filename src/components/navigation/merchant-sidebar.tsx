@@ -82,8 +82,8 @@ export function MerchantSidebar() {
                     >
                       <Link href={item.href} className="flex items-center gap-3 w-full">
                         <item.icon className={cn("w-5 h-5 transition-colors", active ? "text-white" : "text-primary")} />
-                        <span className="font-bold text-sm">{item.label}</span>
-                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-left-2 duration-300" />}
+                        <span className={cn("font-bold text-sm transition-colors", active ? "text-white" : "")}>{item.label}</span>
+                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-left-2 duration-300 text-white" />}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -105,7 +105,7 @@ export function MerchantSidebar() {
                       asChild
                       isActive={active}
                       className={cn(
-                        "h-12 px-4 rounded-xl transition-all duration-200",
+                        "h-12 px-4 rounded-xl transition-all duration-200 group",
                         active 
                           ? "bg-gradient-to-l from-primary to-primary/80 text-white shadow-lg shadow-primary/20" 
                           : "hover:bg-primary/5 text-muted-foreground hover:text-primary"
@@ -113,8 +113,8 @@ export function MerchantSidebar() {
                     >
                       <Link href={item.href} className="flex items-center gap-3 w-full">
                         <item.icon className={cn("w-5 h-5 transition-colors", active ? "text-white" : "text-primary")} />
-                        <span className="font-bold text-sm">{item.label}</span>
-                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-left-2 duration-300" />}
+                        <span className={cn("font-bold text-sm transition-colors", active ? "text-white" : "")}>{item.label}</span>
+                        {active && <ChevronLeft className="w-4 h-4 mr-auto animate-in slide-in-from-left-2 duration-300 text-white" />}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
