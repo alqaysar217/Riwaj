@@ -1,9 +1,13 @@
+
+'use client';
+
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield, Settings2, Heart } from "lucide-react"
+import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield, Settings2, Heart, Store } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const MENU_ITEMS = [
   { icon: Package, label: "طلباتي", href: "/orders" },
@@ -15,13 +19,20 @@ const MENU_ITEMS = [
 ]
 
 export default function ProfilePage() {
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // محاكاة تسجيل الخروج والعودة للترحيب
+    router.push('/auth/welcome')
+  }
+
   return (
     <div className="pb-24">
       <Header />
       
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-2xl mx-auto">
-          {/* User Header - Optimized Height and Organization */}
+          {/* User Header */}
           <div className="bg-primary p-6 rounded-3xl text-white shadow-lg relative overflow-hidden mb-6">
             <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/20 rounded-full -mr-16 -mt-16 blur-2xl" />
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12 blur-xl" />
@@ -35,21 +46,33 @@ export default function ProfilePage() {
               <div className="flex-1 min-w-0">
                 <h1 className="text-xl font-headline font-bold truncate">أحمد محمد</h1>
                 <p className="text-white/70 text-xs mb-3 truncate">ahmed.m@example.com</p>
-                <Button 
-                  variant="secondary" 
-                  size="sm" 
-                  className="rounded-full h-8 px-4 font-bold text-[10px] gap-1.5 shadow-sm" 
-                  asChild
-                >
-                  <Link href="/settings">
-                    <Settings2 className="w-3 h-3" /> تعديل الملف الشخصي
-                  </Link>
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="secondary" 
+                    size="sm" 
+                    className="rounded-full h-8 px-4 font-bold text-[10px] gap-1.5 shadow-sm" 
+                    asChild
+                  >
+                    <Link href="/settings">
+                      <Settings2 className="w-3 h-3" /> تعديل الملف
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="rounded-full h-8 px-4 font-bold text-[10px] gap-1.5 border-white/20 text-white hover:bg-white/10" 
+                    asChild
+                  >
+                    <Link href="/merchant/dashboard">
+                      <Store className="w-3 h-3" /> لوحة التاجر
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Stats Bar - More compact and clean */}
+          {/* Stats Bar */}
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div className="bg-white p-3 rounded-2xl border shadow-sm text-center group hover:border-primary/20 transition-colors">
               <p className="text-lg font-bold text-primary">12</p>
@@ -57,11 +80,11 @@ export default function ProfilePage() {
             </div>
             <div className="bg-white p-3 rounded-2xl border shadow-sm text-center group hover:border-primary/20 transition-colors">
               <p className="text-lg font-bold text-primary">5</p>
-              <p className="text-[9px] text-muted-foreground font-bold">قائمة الرغبات</p>
+              <p className="text-[9px] text-muted-foreground font-bold">المفضلة</p>
             </div>
             <div className="bg-white p-3 rounded-2xl border shadow-sm text-center group hover:border-primary/20 transition-colors">
               <p className="text-lg font-bold text-primary">1240</p>
-              <p className="text-[9px] text-muted-foreground font-bold">نقاط مكافأة</p>
+              <p className="text-[9px] text-muted-foreground font-bold">نقاط</p>
             </div>
           </div>
 
@@ -84,7 +107,11 @@ export default function ProfilePage() {
             ))}
           </div>
 
-          <Button variant="ghost" className="w-full mt-6 text-destructive hover:text-destructive hover:bg-destructive/5 h-12 rounded-2xl gap-2 font-bold text-sm">
+          <Button 
+            variant="ghost" 
+            onClick={handleLogout}
+            className="w-full mt-6 text-destructive hover:text-destructive hover:bg-destructive/5 h-12 rounded-2xl gap-2 font-bold text-sm"
+          >
             <LogOut className="w-4 h-4" /> تسجيل الخروج
           </Button>
         </div>

@@ -16,6 +16,7 @@ export default function RegisterPage() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault()
+    // محاكاة لعملية التسجيل
     if (role === 'merchant') {
       router.push('/merchant/onboarding')
     } else {
@@ -26,15 +27,13 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-background p-6 flex flex-col">
       <header className="mb-8">
-        <Button variant="ghost" size="icon" asChild className="rounded-full bg-white shadow-sm border text-primary">
-          <Link href="/auth/welcome">
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+        <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full bg-white shadow-sm border text-primary">
+          <ArrowRight className="w-5 h-5" />
         </Button>
       </header>
 
       <main className="flex-1 max-w-md mx-auto w-full space-y-8 pb-12">
-        <div className="space-y-2 text-center md:text-right">
+        <div className="space-y-2 text-center">
           <h1 className="text-3xl font-headline font-bold text-primary">انضم إلى رواج</h1>
           <p className="text-muted-foreground text-sm font-medium">اختر نوع الحساب وابدأ رحلتك معنا</p>
         </div>
