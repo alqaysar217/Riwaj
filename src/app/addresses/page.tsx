@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
-import { MapPin, Plus, ArrowRight, Trash2, Navigation, User } from "lucide-react"
+import { MapPin, Plus, ArrowRight, Trash2, Navigation, User, Phone, Tag, Type, Loader2 } from "lucide-react"
 import Link from "next/link"
 import {
   Dialog,
@@ -32,6 +32,7 @@ export default function AddressesPage() {
   ])
 
   const [addressType, setAddressType] = useState<string>("home")
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false)
   const [newAddress, setNewAddress] = useState({ 
     title: "", 
     details: "", 
@@ -39,6 +40,29 @@ export default function AddressesPage() {
     recipientName: "" 
   })
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleGetLocation = () => {
+    setIsLoadingLocation(true)
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords
+          setNewAddress({
+            ...newAddress,
+            details: `إحداثيات الموقع: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
+          })
+          setIsLoadingLocation(false)
+        },
+        (error) => {
+          console.error("Error getting location", error)
+          setIsLoadingLocation(false)
+        }
+      )
+    } else {
+      alert("خاصية تحديد الموقع غير مدعومة في متصفحك")
+      setIsLoadingLocation(false)
+    }
+  }
 
   const handleAddAddress = () => {
     let finalTitle = ""
@@ -89,9 +113,11 @@ export default function AddressesPage() {
                 </DialogHeader>
                 <div className="space-y-4 py-6">
                   <div className="space-y-2">
-                    <Label className="text-right block font-bold text-xs">نوع العنوان</Label>
+                    <Label className="text-right flex items-center gap-2 font-bold text-xs">
+                      <Type className="w-3.5 h-3.5 text-secondary" /> نوع العنوان
+                    </Label>
                     <Select value={addressType} onValueChange={setAddressType}>
-                      <SelectTrigger className="rounded-xl h-12 bg-muted/30 border-none">
+                      <SelectTrigger className="rounded-xl h-12 bg-muted/30 border-none text-right" dir="rtl">
                         <SelectValue placeholder="اختر نوع العنوان" />
                       </SelectTrigger>
                       <SelectContent className="rounded-xl">
@@ -105,7 +131,9 @@ export default function AddressesPage() {
                   {addressType === "other" && (
                     <>
                       <div className="space-y-2">
-                        <Label htmlFor="recipientName" className="text-right block font-bold text-xs">اسم مستلم الطلب</Label>
+                        <Label htmlFor="recipientName" className="text-right flex items-center gap-2 font-bold text-xs">
+                          <User className="w-3.5 h-3.5 text-secondary" /> اسم مستلم الطلب
+                        </Label>
                         <Input 
                           id="recipientName" 
                           value={newAddress.recipientName}
@@ -115,7 +143,9 @@ export default function AddressesPage() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="title" className="text-right block font-bold text-xs">لقب العنوان</Label>
+                        <Label htmlFor="title" className="text-right flex items-center gap-2 font-bold text-xs">
+                          <Tag className="w-3.5 h-3.5 text-secondary" /> لقب العنوان
+                        </Label>
                         <Input 
                           id="title" 
                           value={newAddress.title}
@@ -128,7 +158,9 @@ export default function AddressesPage() {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="details" className="text-right block font-bold text-xs">العنوان بالتفصيل</Label>
+                    <Label htmlFor="details" className="text-right flex items-center gap-2 font-bold text-xs">
+                      <MapPin className="w-3.5 h-3.5 text-secondary" /> العنوان بالتفصيل
+                    </Label>
                     <Input 
                       id="details" 
                       value={newAddress.details}
@@ -139,7 +171,9 @@ export default function AddressesPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-right block font-bold text-xs">رقم الهاتف للتواصل</Label>
+                    <Label htmlFor="phone" className="text-right flex items-center gap-2 font-bold text-xs">
+                      <Phone className="w-3.5 h-3.5 text-secondary" /> رقم الهاتف للتواصل
+                    </Label>
                     <Input 
                       id="phone" 
                       value={newAddress.phone}
@@ -150,8 +184,14 @@ export default function AddressesPage() {
                     />
                   </div>
 
-                  <Button variant="outline" className="w-full rounded-xl h-12 border-primary/20 text-primary gap-2 hover:bg-primary/5 font-bold">
-                    <Navigation className="w-4 h-4" /> تحديد موقعي بالأحداثيات على الخريطة
+                  <Button 
+                    variant="outline" 
+                    onClick={handleGetLocation}
+                    disabled={isLoadingLocation}
+                    className="w-full rounded-xl h-12 border-primary/20 text-primary gap-2 hover:bg-primary/5 font-bold"
+                  >
+                    {isLoadingLocation ? <Loader2 className="w-4 h-4 animate-spin" /> : <Navigation className="w-4 h-4" />}
+                    تحديد موقعي بالأحداثيات على الخريطة
                   </Button>
                 </div>
                 <DialogFooter className="flex gap-3 sm:justify-start">
