@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ChevronLeft } from "lucide-react"
+import { ArrowLeft, ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, ShieldCheck } from "lucide-react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
@@ -8,11 +8,11 @@ import { ProductCard } from "@/components/product/product-card"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 const CATEGORIES = [
-  { name: "بن يمني", icon: "☕", image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
-  { name: "عسل سدر", icon: "🍯", image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
-  { name: "بخور", icon: "💨", image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl },
-  { name: "حرف يدوية", icon: "🏺", image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl },
-  { name: "ملابس", icon: "👗", image: "https://picsum.photos/seed/clothes/400/400" },
+  { name: "بن يمني", icon: Coffee, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
+  { name: "عسل سدر", icon: Droplets, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
+  { name: "بخور", icon: Wind, image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl },
+  { name: "حرف يدوية", icon: Palette, image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl },
+  { name: "ملابس", icon: Shirt, image: "https://picsum.photos/seed/clothes/400/400" },
 ]
 
 const FEATURED_PRODUCTS = [
@@ -65,8 +65,8 @@ export default function Home() {
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                  <span className="text-2xl mb-1">{cat.icon}</span>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-2 text-center">
+                  <cat.icon className="w-8 h-8 mb-2 stroke-[1.5]" />
                   <span className="font-bold text-sm">{cat.name}</span>
                 </div>
               </Link>
@@ -82,7 +82,9 @@ export default function Home() {
                 <h2 className="text-2xl font-headline font-bold text-primary">وصلنا حديثاً</h2>
                 <p className="text-muted-foreground text-sm">أحدث المنتجات من الأسر المنتجة والحرفيين</p>
               </div>
-              <Button variant="ghost" className="text-primary hover:bg-primary/5">عرض المزيد</Button>
+              <Button variant="ghost" asChild className="text-primary hover:bg-primary/5">
+                <Link href="/categories/all">عرض المزيد</Link>
+              </Button>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {FEATURED_PRODUCTS.map((product) => (
@@ -104,7 +106,9 @@ export default function Home() {
               <p className="text-muted-foreground leading-relaxed mb-6">
                 رواج ليس مجرد سوق، بل هو جسر يربط بين المبدعين في القرى والمدن اليمنية وبين العالم. نضمن لك الجودة ونضمن لهم عائداً عادلاً.
               </p>
-              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-8">اكتشف المتاجر</Button>
+              <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-8" asChild>
+                <Link href="/stores">اكتشف المتاجر</Link>
+              </Button>
             </div>
             <div className="flex-1 relative w-full aspect-video md:aspect-auto h-[250px] rounded-2xl overflow-hidden z-10">
               <Image 

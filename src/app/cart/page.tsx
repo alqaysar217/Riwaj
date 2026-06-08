@@ -4,7 +4,7 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Trash2, Plus, Minus, ArrowLeft } from "lucide-react"
+import { Trash2, Plus, Minus, ArrowLeft, ShieldCheck } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default function CartPage() {
@@ -83,7 +83,9 @@ export default function CartPage() {
             </div>
             
             <div className="bg-primary/5 p-4 rounded-xl border border-primary/10 flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-xl shadow-sm">🛡️</div>
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
               <div>
                 <p className="text-xs font-bold text-primary">تسوق آمن 100%</p>
                 <p className="text-[10px] text-muted-foreground">حقوقك محفوظة عبر منصة رواج</p>

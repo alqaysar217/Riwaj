@@ -10,7 +10,7 @@ const navItems = [
   { label: "الفئات", icon: LayoutGrid, href: "/categories" },
   { label: "المتاجر", icon: ShoppingBag, href: "/stores" },
   { label: "الطلبات", icon: ClipboardList, href: "/orders" },
-  { label: "حسابي", icon: "/profile", href: "/profile", isProfile: true },
+  { label: "حسابي", icon: User, href: "/profile" },
 ]
 
 export function BottomNav() {
@@ -18,26 +18,19 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border flex items-center justify-around h-16 px-4 md:hidden">
-      <Link href="/" className={cn("flex flex-col items-center gap-1 min-w-[64px]", pathname === "/" ? "text-primary" : "text-muted-foreground")}>
-        <Home className="w-5 h-5" />
-        <span className="text-[10px] font-medium">الرئيسية</span>
-      </Link>
-      <Link href="/categories" className={cn("flex flex-col items-center gap-1 min-w-[64px]", pathname === "/categories" ? "text-primary" : "text-muted-foreground")}>
-        <LayoutGrid className="w-5 h-5" />
-        <span className="text-[10px] font-medium">الفئات</span>
-      </Link>
-      <Link href="/stores" className={cn("flex flex-col items-center gap-1 min-w-[64px]", pathname === "/stores" ? "text-primary" : "text-muted-foreground")}>
-        <ShoppingBag className="w-5 h-5" />
-        <span className="text-[10px] font-medium">المتاجر</span>
-      </Link>
-      <Link href="/orders" className={cn("flex flex-col items-center gap-1 min-w-[64px]", pathname === "/orders" ? "text-primary" : "text-muted-foreground")}>
-        <ClipboardList className="w-5 h-5" />
-        <span className="text-[10px] font-medium">الطلبات</span>
-      </Link>
-      <Link href="/profile" className={cn("flex flex-col items-center gap-1 min-w-[64px]", pathname === "/profile" ? "text-primary" : "text-muted-foreground")}>
-        <User className="w-5 h-5" />
-        <span className="text-[10px] font-medium">حسابي</span>
-      </Link>
+      {navItems.map((item) => (
+        <Link 
+          key={item.href}
+          href={item.href} 
+          className={cn(
+            "flex flex-col items-center gap-1 min-w-[64px] transition-colors", 
+            pathname === item.href ? "text-primary" : "text-muted-foreground"
+          )}
+        >
+          <item.icon className={cn("w-5 h-5", pathname === item.href ? "stroke-[2.5]" : "stroke-[1.5]")} />
+          <span className="text-[10px] font-medium">{item.label}</span>
+        </Link>
+      ))}
     </nav>
   )
 }

@@ -1,10 +1,11 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Star, ShieldCheck, Truck, MessageCircle, Heart, Share2 } from "lucide-react"
+import { Star, ShieldCheck, Truck, MessageCircle, Heart, Share2, Sparkles } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
@@ -115,7 +116,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div className="bg-white border border-secondary/20 rounded-2xl p-6 shadow-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full -mr-12 -mt-12" />
               <h3 className="text-xl font-headline font-bold mb-3 flex items-center gap-2">
-                <span className="text-secondary">✨</span> {product.narrative.title}
+                <Sparkles className="w-5 h-5 text-secondary" /> {product.narrative.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed italic">
                 {product.narrative.body}
