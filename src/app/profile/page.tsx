@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield } from "lucide-react"
+import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield, Settings2 } from "lucide-react"
 import Link from "next/link"
 
 const MENU_ITEMS = [
@@ -18,37 +18,49 @@ export default function ProfilePage() {
     <div className="pb-24">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-6">
         <div className="max-w-2xl mx-auto">
-          {/* User Header */}
-          <div className="bg-primary p-8 rounded-3xl text-white flex flex-col items-center text-center mb-8 shadow-lg relative overflow-hidden">
+          {/* User Header - Optimized Height and Organization */}
+          <div className="bg-primary p-6 rounded-3xl text-white shadow-lg relative overflow-hidden mb-6">
             <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/20 rounded-full -mr-16 -mt-16 blur-2xl" />
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-2xl" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12 blur-xl" />
             
-            <Avatar className="w-24 h-24 border-4 border-white/20 mb-4 shadow-xl">
-              <AvatarImage src="https://picsum.photos/seed/user1/200/200" />
-              <AvatarFallback className="bg-secondary text-white text-2xl font-bold">أ م</AvatarFallback>
-            </Avatar>
-            <h1 className="text-2xl font-headline font-bold">أحمد محمد</h1>
-            <p className="text-white/70 text-sm mb-4">ahmed.m@example.com</p>
-            <Button variant="secondary" size="sm" className="rounded-full px-6 font-bold" asChild>
-              <Link href="/settings">تعديل الملف الشخصي</Link>
-            </Button>
+            <div className="flex items-center gap-5 relative z-10">
+              <Avatar className="w-20 h-20 border-2 border-white/30 shadow-md">
+                <AvatarImage src="https://picsum.photos/seed/user1/200/200" />
+                <AvatarFallback className="bg-secondary text-white text-xl font-bold">أ م</AvatarFallback>
+              </Avatar>
+              
+              <div className="flex-1 min-w-0">
+                <h1 className="text-xl font-headline font-bold truncate">أحمد محمد</h1>
+                <p className="text-white/70 text-xs mb-3 truncate">ahmed.m@example.com</p>
+                <Button 
+                  variant="secondary" 
+                  size="sm" 
+                  className="rounded-full h-8 px-4 font-bold text-[10px] gap-1.5 shadow-sm" 
+                  asChild
+                >
+                  <Link href="/settings">
+                    <Settings2 className="w-3 h-3" /> تعديل الملف الشخصي
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
 
-          {/* Stats Bar */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="bg-white p-4 rounded-2xl border shadow-sm text-center">
-              <p className="text-xl font-bold text-primary">12</p>
-              <p className="text-[10px] text-muted-foreground">طلب ناجح</p>
+          {/* Stats Bar - More compact and clean */}
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="bg-white p-3 rounded-2xl border shadow-sm text-center group hover:border-primary/20 transition-colors">
+              <p className="text-lg font-bold text-primary">12</p>
+              <p className="text-[9px] text-muted-foreground font-bold">طلب ناجح</p>
             </div>
-            <div className="bg-white p-4 rounded-2xl border shadow-sm text-center">
-              <p className="text-xl font-bold text-primary">5</p>
-              <p className="text-[10px] text-muted-foreground">قائمة الرغبات</p>
+            <div className="bg-white p-3 rounded-2xl border shadow-sm text-center group hover:border-primary/20 transition-colors">
+              <p className="text-lg font-bold text-primary">5</p>
+              <p className="text-[9px] text-muted-foreground font-bold">قائمة الرغبات</p>
             </div>
-            <div className="bg-white p-4 rounded-2xl border shadow-sm text-center">
-              <p className="text-xl font-bold text-primary">1240</p>
-              <p className="text-[10px] text-muted-foreground">نقاط مكافأة</p>
+            <div className="bg-white p-3 rounded-2xl border shadow-sm text-center group hover:border-primary/20 transition-colors">
+              <p className="text-lg font-bold text-primary">1240</p>
+              <p className="text-[9px] text-muted-foreground font-bold">نقاط مكافأة</p>
             </div>
           </div>
 
@@ -58,21 +70,21 @@ export default function ProfilePage() {
               <Link 
                 key={index} 
                 href={item.href} 
-                className={`flex items-center justify-between p-5 hover:bg-muted/30 transition-colors ${index !== MENU_ITEMS.length - 1 ? 'border-b' : ''}`}
+                className={`flex items-center justify-between p-4 hover:bg-muted/30 transition-colors ${index !== MENU_ITEMS.length - 1 ? 'border-b' : ''}`}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary">
-                    <item.icon className="w-5 h-5" />
+                  <div className="w-9 h-9 rounded-xl bg-primary/5 flex items-center justify-center text-primary">
+                    <item.icon className="w-4.5 h-4.5" />
                   </div>
-                  <span className="font-bold">{item.label}</span>
+                  <span className="font-bold text-sm">{item.label}</span>
                 </div>
-                <ChevronLeft className="w-5 h-5 text-muted-foreground" />
+                <ChevronLeft className="w-4 h-4 text-muted-foreground" />
               </Link>
             ))}
           </div>
 
-          <Button variant="ghost" className="w-full mt-8 text-destructive hover:text-destructive hover:bg-destructive/5 h-14 rounded-2xl gap-2 font-bold">
-            <LogOut className="w-5 h-5" /> تسجيل الخروج
+          <Button variant="ghost" className="w-full mt-6 text-destructive hover:text-destructive hover:bg-destructive/5 h-12 rounded-2xl gap-2 font-bold text-sm">
+            <LogOut className="w-4 h-4" /> تسجيل الخروج
           </Button>
         </div>
       </main>
