@@ -6,7 +6,19 @@ import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Star, ShieldCheck, Truck, MessageCircle, Heart, Share2, Sparkles } from "lucide-react"
+import { 
+  Star, 
+  ShieldCheck, 
+  Truck, 
+  MessageCircle, 
+  Heart, 
+  Share2, 
+  Sparkles,
+  Store,
+  ChevronLeft,
+  Clock,
+  ArrowRight
+} from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -22,15 +34,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     reviews: 142,
     category: "البن اليمني",
     store: {
+      id: "1",
       name: "محامص الجبال",
       rating: 4.8,
       location: "صعدة، اليمن",
       verified: true
     },
     narrative: {
-      title: "رحلة من جبال خولان إلى فنجانك",
-      body: "من أعلى قمم الجبال في صعدة، حيث تعانق الغيوم أشجار البن العتيقة، نأتيكم بهذا البن الخولاني المطري. تم انتقاء كل حبة يدوياً وتجفيفها تحت أشعة الشمس الذهبية للحفاظ على نكهتها الغنية التي تجمع بين عبق التراب اليمني وحلاوة الفواكه المجففة.",
-      culturalHighlight: "زراعة البن في خولان تعود لمئات السنين، حيث تتوارث العائلات تقنيات العناية بالأشجار عبر الأجيال."
+      title: "قصة من قلب جبال خولان",
+      body: "من أعالي قمم الجبال التي تعانق السحاب في صعدة، نأتيكم بهذا البن الخولاني الأصيل. تم انتقاء كل حبة يدوياً بعناية فائقة، وتجفيفها طبيعياً تحت أشعة الشمس الذهبية للحفاظ على نكهتها الغنية التي تجمع بين عبق الأرض وحلاوة الفواكه المجففة.",
+      culturalHighlight: "زراعة البن في خولان هي إرث يتناقله الأجيال، حيث تعامل كل شجرة كجزء من أفراد العائلة."
     },
     specs: [
       { label: "المنطقة", value: "خولان، صعدة" },
@@ -38,128 +51,156 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       { label: "الوزن", value: "500 جرام" },
       { label: "المعالجة", value: "تجفيف طبيعي" }
     ],
-    images: [
-      PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "",
-      PlaceHolderImages.find(i => i.id === "product-qishr")?.imageUrl || "",
-    ]
+    image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || ""
   }
 
   return (
-    <div className="pb-24">
+    <div className="pb-24 bg-background min-h-screen">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Gallery */}
-          <div className="space-y-4">
-            <div className="relative aspect-square rounded-2xl overflow-hidden border bg-white">
+      <main className="container mx-auto px-4 py-6">
+        {/* Back Link - Mobile Friendly */}
+        <div className="mb-4">
+          <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-primary p-0">
+            <Link href="/categories" className="flex items-center gap-1 font-bold text-xs">
+              <ArrowRight className="w-4 h-4 ml-1" /> العودة للتسوق
+            </Link>
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Main Image Section */}
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border bg-white shadow-sm">
               <Image 
-                src={product.images[0]} 
+                src={product.image} 
                 alt={product.title} 
                 fill 
                 className="object-cover"
+                priority
               />
               <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <Button variant="secondary" size="icon" className="rounded-full shadow-md">
+                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none">
                   <Heart className="w-5 h-5 text-destructive" />
                 </Button>
-                <Button variant="secondary" size="icon" className="rounded-full shadow-md">
+                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none">
                   <Share2 className="w-5 h-5" />
                 </Button>
               </div>
-            </div>
-            <div className="flex gap-4 overflow-x-auto pb-2">
-              {product.images.map((img, i) => (
-                <div key={i} className="relative w-24 h-24 rounded-lg overflow-hidden border-2 border-primary/20 cursor-pointer shrink-0">
-                  <Image src={img} alt="" fill className="object-cover" />
-                </div>
-              ))}
+              <div className="absolute bottom-4 right-4">
+                <Badge className="bg-primary/90 backdrop-blur-sm text-white px-3 py-1 font-bold">
+                  {product.category}
+                </Badge>
+              </div>
             </div>
           </div>
 
-          {/* Info */}
-          <div className="space-y-6">
-            <div className="space-y-2">
+          {/* Product Details Info Section */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <Badge variant="outline" className="text-primary border-primary/20">{product.category}</Badge>
                 {product.store.verified && (
-                  <Badge className="bg-green-50 text-green-700 hover:bg-green-50 border-green-200 gap-1">
-                    <ShieldCheck className="w-3 h-3" /> توثيق أصالة
+                  <Badge className="bg-green-50 text-green-700 hover:bg-green-50 border-green-200 gap-1 text-[10px] font-bold py-0.5">
+                    <ShieldCheck className="w-3 h-3" /> منتج أصلي موثق
                   </Badge>
                 )}
               </div>
-              <h1 className="text-3xl font-headline font-bold text-primary">{product.title}</h1>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1">
+              <h1 className="text-2xl md:text-4xl font-headline font-bold text-primary leading-tight">
+                {product.title}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-1 bg-secondary/10 px-2 py-1 rounded-lg">
                   <Star className="w-4 h-4 fill-secondary text-secondary" />
-                  <span className="font-bold">{product.rating}</span>
-                  <span className="text-muted-foreground text-sm">({product.reviews} تقييم)</span>
+                  <span className="font-bold text-sm">{product.rating}</span>
+                  <span className="text-muted-foreground text-xs">({product.reviews} تقييم)</span>
                 </div>
-                <Separator orientation="vertical" className="h-4" />
-                <Link href="/stores/1" className="text-primary text-sm font-medium hover:underline">
-                  {product.store.name}
+                <Separator orientation="vertical" className="h-4 hidden sm:block" />
+                <Link href={`/stores/${product.store.id}`} className="flex items-center gap-1.5 text-primary hover:underline group">
+                  <div className="w-7 h-7 rounded-full bg-primary/5 flex items-center justify-center">
+                    <Store className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="font-bold text-sm">{product.store.name}</span>
+                  <ChevronLeft className="w-3 h-3 group-hover:translate-x-[-2px] transition-transform" />
                 </Link>
               </div>
             </div>
 
-            <div className="bg-primary/5 p-6 rounded-2xl">
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-4xl font-bold text-primary">{product.price} ر.ي</span>
-                <span className="text-muted-foreground line-through text-lg">{product.originalPrice} ر.ي</span>
-                <Badge className="bg-secondary text-white mr-auto">خصم 15%</Badge>
+            <Separator />
+
+            {/* Price and Actions Card */}
+            <div className="bg-white border p-6 rounded-3xl shadow-sm space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1 font-bold">السعر الحالي</p>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-bold text-primary">{product.price} ر.ي</span>
+                    <span className="text-muted-foreground line-through text-sm font-medium">{product.originalPrice} ر.ي</span>
+                  </div>
+                </div>
+                <Badge className="bg-secondary text-white px-3 py-1 font-bold">توفير 15%</Badge>
               </div>
               
-              <div className="flex gap-4">
-                <Button className="flex-1 bg-primary hover:bg-primary/90 text-white h-12 text-lg">أضف إلى السلة</Button>
-                <Button className="bg-secondary hover:bg-secondary/90 text-white h-12 px-8 text-lg font-bold">شراء الآن</Button>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button className="flex-1 bg-primary hover:bg-primary/90 text-white h-14 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20">
+                  أضف إلى السلة
+                </Button>
+                <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/5 h-14 rounded-2xl text-lg font-bold">
+                  شراء الآن
+                </Button>
+              </div>
+              
+              <div className="flex justify-around py-2 border-t border-dashed gap-4">
+                <div className="flex items-center gap-2">
+                  <Truck className="w-4 h-4 text-primary" />
+                  <span className="text-[11px] font-medium text-muted-foreground">توصيل سريع لكل المدن</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-primary" />
+                  <span className="text-[11px] font-medium text-muted-foreground">ضمان الجودة والأصالة</span>
+                </div>
               </div>
             </div>
 
-            {/* Cultural Narrative - GenAI Powered */}
-            <div className="bg-white border border-secondary/20 rounded-2xl p-6 shadow-sm relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full -mr-12 -mt-12" />
-              <h3 className="text-xl font-headline font-bold mb-3 flex items-center gap-2">
+            {/* Cultural Narrative Section */}
+            <div className="bg-accent/30 rounded-3xl p-6 border border-accent relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-24 h-24 bg-primary/5 rounded-full -ml-12 -mt-12" />
+              <h3 className="text-xl font-headline font-bold text-primary mb-3 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-secondary" /> {product.narrative.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed italic">
+              <p className="text-muted-foreground leading-relaxed italic text-sm md:text-base">
                 {product.narrative.body}
               </p>
-              <div className="mt-4 pt-4 border-t border-dashed border-secondary/20">
-                <p className="text-xs font-bold text-secondary uppercase tracking-wider mb-1">لمحة ثقافية</p>
-                <p className="text-sm text-primary/80">{product.narrative.culturalHighlight}</p>
-              </div>
-            </div>
-
-            {/* Delivery/Store Info */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="border rounded-xl p-4 flex items-start gap-3">
-                <Truck className="w-5 h-5 text-primary shrink-0" />
-                <div>
-                  <p className="text-sm font-bold">توصيل سريع</p>
-                  <p className="text-xs text-muted-foreground">خلال 3-5 أيام عمل</p>
-                </div>
-              </div>
-              <div className="border rounded-xl p-4 flex items-start gap-3">
-                <MessageCircle className="w-5 h-5 text-primary shrink-0" />
-                <div>
-                  <p className="text-sm font-bold">دردشة فورية</p>
-                  <p className="text-xs text-muted-foreground">تواصل مباشر مع التاجر</p>
+              <div className="mt-4 pt-4 border-t border-primary/10">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4 text-secondary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-secondary uppercase tracking-wider mb-0.5">لمحة ثقافية</p>
+                    <p className="text-xs text-primary/80 font-medium leading-normal">{product.narrative.culturalHighlight}</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Specifications */}
-            <div>
-              <h3 className="font-bold mb-4">المواصفات</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
+            {/* Specifications Section */}
+            <div className="space-y-4">
+              <h3 className="font-bold text-lg text-primary border-r-4 border-secondary pr-3 leading-none">المواصفات الفنية</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {product.specs.map((spec, i) => (
-                  <div key={i} className="flex justify-between py-2 border-b border-muted">
-                    <span className="text-muted-foreground text-sm">{spec.label}</span>
-                    <span className="font-medium text-sm">{spec.value}</span>
+                  <div key={i} className="flex justify-between items-center p-3 bg-white rounded-xl border border-muted hover:border-primary/20 transition-colors">
+                    <span className="text-muted-foreground text-xs font-bold">{spec.label}</span>
+                    <span className="font-bold text-xs text-primary">{spec.value}</span>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Contact Store */}
+            <Button variant="ghost" className="w-full h-12 rounded-xl text-primary font-bold gap-2 hover:bg-primary/5">
+              <MessageCircle className="w-5 h-5" /> تواصل مع التاجر للاستفسار
+            </Button>
           </div>
         </div>
       </main>
