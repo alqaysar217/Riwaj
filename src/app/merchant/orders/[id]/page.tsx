@@ -36,6 +36,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Textarea } from "@/components/ui/textarea"
 import Image from "next/image"
 import { useToast } from "@/hooks/use-toast"
 
