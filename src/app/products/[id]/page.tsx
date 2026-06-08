@@ -69,9 +69,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Main Image Section */}
-          <div className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border bg-white shadow-sm">
+          {/* Main Image Section - Reduced size on desktop and height on mobile */}
+          <div className="lg:col-span-4">
+            <div className="relative aspect-square md:aspect-[4/5] rounded-3xl overflow-hidden border bg-white shadow-sm max-w-md mx-auto lg:max-w-none">
               <Image 
                 src={product.image} 
                 alt={product.title} 
@@ -80,23 +80,23 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 priority
               />
               <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none">
-                  <Heart className="w-5 h-5 text-destructive" />
+                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-8 h-8">
+                  <Heart className="w-4 h-4 text-destructive" />
                 </Button>
-                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none">
-                  <Share2 className="w-5 h-5" />
+                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-8 h-8">
+                  <Share2 className="w-4 h-4" />
                 </Button>
               </div>
               <div className="absolute bottom-4 right-4">
-                <Badge className="bg-primary/90 backdrop-blur-sm text-white px-3 py-1 font-bold">
+                <Badge className="bg-primary/90 backdrop-blur-sm text-white px-3 py-1 font-bold text-[10px]">
                   {product.category}
                 </Badge>
               </div>
             </div>
           </div>
 
-          {/* Product Details Info Section */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Product Details Info Section - Expanded span */}
+          <div className="lg:col-span-8 space-y-6">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 {product.store.verified && (
@@ -105,7 +105,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   </Badge>
                 )}
               </div>
-              <h1 className="text-2xl md:text-4xl font-headline font-bold text-primary leading-tight">
+              <h1 className="text-2xl md:text-3xl font-headline font-bold text-primary leading-tight">
                 {product.title}
               </h1>
               
@@ -142,10 +142,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
               
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button className="flex-1 bg-primary hover:bg-primary/90 text-white h-14 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20">
+                <Button className="flex-1 bg-primary hover:bg-primary/90 text-white h-12 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20">
                   أضف إلى السلة
                 </Button>
-                <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/5 h-14 rounded-2xl text-lg font-bold">
+                <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/5 h-12 rounded-2xl text-lg font-bold">
                   شراء الآن
                 </Button>
               </div>
@@ -153,11 +153,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <div className="flex justify-around py-2 border-t border-dashed gap-4">
                 <div className="flex items-center gap-2">
                   <Truck className="w-4 h-4 text-primary" />
-                  <span className="text-[11px] font-medium text-muted-foreground">توصيل سريع لكل المدن</span>
+                  <span className="text-[11px] font-medium text-muted-foreground">توصيل سريع</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-primary" />
-                  <span className="text-[11px] font-medium text-muted-foreground">ضمان الجودة والأصالة</span>
+                  <span className="text-[11px] font-medium text-muted-foreground">ضمان الجودة</span>
                 </div>
               </div>
             </div>
@@ -165,10 +165,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {/* Cultural Narrative Section */}
             <div className="bg-accent/30 rounded-3xl p-6 border border-accent relative overflow-hidden">
               <div className="absolute top-0 left-0 w-24 h-24 bg-primary/5 rounded-full -ml-12 -mt-12" />
-              <h3 className="text-xl font-headline font-bold text-primary mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-headline font-bold text-primary mb-3 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-secondary" /> {product.narrative.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed italic text-sm md:text-base">
+              <p className="text-muted-foreground leading-relaxed italic text-sm">
                 {product.narrative.body}
               </p>
               <div className="mt-4 pt-4 border-t border-primary/10">
@@ -186,19 +186,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
             {/* Specifications Section */}
             <div className="space-y-4">
-              <h3 className="font-bold text-lg text-primary border-r-4 border-secondary pr-3 leading-none">المواصفات الفنية</h3>
+              <h3 className="font-bold text-base text-primary border-r-4 border-secondary pr-3 leading-none">المواصفات الفنية</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {product.specs.map((spec, i) => (
                   <div key={i} className="flex justify-between items-center p-3 bg-white rounded-xl border border-muted hover:border-primary/20 transition-colors">
-                    <span className="text-muted-foreground text-xs font-bold">{spec.label}</span>
-                    <span className="font-bold text-xs text-primary">{spec.value}</span>
+                    <span className="text-muted-foreground text-[10px] font-bold">{spec.label}</span>
+                    <span className="font-bold text-[10px] text-primary">{spec.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Contact Store */}
-            <Button variant="ghost" className="w-full h-12 rounded-xl text-primary font-bold gap-2 hover:bg-primary/5">
+            <Button variant="ghost" className="w-full h-11 rounded-xl text-primary font-bold gap-2 hover:bg-primary/5 text-sm">
               <MessageCircle className="w-5 h-5" /> تواصل مع التاجر للاستفسار
             </Button>
           </div>
