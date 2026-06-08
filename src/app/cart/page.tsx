@@ -141,17 +141,17 @@ export default function CartPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-6">
-            {/* Products Table */}
+            {/* Products Table - Enhanced for Mobile Visibility */}
             <div className="bg-white rounded-3xl border shadow-sm overflow-hidden">
-              <div className="overflow-x-auto">
-                <Table>
+              <div className="overflow-x-auto no-scrollbar">
+                <Table className="min-w-[400px] md:min-w-full">
                   <TableHeader className="bg-muted/30">
                     <TableRow>
-                      <TableHead className="text-right font-bold text-primary">المنتج</TableHead>
-                      <TableHead className="text-center font-bold text-primary">الكمية</TableHead>
-                      <TableHead className="text-center font-bold text-primary">السعر</TableHead>
-                      <TableHead className="text-center font-bold text-primary">الإجمالي</TableHead>
-                      <TableHead className="text-center font-bold text-primary">إجراء</TableHead>
+                      <TableHead className="text-right font-bold text-primary px-2 py-3 text-[10px] md:text-xs">المنتج</TableHead>
+                      <TableHead className="text-center font-bold text-primary px-1 py-3 text-[10px] md:text-xs">الكمية</TableHead>
+                      <TableHead className="text-center font-bold text-primary px-1 py-3 text-[10px] md:text-xs">السعر</TableHead>
+                      <TableHead className="text-center font-bold text-primary px-1 py-3 text-[10px] md:text-xs">الإجمالي</TableHead>
+                      <TableHead className="text-center font-bold text-primary px-1 py-3 text-[10px] md:text-xs">إجراء</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -159,32 +159,38 @@ export default function CartPage() {
                       <Dialog key={item.id}>
                         <DialogTrigger asChild>
                           <TableRow className="cursor-pointer hover:bg-muted/10 transition-colors">
-                            <TableCell className="text-right">
-                              <span className="font-bold text-[11px] sm:text-sm line-clamp-2">{item.title}</span>
+                            <TableCell className="text-right px-2 py-4">
+                              <span className="font-bold text-[9px] md:text-sm leading-tight block max-w-[120px] md:max-w-none break-words">
+                                {item.title}
+                              </span>
                             </TableCell>
-                            <TableCell className="text-center font-bold text-xs">{item.quantity}</TableCell>
-                            <TableCell className="text-center text-[10px] sm:text-xs whitespace-nowrap">{item.price} ر.ي</TableCell>
-                            <TableCell className="text-center font-bold text-primary text-[11px] sm:text-sm whitespace-nowrap">{item.price * item.quantity} ر.ي</TableCell>
-                            <TableCell className="text-center">
-                              <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-primary">
-                                <Edit2 className="w-4 h-4" />
+                            <TableCell className="text-center font-bold text-[10px] md:text-xs px-1">{item.quantity}</TableCell>
+                            <TableCell className="text-center text-[9px] md:text-xs whitespace-nowrap px-1">
+                              {item.price} <span className="text-[8px] opacity-60">ر.ي</span>
+                            </TableCell>
+                            <TableCell className="text-center font-bold text-primary text-[10px] md:text-sm whitespace-nowrap px-1">
+                              {item.price * item.quantity} <span className="text-[8px] opacity-60">ر.ي</span>
+                            </TableCell>
+                            <TableCell className="text-center px-1">
+                              <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-primary">
+                                <Edit2 className="w-3.5 h-3.5" />
                               </Button>
                             </TableCell>
                           </TableRow>
                         </DialogTrigger>
-                        <DialogContent className="rounded-[32px] w-[92vw] max-w-md sm:max-w-sm border-none shadow-2xl p-0 overflow-hidden [&>button]:left-4 [&>button]:right-auto">
+                        <DialogContent className="rounded-[32px] w-[92vw] max-w-[340px] border-none shadow-2xl p-0 overflow-hidden [&>button]:left-4 [&>button]:right-auto">
                           <DialogHeader className="p-6 pb-0">
                             <DialogTitle className="text-xl font-headline font-bold text-primary text-right">تعديل المنتج</DialogTitle>
                           </DialogHeader>
                           <div className="p-6 space-y-6">
                             <div className="flex gap-4 bg-muted/20 p-4 rounded-3xl border border-dashed">
-                              <div className="relative w-24 h-24 rounded-2xl overflow-hidden border bg-white shrink-0">
+                              <div className="relative w-20 h-20 rounded-2xl overflow-hidden border bg-white shrink-0">
                                 <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
                               </div>
                               <div className="flex-1 space-y-1">
-                                <h3 className="font-bold text-sm leading-tight">{item.title}</h3>
+                                <h3 className="font-bold text-xs leading-tight">{item.title}</h3>
                                 <p className="text-primary font-bold text-lg">{item.price} <span className="text-[10px]">ر.ي</span></p>
-                                <p className="text-xs text-muted-foreground">الإجمالي: <span className="text-foreground font-bold">{item.price * item.quantity} ر.ي</span></p>
+                                <p className="text-[10px] text-muted-foreground">الإجمالي: <span className="text-foreground font-bold">{item.price * item.quantity} ر.ي</span></p>
                               </div>
                             </div>
                             
