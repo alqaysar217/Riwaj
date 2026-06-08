@@ -1,3 +1,4 @@
+
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -30,7 +31,7 @@ export default function OrdersPage() {
             </div>
           </div>
 
-          <Tabs defaultValue="all" className="w-full">
+          <Tabs defaultValue="all" className="w-full" dir="rtl">
             <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 rounded-xl mb-6">
               <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs">الكل</TabsTrigger>
               <TabsTrigger value="ongoing" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs">جارية</TabsTrigger>

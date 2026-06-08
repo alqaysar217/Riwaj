@@ -107,7 +107,7 @@ export default function StoreProfilePage({ params }: { params: Promise<{ id: str
 
         {/* Store Tabs Content */}
         <div className="container mx-auto px-4 mt-8">
-          <Tabs defaultValue="products" className="w-full">
+          <Tabs defaultValue="products" className="w-full" dir="rtl">
             <TabsList className="w-full justify-start bg-transparent border-b rounded-none p-0 h-auto mb-8 gap-8">
               <TabsTrigger 
                 value="products" 
