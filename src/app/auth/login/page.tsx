@@ -58,8 +58,7 @@ export default function LoginPage() {
                   id="email" 
                   type="email" 
                   placeholder="example@mail.com" 
-                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-left placeholder:text-right" 
-                  dir="ltr"
+                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-right" 
                   required
                 />
               </div>
@@ -78,8 +77,7 @@ export default function LoginPage() {
                     id="password" 
                     type={showPassword ? "text" : "password"} 
                     placeholder="••••••••" 
-                    className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-left placeholder:text-right" 
-                    dir="ltr"
+                    className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-right" 
                     required
                   />
                   <button 

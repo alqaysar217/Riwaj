@@ -37,7 +37,7 @@ export default function RegisterPage() {
           <p className="text-muted-foreground text-sm font-medium">اختر نوع الحساب وابدأ رحلتك معنا</p>
         </div>
 
-        {/* Role Selection - More Compact and Professional */}
+        {/* Role Selection */}
         <div className="grid grid-cols-2 gap-4">
           <div 
             onClick={() => setRole('customer')}
@@ -80,28 +80,28 @@ export default function RegisterPage() {
               <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                 <User className="w-3.5 h-3.5 text-primary" /> الاسم الكامل
               </Label>
-              <Input placeholder="أحمد محمد" className="h-14 rounded-2xl bg-muted/30 border-none px-6" required />
+              <Input placeholder="أحمد محمد" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" required />
             </div>
 
             <div className="space-y-2">
               <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                 <Mail className="w-3.5 h-3.5 text-primary" /> البريد الإلكتروني
               </Label>
-              <Input type="email" placeholder="example@mail.com" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-left" dir="ltr" required />
+              <Input type="email" placeholder="example@mail.com" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" required />
             </div>
 
             <div className="space-y-2">
               <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                 <Phone className="w-3.5 h-3.5 text-primary" /> رقم الهاتف
               </Label>
-              <Input placeholder="77XXXXXXX" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-left" dir="ltr" required />
+              <Input placeholder="77XXXXXXX" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" required />
             </div>
 
             <div className="space-y-2">
               <Label className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
                 <Lock className="w-3.5 h-3.5 text-primary" /> كلمة المرور
               </Label>
-              <Input type="password" placeholder="••••••••" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-left" dir="ltr" required />
+              <Input type="password" placeholder="••••••••" className="h-14 rounded-2xl bg-muted/30 border-none px-6 text-right" required />
             </div>
           </div>
 
