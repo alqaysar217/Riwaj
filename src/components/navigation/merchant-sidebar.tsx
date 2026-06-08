@@ -56,7 +56,7 @@ export function MerchantSidebar() {
 
   return (
     <Sidebar side="right" className="border-l bg-white" dir="rtl">
-      <SidebarHeader className="h-24 flex items-center justify-start px-4 border-b">
+      <SidebarHeader className="h-24 flex items-center justify-start px-6 border-b">
         <Link href="/merchant/dashboard" className="flex items-center gap-3 group">
           <div className="relative">
              {/* Glowing effect behind logo */}
@@ -64,12 +64,12 @@ export function MerchantSidebar() {
              <Image 
               src="/logo.png" 
               alt="رواج" 
-              width={54} 
-              height={52} 
-              className="object-contain relative z-10 drop-shadow-[0_4px_12px_rgba(15,118,110,0.3)] transition-transform duration-300 group-hover:scale-110"
+              width={48} 
+              height={48} 
+              className="object-contain relative z-10 drop-shadow-[0_4px_12px_rgba(15,118,110,0.2)] transition-transform duration-300 group-hover:scale-110"
             />
           </div>
-          <span className="text-3xl font-headline font-bold text-primary tracking-tight">رواج</span>
+          <span className="text-2xl font-headline font-bold text-primary tracking-tight">رواج</span>
         </Link>
       </SidebarHeader>
 
