@@ -4,7 +4,8 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, MapPin, ShieldCheck, ArrowLeft, ShoppingBag } from "lucide-react"
+import { Star, MapPin, ShieldCheck, ArrowLeft, ShoppingBag, LayoutGrid, Coffee, Droplets, Palette, Shirt, Wind } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const STORES = [
   { 
@@ -75,7 +76,14 @@ const STORES = [
   },
 ]
 
-const CATEGORIES = ["الكل", "البن", "العسل", "الحرف", "الملابس", "العطور"]
+const STORE_CATEGORIES = [
+  { name: "الكل", icon: LayoutGrid },
+  { name: "البن", icon: Coffee },
+  { name: "العسل", icon: Droplets },
+  { name: "الحرف", icon: Palette },
+  { name: "الملابس", icon: Shirt },
+  { name: "العطور", icon: Wind },
+]
 
 export default function StoresDirectoryPage() {
   return (
@@ -89,18 +97,25 @@ export default function StoresDirectoryPage() {
           <p className="text-muted-foreground text-xs">اكتشف أفضل المتاجر والأسر المنتجة في اليمن</p>
         </div>
 
-        {/* Horizontal Filters */}
+        {/* Horizontal Filters - Unified Design */}
         <div className="flex overflow-x-auto pb-4 gap-2 no-scrollbar -mx-4 px-4">
-          {CATEGORIES.map((cat, i) => (
+          {STORE_CATEGORIES.map((cat, i) => (
             <button
               key={i}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all border shrink-0 ${
+              className={cn(
+                "flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all shrink-0 font-bold text-xs",
                 i === 0 
                 ? "bg-primary text-white border-primary shadow-sm" 
                 : "bg-white text-muted-foreground border-border hover:border-primary/30"
-              }`}
+              )}
             >
-              {cat}
+              <div className={cn(
+                "w-5 h-5 rounded-full flex items-center justify-center",
+                i === 0 ? "bg-white/20 text-white" : "bg-primary/10 text-primary"
+              )}>
+                <cat.icon className="w-3 h-3" />
+              </div>
+              {cat.name}
             </button>
           ))}
         </div>

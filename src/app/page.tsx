@@ -47,7 +47,7 @@ export default function Home() {
       <Header />
       
       <main>
-        {/* Hero Section with Carousel and Spacing */}
+        {/* Hero Section with Carousel */}
         <section className="container mx-auto px-4 pt-6">
           <Carousel className="w-full" opts={{ loop: true }}>
             <CarouselContent>
@@ -56,7 +56,7 @@ export default function Home() {
                   <div className="relative h-[160px] md:h-[350px] overflow-hidden rounded-3xl shadow-md">
                     <Image 
                       src={slide.image}
-                      alt="رواج - سوق المنتجات اليمنية"
+                      alt="رواج"
                       fill
                       className="object-cover"
                       priority={index === 0}
@@ -72,7 +72,7 @@ export default function Home() {
           </Carousel>
         </section>
 
-        {/* Small Horizontal Categories (Filter Style) */}
+        {/* Categories Section - Unified Design */}
         <section className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-headline font-bold text-primary">تصفح الفئات</h2>
@@ -85,12 +85,12 @@ export default function Home() {
               <Link 
                 key={i} 
                 href={`/categories/${cat.name}`} 
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border hover:border-primary hover:bg-primary/5 transition-all shadow-sm shrink-0 group"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-border hover:border-primary hover:bg-primary/5 transition-all shadow-sm shrink-0 group"
               >
-                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                  <cat.icon className="w-3.5 h-3.5" />
+                <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <cat.icon className="w-3 h-3" />
                 </div>
-                <span className="text-sm font-bold whitespace-nowrap">{cat.name}</span>
+                <span className="text-xs font-bold whitespace-nowrap">{cat.name}</span>
               </Link>
             ))}
           </div>

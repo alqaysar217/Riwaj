@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react"
@@ -14,7 +13,8 @@ import {
   MessageSquare, 
   ShoppingBag, 
   Store, 
-  ShieldAlert 
+  ShieldAlert,
+  Zap
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -95,10 +95,10 @@ const NOTIFICATIONS = [
 ]
 
 const FILTERS = [
-  { id: "all", label: "الكل" },
-  { id: "new", label: "جديدة" },
-  { id: "orders", label: "الطلبات" },
-  { id: "offers", label: "العروض" },
+  { id: "all", label: "الكل", icon: Bell },
+  { id: "new", label: "جديدة", icon: Zap },
+  { id: "orders", label: "الطلبات", icon: Package },
+  { id: "offers", label: "العروض", icon: Tag },
 ]
 
 export default function NotificationsPage() {
@@ -121,19 +121,25 @@ export default function NotificationsPage() {
             <Button variant="ghost" size="sm" className="text-[10px] text-primary font-bold h-7">تحديد الكل كمقروء</Button>
           </div>
 
-          {/* Filters */}
-          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+          {/* Filters - Unified Design */}
+          <div className="flex gap-2 overflow-x-auto pb-6 no-scrollbar">
             {FILTERS.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
                 className={cn(
-                  "px-4 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0",
+                  "flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all shrink-0 font-bold text-xs",
                   activeFilter === filter.id 
                     ? "bg-primary text-white border-primary shadow-sm" 
                     : "bg-white text-muted-foreground border-border hover:border-primary/30"
                 )}
               >
+                <div className={cn(
+                  "w-5 h-5 rounded-full flex items-center justify-center",
+                  activeFilter === filter.id ? "bg-white/20 text-white" : "bg-primary/10 text-primary"
+                )}>
+                  <filter.icon className="w-3 h-3" />
+                </div>
                 {filter.label}
               </button>
             ))}
