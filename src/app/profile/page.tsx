@@ -2,11 +2,12 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield, Settings2 } from "lucide-react"
+import { ChevronLeft, User, Package, MapPin, HelpCircle, LogOut, Bell, Shield, Settings2, Heart } from "lucide-react"
 import Link from "next/link"
 
 const MENU_ITEMS = [
   { icon: Package, label: "طلباتي", href: "/orders" },
+  { icon: Heart, label: "المفضلة", href: "/favorites" },
   { icon: Bell, label: "التنبيهات", href: "/notifications" },
   { icon: MapPin, label: "عناويني", href: "/addresses" },
   { icon: Shield, label: "الأمان والخصوصية", href: "/privacy" },
