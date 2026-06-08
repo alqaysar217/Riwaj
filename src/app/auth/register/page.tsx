@@ -16,7 +16,6 @@ export default function RegisterPage() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault()
-    // محاكاة لعملية التسجيل
     if (role === 'merchant') {
       router.push('/merchant/onboarding')
     } else {
@@ -26,7 +25,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-background p-6 flex flex-col">
-      <header className="mb-8">
+      <header className="mb-6">
         <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full bg-white shadow-sm border text-primary">
           <ArrowRight className="w-5 h-5" />
         </Button>
@@ -38,7 +37,7 @@ export default function RegisterPage() {
           <p className="text-muted-foreground text-sm font-medium">اختر نوع الحساب وابدأ رحلتك معنا</p>
         </div>
 
-        {/* Role Selection */}
+        {/* Role Selection - More Compact and Professional */}
         <div className="grid grid-cols-2 gap-4">
           <div 
             onClick={() => setRole('customer')}
