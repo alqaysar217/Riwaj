@@ -26,6 +26,13 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select"
+import { Badge } from "@/components/ui/badge"
+import { 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardContent 
+} from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 import { generateProductNarrative } from "@/ai/flows/generate-product-narrative"
 import { suggestProductTags } from "@/ai/flows/suggest-product-tags"
@@ -272,6 +279,3 @@ export default function AddProductPage() {
     </div>
   )
 }
-
-// Re-using common components for layout consistency
-import { CardHeader, CardTitle, CardContent } from "@/components/ui/card"
