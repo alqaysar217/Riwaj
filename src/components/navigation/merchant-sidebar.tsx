@@ -47,6 +47,11 @@ const TOOLS_ITEMS = [
 export function MerchantSidebar() {
   const pathname = usePathname();
 
+  const isLinkActive = (href: string) => {
+    if (href === '/merchant/dashboard') return pathname === href;
+    return pathname.startsWith(href);
+  };
+
   return (
     <Sidebar side="right" className="border-l bg-white hidden md:flex">
       <SidebarHeader className="h-20 flex items-center justify-center border-b px-6">
@@ -61,26 +66,29 @@ export function MerchantSidebar() {
           <SidebarGroupLabel className="px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">إدارة المتجر</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {NAV_ITEMS.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    className={cn(
-                      "h-12 px-4 rounded-xl transition-all duration-200 group",
-                      pathname === item.href 
-                        ? "bg-primary text-white shadow-lg shadow-primary/20" 
-                        : "hover:bg-primary/5 text-muted-foreground hover:text-primary"
-                    )}
-                  >
-                    <Link href={item.href} className="flex items-center gap-3 w-full">
-                      <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-white" : "text-primary")} />
-                      <span className="font-bold text-sm">{item.label}</span>
-                      {pathname === item.href && <ChevronLeft className="w-4 h-4 mr-auto" />}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const active = isLinkActive(item.href);
+                return (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={active}
+                      className={cn(
+                        "h-12 px-4 rounded-xl transition-all duration-200 group",
+                        active 
+                          ? "bg-primary text-white shadow-lg shadow-primary/20" 
+                          : "hover:bg-primary/5 text-muted-foreground hover:text-primary"
+                      )}
+                    >
+                      <Link href={item.href} className="flex items-center gap-3 w-full">
+                        <item.icon className={cn("w-5 h-5", active ? "text-white" : "text-primary")} />
+                        <span className="font-bold text-sm">{item.label}</span>
+                        {active && <ChevronLeft className="w-4 h-4 mr-auto" />}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -89,25 +97,28 @@ export function MerchantSidebar() {
           <SidebarGroupLabel className="px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">أدوات إضافية</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {TOOLS_ITEMS.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    className={cn(
-                      "h-12 px-4 rounded-xl transition-all duration-200",
-                      pathname === item.href 
-                        ? "bg-primary text-white shadow-lg shadow-primary/20" 
-                        : "hover:bg-primary/5 text-muted-foreground hover:text-primary"
-                    )}
-                  >
-                    <Link href={item.href} className="flex items-center gap-3 w-full">
-                      <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-white" : "text-primary")} />
-                      <span className="font-bold text-sm">{item.label}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {TOOLS_ITEMS.map((item) => {
+                const active = isLinkActive(item.href);
+                return (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={active}
+                      className={cn(
+                        "h-12 px-4 rounded-xl transition-all duration-200",
+                        active 
+                          ? "bg-primary text-white shadow-lg shadow-primary/20" 
+                          : "hover:bg-primary/5 text-muted-foreground hover:text-primary"
+                      )}
+                    >
+                      <Link href={item.href} className="flex items-center gap-3 w-full">
+                        <item.icon className={cn("w-5 h-5", active ? "text-white" : "text-primary")} />
+                        <span className="font-bold text-sm">{item.label}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
