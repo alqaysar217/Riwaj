@@ -69,9 +69,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Main Image Section - Compact Size */}
+          {/* Main Image Section - Even smaller and more compact */}
           <div className="lg:col-span-4 flex justify-center lg:justify-start">
-            <div className="relative aspect-[4/3] md:aspect-square w-full max-w-sm rounded-3xl overflow-hidden border bg-white shadow-sm">
+            <div className="relative aspect-square w-full max-w-[280px] md:max-w-xs rounded-3xl overflow-hidden border bg-white shadow-sm mx-auto lg:mx-0">
               <Image 
                 src={product.image} 
                 alt={product.title} 
