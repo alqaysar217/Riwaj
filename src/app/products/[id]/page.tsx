@@ -1,3 +1,4 @@
+
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -8,10 +9,12 @@ import { Separator } from "@/components/ui/separator"
 import { Star, ShieldCheck, Truck, MessageCircle, Heart, Share2, Sparkles } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  
   // Mock data for the product
   const product = {
-    id: params.id,
+    id: id,
     title: "بن خولاني مطري فاخر - تحميص متوسط",
     price: 5500,
     originalPrice: 6500,

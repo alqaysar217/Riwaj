@@ -1,6 +1,7 @@
 
 "use client"
 
+import { use } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -22,10 +23,12 @@ import {
   Sparkles
 } from "lucide-react"
 
-export default function StoreProfilePage({ params }: { params: { id: string } }) {
+export default function StoreProfilePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  
   // Mock data for the store
   const store = {
-    id: params.id,
+    id: id,
     name: "محامص الجبال",
     category: "البن والقهوة",
     rating: 4.8,
