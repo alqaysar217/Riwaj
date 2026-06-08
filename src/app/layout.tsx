@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'رواج | Riwaj - سوق المنتجات اليمنية الأصيلة',
+  title: 'رواج - سوق المنتجات اليمنية الأصيلة',
   description: 'اكتشف أفضل المنتجات اليمنية من البن والعسل والمشغولات اليدوية والبخور في منصة رواج.',
 };
 

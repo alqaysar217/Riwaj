@@ -12,7 +12,7 @@ export function Header() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="text-2xl font-headline font-bold text-primary">رواج | Riwaj</span>
+          <span className="text-2xl font-headline font-bold text-primary">رواج</span>
         </Link>
 
         {/* Search Bar - Hidden on Mobile, shown in separate bar or expanded */}
@@ -39,8 +39,10 @@ export function Header() {
             </Link>
           </Button>
           <div className="hidden sm:block">
-            <Button variant="ghost" size="icon">
-              <User className="w-5 h-5" />
+            <Button variant="ghost" size="icon" asChild>
+              <Link href="/profile">
+                <User className="w-5 h-5" />
+              </Link>
             </Button>
           </div>
         </div>
