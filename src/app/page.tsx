@@ -6,6 +6,13 @@ import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product/product-card"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const CATEGORIES = [
   { name: "بن يمني", icon: Coffee },
@@ -22,28 +29,66 @@ const FEATURED_PRODUCTS = [
   { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "بخور", image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl || "" },
 ]
 
+const HERO_SLIDES = [
+  {
+    title: "أصالة اليمن في كل منتج",
+    description: "اكتشف كنوز اليمن من البن الفاخر والعسل الملكي والحرف اليدوية الأصيلة.",
+    image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "",
+  },
+  {
+    title: "عسل سدر ملكي فاخر",
+    description: "نقدم لكم أجود أنواع العسل اليمني من وديان حضرموت وشبوة.",
+    image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "",
+  },
+  {
+    title: "حرف يدوية من قلب صنعاء",
+    description: "منتجات تحاكي التاريخ وتجسد مهارة الحرفي اليمني الأصيل.",
+    image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl || "",
+  },
+]
+
 export default function Home() {
   return (
     <div className="pb-20 md:pb-0">
       <Header />
       
       <main>
-        {/* Hero Section */}
-        <section className="relative h-[250px] md:h-[400px] overflow-hidden">
-          <Image 
-            src={PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || ""}
-            alt="Yemeni Heritage"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent flex flex-col justify-center px-6 md:px-20 text-white">
-            <h1 className="text-2xl md:text-5xl font-headline font-bold mb-3 max-w-md">أصالة اليمن في كل منتج</h1>
-            <p className="text-xs md:text-lg mb-6 max-w-sm opacity-90 leading-relaxed">اكتشف كنوز اليمن من البن الفاخر والعسل الملكي والحرف اليدوية الأصيلة.</p>
-            <div className="flex gap-2">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white border-none px-6 font-bold text-sm md:text-base">تسوق الآن</Button>
+        {/* Hero Section with Carousel and Spacing */}
+        <section className="container mx-auto px-4 pt-6">
+          <Carousel className="w-full" opts={{ loop: true }}>
+            <CarouselContent>
+              {HERO_SLIDES.map((slide, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative h-[250px] md:h-[450px] overflow-hidden rounded-3xl shadow-xl">
+                    <Image 
+                      src={slide.image}
+                      alt={slide.title}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent flex flex-col justify-center px-8 md:px-16 text-white">
+                      <h1 className="text-2xl md:text-5xl font-headline font-bold mb-3 max-w-md leading-tight">
+                        {slide.title}
+                      </h1>
+                      <p className="text-xs md:text-lg mb-6 max-w-sm opacity-90 leading-relaxed">
+                        {slide.description}
+                      </p>
+                      <div className="flex gap-2">
+                        <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white border-none px-8 font-bold text-sm md:text-base rounded-full shadow-lg transition-transform hover:scale-105">
+                          تسوق الآن
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:block">
+              <CarouselPrevious className="right-4 left-auto bg-white/20 border-none text-white hover:bg-white/40" />
+              <CarouselNext className="left-4 right-auto bg-white/20 border-none text-white hover:bg-white/40" />
             </div>
-          </div>
+          </Carousel>
         </section>
 
         {/* Small Horizontal Categories (Filter Style) */}
