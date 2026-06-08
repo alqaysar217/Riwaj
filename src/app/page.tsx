@@ -62,7 +62,7 @@ export default function Home() {
       <Header />
       
       <main>
-        {/* Hero Section with Carousel */}
+        {/* Hero Section with Enhanced Shadow and Border */}
         <section className="container mx-auto px-4 pt-6">
           <Carousel 
             className="w-full" 
@@ -76,14 +76,15 @@ export default function Home() {
             <CarouselContent>
               {HERO_SLIDES.map((slide, index) => (
                 <CarouselItem key={index}>
-                  <div className="relative h-[160px] md:h-[350px] overflow-hidden rounded-3xl shadow-md border bg-muted">
+                  <div className="relative h-[180px] md:h-[380px] overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-white/50 bg-muted group">
                     <Image 
                       src={slide.image}
                       alt="رواج"
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
                       priority={index === 0}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
                 </CarouselItem>
               ))}
@@ -95,7 +96,7 @@ export default function Home() {
           </Carousel>
         </section>
 
-        {/* Categories Section - Now Interactive */}
+        {/* Categories Section */}
         <section className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-headline font-bold text-primary">تصفح الفئات</h2>
@@ -111,7 +112,7 @@ export default function Home() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all shadow-sm shrink-0 group font-bold text-xs",
                   activeCategory === cat.key 
-                    ? "bg-primary text-white border-primary" 
+                    ? "bg-primary text-white border-primary shadow-md" 
                     : "bg-white text-foreground border-border hover:border-primary/30"
                 )}
               >

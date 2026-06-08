@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from "react"
@@ -23,19 +24,19 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0 group">
-          <div className="relative">
-            <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Logo Section with Shadow and Border */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+          <div className="relative p-1.5 rounded-xl bg-white shadow-sm border border-primary/10 transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-md">
+            <div className="absolute inset-0 bg-primary/5 blur-md rounded-full scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <Image 
               src="/logo.png" 
               alt="رواج" 
-              width={36} 
-              height={36} 
-              className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
+              width={34} 
+              height={34} 
+              className="object-contain relative z-10 drop-shadow-md transition-transform duration-300 group-hover:scale-110"
             />
           </div>
-          <span className="text-2xl font-headline font-bold text-primary tracking-tight">رواج</span>
+          <span className="text-2xl font-headline font-bold text-primary tracking-tight drop-shadow-sm">رواج</span>
         </Link>
 
         {/* Search Bar */}
