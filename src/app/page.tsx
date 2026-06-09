@@ -39,15 +39,9 @@ const FEATURED_PRODUCTS = [
 ]
 
 const HERO_SLIDES = [
-  {
-    image: "/Onboarding-1.png",
-  },
-  {
-    image: "/Onboarding-2.png",
-  },
-  {
-    image: "/Onboarding-3.png",
-  },
+  { image: "/Onboarding-1.png" },
+  { image: "/Onboarding-2.png" },
+  { image: "/Onboarding-3.png" },
 ]
 
 export default function Home() {
@@ -62,7 +56,7 @@ export default function Home() {
       <Header />
       
       <main>
-        {/* Hero Section with Enhanced Shadow and Border */}
+        {/* Hero Section */}
         <section className="container mx-auto px-4 pt-6">
           <Carousel 
             className="w-full" 
@@ -76,7 +70,7 @@ export default function Home() {
             <CarouselContent>
               {HERO_SLIDES.map((slide, index) => (
                 <CarouselItem key={index}>
-                  <div className="relative h-[180px] md:h-[380px] overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-white/50 bg-muted group">
+                  <div className="relative h-[180px] md:h-[420px] overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-white bg-muted group">
                     <Image 
                       src={slide.image}
                       alt="رواج"
@@ -84,7 +78,7 @@ export default function Home() {
                       className="object-cover transition-transform duration-1000 group-hover:scale-105"
                       priority={index === 0}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   </div>
                 </CarouselItem>
               ))}
