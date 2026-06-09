@@ -52,8 +52,10 @@ export default function WelcomePage() {
   }
 
   const handleSkip = () => {
+    // التخطي يقوم بتسجيل الدخول التلقائي كمشتري (ضيف)
+    localStorage.setItem('isLoggedIn', 'true')
     localStorage.setItem('hasSeenWelcome', 'true')
-    router.push('/auth/login')
+    router.push('/')
   }
 
   return (
