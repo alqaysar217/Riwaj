@@ -66,7 +66,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.7,
       reviews: 65,
       category: "العطور والبخور",
-      store: { id: "3", name: "عبق التراث", rating: 4.6, location: "صنعاء، اليمن", verified: true },
+      store: { id: "4", name: "عبق التراث", rating: 4.7, location: "صنعاء، اليمن", verified: true },
       narrative: {
         title: "فخامة الأصالة",
         body: "مبخرة نحاسية مصنوعة يدوياً بنقوش إسلامية دقيقة، تضيف لمسة من الفخامة والعراقة لأي ركن في منزلك.",
@@ -83,7 +83,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.8,
       reviews: 42,
       category: "المشغولات اليدوية",
-      store: { id: "4", name: "السيوف والجمبيات", rating: 4.9, location: "صنعاء، اليمن", verified: true },
+      store: { id: "6", name: "صائغ العقيق", rating: 4.9, location: "صنعاء، اليمن", verified: true },
       narrative: {
         title: "رمز الرجولة والشموخ",
         body: "جنبية يمنية أصلية بمقبض من قرن وحيد القرن الطبيعي، ونصل فولاذي حاد، قطعة فنية تجمع التاريخ والقوة.",
@@ -100,7 +100,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.6,
       reviews: 35,
       category: "الأزياء التقليدية",
-      store: { id: "5", name: "حياكة الأجداد", rating: 4.7, location: "تعز، اليمن", verified: true },
+      store: { id: "7", name: "هدايا وتحف", rating: 4.4, location: "عدن، اليمن", verified: true },
       narrative: {
         title: "أناقة الحاضر بروح الماضي",
         body: "فستان نسائي بتطريز يدوي دقيق يعكس دقة الحرفيين اليمنيين، مصمم ليمنحكِ إطلالة ملكية في المناسبات.",
@@ -117,7 +117,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.5,
       reviews: 78,
       category: "المشغولات اليدوية",
-      store: { id: "6", name: "أنامل يمنية", rating: 4.4, location: "تهامة، اليمن", verified: true },
+      store: { id: "7", name: "هدايا وتحف", rating: 4.4, location: "عدن، اليمن", verified: true },
       narrative: {
         title: "فن الحياكة الطبيعية",
         body: "سلة خوص مصنوعة من سعف النخيل الطبيعي، ملونة بأصباغ مستخلصة من الطبيعة، مثالية للتنظيم والديكور.",
@@ -134,7 +134,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.9,
       reviews: 55,
       category: "المجوهرات والحلي",
-      store: { id: "7", name: "صائغ اليمن", rating: 4.8, location: "صنعاء، اليمن", verified: true },
+      store: { id: "6", name: "صائغ العقيق", rating: 4.9, location: "صنعاء، اليمن", verified: true },
       narrative: {
         title: "بريق العقيق اليماني",
         body: "عقد من الفضة الخالصة مرصع بالعقيق اليماني الكبدي الأصلي، يجمع بين بريق الفضة وجمال الحجر التاريخي.",
@@ -151,7 +151,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.8,
       reviews: 112,
       category: "العطور والبخور",
-      store: { id: "8", name: "خبير البخور", rating: 4.9, location: "عدن، اليمن", verified: true },
+      store: { id: "8", name: "خبير البخور", rating: 4.8, location: "عدن، اليمن", verified: true },
       narrative: {
         title: "رائحة الحب والذكريات",
         body: "خلطة بخور عدني أصلية، مكونة من أجود أنواع العود والعطور الشرقية التي تدوم طويلاً وتملأ المكان بالسكينة.",
@@ -168,7 +168,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.7,
       reviews: 48,
       category: "الجلديات والإكسسوارات",
-      store: { id: "9", name: "دباغة الجلود", rating: 4.6, location: "صنعاء، اليمن", verified: true },
+      store: { id: "7", name: "هدايا وتحف", rating: 4.4, location: "عدن، اليمن", verified: true },
       narrative: {
         title: "متانة تعيش طويلاً",
         body: "حقيبة نسائية من الجلد الطبيعي المعالج يدوياً، بتصميم يجمع بين الحداثة والتراث اليمني.",
@@ -185,7 +185,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       rating: 4.5,
       reviews: 92,
       category: "المشغولات اليدوية",
-      store: { id: "10", name: "بيت الفخار", rating: 4.4, location: "صنعاء، اليمن", verified: true },
+      store: { id: "3", name: "بيت الفخار", rating: 4.5, location: "صنعاء، اليمن", verified: true },
       narrative: {
         title: "نتاج الطين والماء",
         body: "أواني فخارية مصنوعة يدوياً على القرص الدوار، تستخدم لحفظ الماء وتبريده بشكل طبيعي وصحي.",

@@ -64,7 +64,7 @@ const ALL_PRODUCTS = [
     rating: 4.8,
     reviews: 42,
     category: "المشغولات اليدوية",
-    storeName: "سيوف الحرفيين",
+    storeName: "صائغ العقيق",
     image: "/products-4.png"
   },
   {
@@ -74,7 +74,7 @@ const ALL_PRODUCTS = [
     rating: 4.6,
     reviews: 35,
     category: "الأزياء التقليدية",
-    storeName: "حياكة الأجداد",
+    storeName: "هدايا وتحف",
     image: "/products-5.png"
   },
   {
@@ -84,7 +84,7 @@ const ALL_PRODUCTS = [
     rating: 4.5,
     reviews: 78,
     category: "المشغولات اليدوية",
-    storeName: "أنامل تهامة",
+    storeName: "هدايا وتحف",
     image: "/products-6.png"
   },
   {
@@ -114,7 +114,7 @@ const ALL_PRODUCTS = [
     rating: 4.7,
     reviews: 48,
     category: "الجلديات والإكسسوارات",
-    storeName: "دباغة الجلود",
+    storeName: "هدايا وتحف",
     image: "/products-9.png"
   },
   {
@@ -132,12 +132,12 @@ const ALL_PRODUCTS = [
 const ALL_STORES = [
   { id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png", banner: "/logo-stores-ditales-1.png" },
   { id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, location: "حضرموت", verified: true, avatar: "/logo-stores-2.png", banner: "/logo-stores-ditales-2.png" },
-  { id: "3", name: "عبق التراث", category: "العطور والبخور", rating: 4.7, location: "صنعاء", verified: true, avatar: "/logo-stores-3.png", banner: "/logo-stores-ditales-3.png" },
-  { id: "4", name: "سيوف الحرفيين", category: "المشغولات اليدوية", rating: 4.9, location: "صعدة", verified: true, avatar: "/logo-stores-4.png", banner: "/logo-stores-ditales-4.png" },
-  { id: "5", name: "حياكة الأجداد", category: "الأزياء التقليدية", rating: 4.6, location: "تعز", verified: true, avatar: "/logo-stores-5.png", banner: "/logo-stores-ditales-5.png" },
-  { id: "6", name: "أنامل تهامة", category: "المشغولات اليدوية", rating: 4.5, location: "الحديدة", verified: false, avatar: "/logo-stores-6.png", banner: "/logo-stores-ditales-6.png" },
-  { id: "7", name: "صائغ العقيق", category: "المجوهرات والحلي", rating: 4.9, location: "صنعاء", verified: true, avatar: "/logo-stores-7.png", banner: "/logo-stores-ditales-7.png" },
-  { id: "8", name: "خبير البخور", category: "العطور والبخور", rating: 4.8, location: "عدن", verified: true, avatar: "/logo-stores-8.png", banner: "/logo-stores-ditales-8.png" },
+  { id: "3", name: "بيت الفخار", category: "الفخار والأواني", rating: 4.5, location: "صنعاء", verified: true, avatar: "/logo-stores-3.png", banner: "/logo-stores-ditales-3.png" },
+  { id: "4", name: "عبق التراث", category: "العطور", rating: 4.7, location: "صنعاء", verified: true, avatar: "/logo-stores-4.png", banner: "/logo-stores-ditales-4.png" },
+  { id: "5", name: "مأكولات الأجداد", category: "المأكولات البيتية", rating: 4.6, location: "تعز", verified: true, avatar: "/logo-stores-5.png", banner: "/logo-stores-ditales-5.png" },
+  { id: "6", name: "صائغ العقيق", category: "الفضة والعقيق", rating: 4.9, location: "صنعاء", verified: true, avatar: "/logo-stores-6.png", banner: "/logo-stores-ditales-6.png" },
+  { id: "7", name: "هدايا وتحف", category: "الهدايا والتحف", rating: 4.4, location: "عدن", verified: true, avatar: "/logo-stores-7.png", banner: "/logo-stores-ditales-7.png" },
+  { id: "8", name: "خبير البخور", category: "البخور والعطور", rating: 4.8, location: "عدن", verified: true, avatar: "/logo-stores-8.png", banner: "/logo-stores-ditales-8.png" },
 ]
 
 const CATEGORIES = ["البن اليمني", "العسل الطبيعي", "العطور والبخور", "المشغولات اليدوية", "الأزياء التقليدية", "المجوهرات والحلي"]

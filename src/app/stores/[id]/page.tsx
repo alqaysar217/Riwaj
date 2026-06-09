@@ -23,31 +23,70 @@ import {
   Sparkles
 } from "lucide-react"
 
+const ALL_STORES = [
+  { 
+    id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, reviews: 245, location: "صنعاء، حي حدة", 
+    joinedDate: "يناير 2023", verified: true, avatar: "/logo-stores-1.png", banner: "/logo-stores-ditales-1.png",
+    description: "نحن في محامص الجبال نفخر بتقديم أجود أنواع البن اليمني الأصيل، نعتني بكل حبة بن من المزرعة وحتى محمصة القهوة لنضمن لكم نكهة لا تنسى تجسد تراث اليمن العريق.",
+    aiNarrative: "يتميز هذا المتجر بالتزامه بتقاليد زراعة البن في جبال خولان، حيث يتم التجفيف طبيعياً تحت أشعة الشمس، مما يمنح محاصيله نكهة فاكهية فريدة تعكس جودة التربة اليمنية."
+  },
+  { 
+    id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, reviews: 180, location: "سيئون، حضرموت", 
+    joinedDate: "مارس 2023", verified: true, avatar: "/logo-stores-2.png", banner: "/logo-stores-ditales-2.png",
+    description: "متخصصون في إنتاج وتعبئة أجود أنواع عسل السدر والسمر اليمني من قلب وديان حضرموت الطبيعية.",
+    aiNarrative: "يعتبر رحيق الوادي مرجعاً للعسل الملكي الفاخر، حيث يتميز بدقة الفحص والفرز لضمان وصول المنتج بأعلى معايير النقاء."
+  },
+  { 
+    id: "3", name: "بيت الفخار", category: "الفخار والأواني", rating: 4.5, reviews: 92, location: "صنعاء القديمة", 
+    joinedDate: "يونيو 2023", verified: true, avatar: "/logo-stores-3.png", banner: "/logo-stores-ditales-3.png",
+    description: "صناعة الأواني الفخارية والتحف الطينية يدوياً باستخدام تقنيات الأجداد للحفاظ على برودة المياه ونكهة الطعام الأصيلة.",
+    aiNarrative: "لمسة من الطين اليمني الحر، تجسد علاقة الإنسان بالأرض في قطع فنية تدوم لأجيال."
+  },
+  { 
+    id: "4", name: "عبق التراث", category: "العطور", rating: 4.7, reviews: 115, location: "صنعاء، التحرير", 
+    joinedDate: "سبتمبر 2023", verified: true, avatar: "/logo-stores-4.png", banner: "/logo-stores-ditales-4.png",
+    description: "تركيبات عطرية فريدة تجمع بين روح العصر وعبق الشرق، نستخدم أندر الزيوت العطرية لإنتاج روائح تدوم طويلاً.",
+    aiNarrative: "رحلة في عالم الروائح الساحرة، حيث تلتقي الأصالة بالفخامة في كل زجاجة عطر."
+  },
+  { 
+    id: "5", name: "مأكولات الأجداد", category: "المأكولات البيتية", rating: 4.6, reviews: 130, location: "تعز، وادي القاضي", 
+    joinedDate: "نوفمبر 2023", verified: true, avatar: "/logo-stores-5.png", banner: "/logo-stores-ditales-5.png",
+    description: "مأكولات شعبية وحلويات تعزية مصنوعة بحب في منازلنا، نستخدم أفضل المكونات المحلية لضمان الطعم البيتي الأصيل.",
+    aiNarrative: "نكهات من مطبخ الجدات، تعيد إليكم ذكريات الزمن الجميل والجلسات العائلية الدافئة."
+  },
+  { 
+    id: "6", name: "صائغ العقيق", category: "الفضة والعقيق", rating: 4.9, reviews: 210, location: "صنعاء، باب اليمن", 
+    joinedDate: "ديسمبر 2022", verified: true, avatar: "/logo-stores-6.png", banner: "/logo-stores-ditales-6.png",
+    description: "صياغة الفضة اليمانية وترصيعها بأجود أنواع العقيق اليماني الكبدي والمصور، قطع فنية فريدة لكل محبي التميز.",
+    aiNarrative: "بريق الفضة وسحر الحجر، حرفة يمانية عريقة تتجسد في خواتم وحلي تخطف الأبصار."
+  },
+  { 
+    id: "7", name: "هدايا وتحف", category: "الهدايا والتحف", rating: 4.4, reviews: 75, location: "عدن، كريتر", 
+    joinedDate: "فبراير 2024", verified: true, avatar: "/logo-stores-7.png", banner: "/logo-stores-ditales-7.png",
+    description: "وجهتكم الأولى للهدايا التذكارية والتحف التي تمثل التنوع الثقافي اليمني، من الجلديات وحتى المجسمات الخشبية.",
+    aiNarrative: "هدية من قلب اليمن لكل عزيز، قطع تحكي قصصاً من مدننا وتراثنا العريق."
+  },
+  { 
+    id: "8", name: "خبير البخور", category: "البخور والعطور", rating: 4.8, reviews: 195, location: "عدن، المنصورة", 
+    joinedDate: "أكتوبر 2023", verified: true, avatar: "/logo-stores-8.png", banner: "/logo-stores-ditales-8.png",
+    description: "أسرار البخور العدني الفاخر والزباد واللبان المعطر، خلطات متوارثة تمنح منزلك رائحة ترحيب لا تُنسى.",
+    aiNarrative: "عبير عدن في منزلك، خلطات بخور ملكية صُنعت بأيدي خبراء الحرفة لضمان ثبات ونقاء الرائحة."
+  }
+];
+
+const STORE_PRODUCTS = [
+  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "محامص الجبال", category: "بن", image: "/products-1.png" },
+  { id: "10", title: "فخار صنعاني أصيل", price: 2500, rating: 4.5, reviews: 92, storeName: "بيت الفخار", category: "المشغولات اليدوية", image: "/products-10.png" },
+  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "رحيق الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
+  { id: "8", title: "بخور عدني فاخر", price: 6000, rating: 4.8, reviews: 112, storeName: "خبير البخور", category: "العطور والبخور", image: "/products-8.png" },
+]
+
 export default function StoreProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   
-  // Mock data for the store
-  const store = {
-    id: id,
-    name: "محامص الجبال",
-    category: "البن والقهوة",
-    rating: 4.8,
-    reviews: 245,
-    location: "صنعاء، حي حدة",
-    joinedDate: "يناير 2023",
-    verified: true,
-    avatar: "/logo-stores-1.png",
-    banner: "/logo-stores-ditales-1.png",
-    description: "نحن في محامص الجبال نفخر بتقديم أجود أنواع البن اليمني الأصيل، نعتني بكل حبة بن من المزرعة وحتى محمصة القهوة لنضمن لكم نكهة لا تنسى تجسد تراث اليمن العريق.",
-    aiNarrative: "يتميز هذا المتجر بالتزامه بتقاليد زراعة البن في جبال خولان، حيث يتم التجفيف طبيعياً تحت أشعة الشمس، مما يمنح محاصيله نكهة فاكهية فريدة تعكس جودة التربة اليمنية."
-  }
+  const store = ALL_STORES.find(s => s.id === id) || ALL_STORES[0];
 
-  const STORE_PRODUCTS = [
-    { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: store.name, category: "بن", image: "/products-1.png" },
-    { id: "2", title: "قشر قهوة يمني", price: 1500, rating: 4.7, reviews: 56, storeName: store.name, category: "بن", image: "/products-2.png" },
-    { id: "3", title: "عسل سدر مطري", price: 15000, rating: 5.0, reviews: 32, storeName: store.name, category: "عسل", image: "/products-3.png" },
-    { id: "4", title: "خلطة بن عربي", price: 3800, rating: 4.8, reviews: 89, storeName: store.name, category: "بن", image: "/products-4.png" },
-  ]
+  const currentStoreProducts = STORE_PRODUCTS.filter(p => p.storeName === store.name);
 
   return (
     <div className="pb-24">
@@ -113,7 +152,7 @@ export default function StoreProfilePage({ params }: { params: Promise<{ id: str
                 value="products" 
                 className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-2 py-4 h-auto font-bold text-base"
               >
-                المنتجات ({STORE_PRODUCTS.length})
+                المنتجات ({currentStoreProducts.length > 0 ? currentStoreProducts.length : STORE_PRODUCTS.length})
               </TabsTrigger>
               <TabsTrigger 
                 value="about" 
@@ -125,7 +164,7 @@ export default function StoreProfilePage({ params }: { params: Promise<{ id: str
 
             <TabsContent value="products">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {STORE_PRODUCTS.map((product) => (
+                {(currentStoreProducts.length > 0 ? currentStoreProducts : STORE_PRODUCTS).map((product) => (
                   <ProductCard key={product.id} {...product} />
                 ))}
               </div>

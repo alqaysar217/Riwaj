@@ -13,92 +13,36 @@ import { cn } from "@/lib/utils"
 
 const STORES = [
   { 
-    id: "1", 
-    name: "محامص الجبال", 
-    category: "البن والقهوة", 
-    rating: 4.8, 
-    location: "صنعاء", 
-    products: 45, 
-    verified: true, 
-    avatar: "/logo-stores-1.png",
-    banner: "/logo-stores-ditales-1.png"
+    id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, location: "صنعاء", products: 45, verified: true, 
+    avatar: "/logo-stores-1.png", banner: "/logo-stores-ditales-1.png" 
   },
   { 
-    id: "2", 
-    name: "رحيق الوادي", 
-    category: "العسل الطبيعي", 
-    rating: 4.9, 
-    location: "حضرموت", 
-    products: 32, 
-    verified: true, 
-    avatar: "/logo-stores-2.png",
-    banner: "/logo-stores-ditales-2.png"
+    id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, location: "حضرموت", products: 32, verified: true, 
+    avatar: "/logo-stores-2.png", banner: "/logo-stores-ditales-2.png" 
   },
   { 
-    id: "3", 
-    name: "عبق التراث", 
-    category: "العطور والبخور", 
-    rating: 4.7, 
-    location: "صنعاء", 
-    products: 28, 
-    verified: true, 
-    avatar: "/logo-stores-3.png",
-    banner: "/logo-stores-ditales-3.png"
+    id: "3", name: "بيت الفخار", category: "الفخار والأواني", rating: 4.5, location: "صنعاء", products: 20, verified: true, 
+    avatar: "/logo-stores-3.png", banner: "/logo-stores-ditales-3.png" 
   },
   { 
-    id: "4", 
-    name: "سيوف الحرفيين", 
-    category: "المشغولات اليدوية", 
-    rating: 4.9, 
-    location: "صعدة", 
-    products: 15, 
-    verified: true, 
-    avatar: "/logo-stores-4.png",
-    banner: "/logo-stores-ditales-4.png"
+    id: "4", name: "عبق التراث", category: "العطور", rating: 4.7, location: "صنعاء", products: 28, verified: true, 
+    avatar: "/logo-stores-4.png", banner: "/logo-stores-ditales-4.png" 
   },
   { 
-    id: "5", 
-    name: "حياكة الأجداد", 
-    category: "الأزياء التقليدية", 
-    rating: 4.6, 
-    location: "تعز", 
-    products: 22, 
-    verified: true, 
-    avatar: "/logo-stores-5.png",
-    banner: "/logo-stores-ditales-5.png"
+    id: "5", name: "مأكولات الأجداد", category: "المأكولات البيتية", rating: 4.6, location: "تعز", products: 22, verified: true, 
+    avatar: "/logo-stores-5.png", banner: "/logo-stores-ditales-5.png" 
   },
   { 
-    id: "6", 
-    name: "أنامل تهامة", 
-    category: "المشغولات اليدوية", 
-    rating: 4.5, 
-    location: "الحديدة", 
-    products: 35, 
-    verified: false, 
-    avatar: "/logo-stores-6.png",
-    banner: "/logo-stores-ditales-6.png"
+    id: "6", name: "صائغ العقيق", category: "الفضة والعقيق", rating: 4.9, location: "صنعاء", products: 18, verified: true, 
+    avatar: "/logo-stores-6.png", banner: "/logo-stores-ditales-6.png" 
   },
   { 
-    id: "7", 
-    name: "صائغ العقيق", 
-    category: "المجوهرات والحلي", 
-    rating: 4.9, 
-    location: "صنعاء", 
-    products: 18, 
-    verified: true, 
-    avatar: "/logo-stores-7.png",
-    banner: "/logo-stores-ditales-7.png"
+    id: "7", name: "هدايا وتحف", category: "الهدايا والتحف", rating: 4.4, location: "عدن", products: 30, verified: true, 
+    avatar: "/logo-stores-7.png", banner: "/logo-stores-ditales-7.png" 
   },
   { 
-    id: "8", 
-    name: "خبير البخور", 
-    category: "العطور والبخور", 
-    rating: 4.8, 
-    location: "عدن", 
-    products: 40, 
-    verified: true, 
-    avatar: "/logo-stores-8.png",
-    banner: "/logo-stores-ditales-8.png"
+    id: "8", name: "خبير البخور", category: "البخور والعطور", rating: 4.8, location: "عدن", products: 40, verified: true, 
+    avatar: "/logo-stores-8.png", banner: "/logo-stores-ditales-8.png" 
   }
 ];
 
@@ -119,10 +63,10 @@ export default function StoresDirectoryPage() {
     if (activeCategory === "الكل") return true
     if (activeCategory === "البن") return store.category.includes("البن")
     if (activeCategory === "العسل") return store.category.includes("العسل")
-    if (activeCategory === "الحرف") return store.category.includes("المشغولات")
+    if (activeCategory === "الحرف") return store.category.includes("المشغولات") || store.category.includes("الفخار")
     if (activeCategory === "الملابس") return store.category.includes("الأزياء")
-    if (activeCategory === "العطور") return store.category.includes("العطور")
-    if (activeCategory === "المجوهرات") return store.category.includes("المجوهرات")
+    if (activeCategory === "العطور") return store.category.includes("العطور") || store.category.includes("البخور")
+    if (activeCategory === "المجوهرات") return store.category.includes("المجوهرات") || store.category.includes("الفضة")
     return true
   })
 
