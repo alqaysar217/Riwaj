@@ -33,7 +33,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -45,8 +44,8 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     date: "24 مايو 2024",
     status: "ongoing", // ongoing, delivered, shipped
     items: [
-      { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
-      { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
+      { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: "/products-1.png" },
+      { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: "/products-2.png" },
     ],
     paymentMethod: "accounts", // cod, wallet, accounts
     selectedBank: { name: "بنك الكريمي", account: "1234567", owner: "مؤسسة رواج التجارية" },
@@ -171,7 +170,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                           <TableCell className="text-right px-4 py-4">
                             <div className="flex items-center gap-3">
                               <div className="relative w-10 h-10 rounded-lg overflow-hidden border shrink-0 hidden md:block">
-                                <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
+                                <Image src={item.image || "/products-1.png"} alt={item.title} fill className="object-cover" />
                               </div>
                               <span className="font-bold text-[10px] md:text-sm leading-tight block max-w-[150px] md:max-w-none break-words">
                                 {item.title}

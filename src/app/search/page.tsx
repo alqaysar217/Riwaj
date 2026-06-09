@@ -28,20 +28,20 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 const ALL_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "بن يمني", image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "" },
-  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "عسل طبيعي", image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "" },
-  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "حرف يدوية", image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl || "" },
-  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "بخور وعطور", image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl || "" },
-  { id: "5", title: "قشر قهوة مطري", price: 1800, rating: 4.5, reviews: 30, storeName: "محامص الجبال", category: "بن يمني", image: PlaceHolderImages.find(i => i.id === "product-qishr")?.imageUrl || "" },
+  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "البن اليمني", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
+  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "المشغولات اليدوية", image: "/products-3.png" },
+  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "العطور والبخور", image: "/products-4.png" },
+  { id: "5", title: "قشر قهوة مطري", price: 1800, rating: 4.5, reviews: 30, storeName: "محامص الجبال", category: "البن اليمني", image: "/products-5.png" },
 ]
 
 const ALL_STORES = [
-  { id: "1", name: "محامص الجبال", category: "بن يمني", rating: 4.8, location: "صنعاء", verified: true, avatar: "https://picsum.photos/seed/store1/100/100" },
-  { id: "2", name: "عسل الوادي", category: "عسل طبيعي", rating: 4.9, location: "دوعن", verified: true, avatar: "https://picsum.photos/seed/store2/100/100" },
-  { id: "3", name: "تراث اليمن", category: "حرف يدوية", rating: 4.6, location: "حضرموت", verified: false, avatar: "https://picsum.photos/seed/store3/100/100" },
+  { id: "1", name: "محامص الجبال", category: "البن اليمني", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
+  { id: "2", name: "عسل الوادي", category: "العسل الطبيعي", rating: 4.9, location: "دوعن", verified: true, avatar: "/logo-stores-2.png" },
+  { id: "3", name: "تراث اليمن", category: "المشغولات اليدوية", rating: 4.6, location: "حضرموت", verified: false, avatar: "/logo-stores-3.png" },
 ]
 
-const CATEGORIES = ["بن يمني", "عسل طبيعي", "بخور وعطور", "حرف يدوية", "ملابس تقليدية", "مأكولات"]
+const CATEGORIES = ["البن اليمني", "العسل الطبيعي", "العطور والبخور", "المشغولات اليدوية", "الأزياء التقليدية", "الضيافة الشعبية"]
 
 function SearchContent() {
   const searchParams = useSearchParams()

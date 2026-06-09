@@ -15,7 +15,7 @@ const CATEGORIES = [
   { id: "7", name: "المجوهرات والحلي", icon: Gem, count: 67, image: "/categories-7.png" },
   { id: "8", name: "الهدايا الفاخرة", icon: Gift, count: 29, image: "/categories-8.png" },
   { id: "9", name: "الجلديات والإكسسوارات", icon: ShoppingBag, count: 45, image: "/categories-9.png" },
-  { id: "10", name: "أخرى", icon: LayoutGrid, count: 12, image: "/categories-10.png" },
+  { id: "10", name: "أخرى", icon: LayoutGrid, count: 12, image: "/logo.png" },
 ]
 
 export default function CategoriesPage() {

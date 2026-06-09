@@ -1,10 +1,10 @@
+
 "use client"
 
 import { useState, useMemo } from "react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { ProductCard } from "@/components/product/product-card"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { Search, X, ShoppingBag, Store, Star, MapPin, ShieldCheck, ChevronLeft, Heart, ArrowRight } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -14,12 +14,12 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 const FAVORITE_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "بن يمني", image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "" },
-  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "عسل طبيعي", image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "" },
+  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "البن اليمني", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
 ]
 
 const FAVORITE_STORES = [
-  { id: "1", name: "محامص الجبال", category: "بن يمني", rating: 4.8, location: "صنعاء", verified: true, avatar: "https://picsum.photos/seed/store1/100/100" },
+  { id: "1", name: "محامص الجبال", category: "البن اليمني", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
 ]
 
 export default function FavoritesPage() {

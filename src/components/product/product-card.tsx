@@ -16,11 +16,14 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ id, title, price, image, rating, reviews, storeName, category }: ProductCardProps) {
+  // Safe image source handling to prevent empty string error
+  const imageSrc = image || "/products-1.png"
+
   return (
     <Card className="group overflow-hidden border-none shadow-sm hover:shadow-md transition-all duration-300">
       <Link href={`/products/${id}`} className="block relative aspect-square">
         <Image 
-          src={image} 
+          src={imageSrc} 
           alt={title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
