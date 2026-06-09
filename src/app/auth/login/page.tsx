@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Mail, Lock, Eye, EyeOff, ArrowRight, LogIn, ShieldAlert } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, ArrowRight, LogIn, ShieldAlert, Store, User } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { useToast } from "@/hooks/use-toast"
+import { cn } from "@/lib/utils"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -22,16 +23,30 @@ export default function LoginPage() {
     e.preventDefault()
     
     // Admin login logic
-    if (email === "admin" && password === "admin") {
+    if (email === "مدير" && password === "123456") {
       toast({
         title: "مرحباً أيها المدير",
-        description: "جاري توجيهك إلى لوحة الإدارة المركزية.",
+        description: "جاري توجيهك إلى لوحة الإدارة المركزية لـ رواج.",
       })
       router.push('/admin')
       return
     }
 
-    // Default user login
+    // Merchant login logic
+    if (email === "تاجر" && password === "123456") {
+      toast({
+        title: "أهلاً بك يا شريك النجاح",
+        description: "جاري توجيهك إلى لوحة تحكم متجرك.",
+      })
+      router.push('/merchant/dashboard')
+      return
+    }
+
+    // Default user login (Customer)
+    toast({
+      title: "تم تسجيل الدخول بنجاح",
+      description: "مرحباً بك في رواج، استمتع برحلة تسوق أصيلة.",
+    })
     router.push('/')
   }
 
@@ -41,7 +56,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top Image Section */}
-      <div className="relative h-[30vh] w-full">
+      <div className="relative h-[35vh] w-full">
         <Image 
           src={heroImage} 
           alt="Login" 
@@ -49,19 +64,25 @@ export default function LoginPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
         <Button 
           variant="ghost" 
           size="icon" 
           onClick={() => router.back()}
-          className="absolute top-6 right-6 rounded-full bg-white/20 backdrop-blur-md text-white border-none"
+          className="absolute top-6 right-6 rounded-full bg-white/20 backdrop-blur-md text-white border-none hover:bg-white/40"
         >
           <ArrowRight className="w-5 h-5" />
         </Button>
+        
+        {/* Logo Overlay on image */}
+        <div className="absolute bottom-12 right-8 z-20">
+          <h2 className="text-4xl font-headline font-bold text-white drop-shadow-lg">رواج</h2>
+          <p className="text-white/80 text-[10px] font-bold uppercase tracking-[0.3em]">بوابتك للمنتجات اليمنية</p>
+        </div>
       </div>
 
-      <main className="flex-1 max-w-md mx-auto w-full px-6 space-y-8 -mt-10 relative z-10">
-        <div className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-primary/5 space-y-6">
+      <main className="flex-1 max-w-md mx-auto w-full px-6 space-y-8 -mt-8 relative z-30 pb-12">
+        <div className="bg-white p-8 rounded-[2.5rem] shadow-2xl shadow-primary/10 border border-primary/5 space-y-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-headline font-bold text-primary">مرحباً بك مجدداً</h1>
             <p className="text-muted-foreground text-sm font-medium">سجل دخولك لمواصلة رحلتك في سوق رواج</p>
@@ -71,14 +92,14 @@ export default function LoginPage() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
-                  <Mail className="w-3.5 h-3.5 text-primary" /> البريد الإلكتروني أو اسم المستخدم
+                  <User className="w-3.5 h-3.5 text-primary" /> البريد أو اسم المستخدم
                 </Label>
                 <Input 
                   id="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin" 
-                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-right" 
+                  placeholder="أدخل اسمك أو بريدك الإلكتروني" 
+                  className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-2 focus-visible:ring-primary/20 text-right font-bold" 
                   required
                 />
               </div>
@@ -99,7 +120,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••" 
-                    className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-primary/20 text-right" 
+                    className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-2 focus-visible:ring-primary/20 text-right font-bold" 
                     required
                   />
                   <button 
@@ -113,24 +134,44 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-lg shadow-primary/20 gap-2">
+            <Button type="submit" className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 gap-3 transition-all hover:scale-[1.02] active:scale-95">
               تسجيل الدخول <LogIn className="w-5 h-5" />
             </Button>
           </form>
 
-          {email === "admin" && (
-            <div className="bg-orange-50 p-3 rounded-xl border border-orange-100 flex items-center gap-2 animate-pulse">
-               <ShieldAlert className="w-4 h-4 text-orange-600" />
-               <p className="text-[10px] text-orange-700 font-bold">نمط الدخول كمدير للنظام مفعل.</p>
+          {/* Dynamic Badge for Shortcut Login */}
+          {(email === "مدير" || email === "تاجر") && (
+            <div className={cn(
+              "p-4 rounded-2xl flex items-center gap-3 border animate-in fade-in zoom-in-95 duration-300",
+              email === "مدير" ? "bg-orange-50 border-orange-100 text-orange-700" : "bg-blue-50 border-blue-100 text-blue-700"
+            )}>
+               <div className={cn(
+                 "w-10 h-10 rounded-xl flex items-center justify-center shadow-sm",
+                 email === "مدير" ? "bg-white text-orange-600" : "bg-white text-blue-600"
+               )}>
+                 {email === "مدير" ? <ShieldAlert className="w-5 h-5" /> : <Store className="w-5 h-5" />}
+               </div>
+               <div>
+                 <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">وضع الدخول السريع</p>
+                 <p className="text-xs font-bold">نمط الدخول كـ {email === "مدير" ? "مدير للنظام" : "تاجر معتمد"} مفعّل.</p>
+               </div>
             </div>
           )}
 
           <div className="pt-4 text-center space-y-4">
             <p className="text-xs text-muted-foreground font-medium">ليس لديك حساب بعد؟</p>
-            <Button variant="outline" asChild className="w-full h-14 rounded-2xl border-primary text-primary font-bold hover:bg-primary/5">
+            <Button variant="outline" asChild className="w-full h-14 rounded-2xl border-primary/20 text-primary font-bold hover:bg-primary/5 transition-all">
               <Link href="/auth/register">إنشاء حساب جديد</Link>
             </Button>
           </div>
+        </div>
+        
+        {/* Info Tip for Proto Typing */}
+        <div className="bg-primary/5 p-4 rounded-2xl border border-primary/10 flex gap-3 items-start">
+           <ShieldAlert className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+           <p className="text-[10px] text-muted-foreground leading-relaxed">
+             <span className="text-primary font-bold">تلميح تجريبي:</span> استخدم "مدير" أو "تاجر" مع كلمة السر "123456" للتنقل السريع بين لوحات التحكم المختلفة للمنصة.
+           </p>
         </div>
       </main>
     </div>
