@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, useEffect } from "react"
@@ -20,7 +19,8 @@ import {
   AlertCircle,
   TrendingUp,
   LayoutGrid,
-  ShoppingBag
+  ShoppingBag,
+  ChevronLeft
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -206,7 +206,7 @@ export default function MerchantProducts() {
                     "text-[9px] font-bold px-3 py-1 rounded-full border-none shadow-sm",
                     product.status === 'active' ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
                   )}>
-                    {product.status === 'active' ? <CheckCircle2 className="w-3 h-3 ml-1.5" /> : <AlertCircle className="w-3 h-3 ml-1.5" />}
+                    {product.status === 'active' ? <CheckCircle2 className="w-3.5 h-3.5 ml-1.5" /> : <AlertCircle className="w-3.5 h-3.5 ml-1.5" />}
                     {product.status === 'active' ? 'متاح للبيع' : 'غير متوفر'}
                   </Badge>
                 </div>
