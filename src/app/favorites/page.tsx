@@ -37,7 +37,8 @@ const FAVORITE_PRODUCTS = [
 ]
 
 const FAVORITE_STORES = [
-  { id: "1", name: "محامص الجبال", category: "البن اليمني", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
+  { id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
+  { id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, location: "حضرموت", verified: true, avatar: "/logo-stores-2.png" },
 ]
 
 export default function FavoritesPage() {
@@ -84,7 +85,7 @@ export default function FavoritesPage() {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="ابحث في مفضلتك..." 
-                className="h-14 pr-12 pl-12 rounded-2xl bg-muted/40 border-none text-base focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-sm"
+                className="h-14 pr-12 pl-12 rounded-xl bg-muted/40 border-none text-base focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-sm"
               />
               {searchInput && (
                 <button 
@@ -99,16 +100,16 @@ export default function FavoritesPage() {
 
           {/* Tabs Area */}
           <Tabs defaultValue="products" className="w-full" dir="rtl">
-            <TabsList className="bg-primary/5 p-1.5 rounded-2xl h-14 border border-primary/10 shadow-inner w-full mb-8">
+            <TabsList className="bg-primary/5 p-1 rounded-xl h-14 border border-primary/10 shadow-inner w-full mb-8">
               <TabsTrigger 
                 value="products" 
-                className="flex-1 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
+                className="flex-1 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
               >
                 <ShoppingBag className="w-4 h-4" /> المنتجات ({filteredProducts.length})
               </TabsTrigger>
               <TabsTrigger 
                 value="stores" 
-                className="flex-1 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
+                className="flex-1 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
               >
                 <Store className="w-4 h-4" /> المتاجر ({filteredStores.length})
               </TabsTrigger>
@@ -122,7 +123,7 @@ export default function FavoritesPage() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-24 bg-muted/10 rounded-3xl border border-dashed">
+                <div className="text-center py-24 bg-muted/10 rounded-xl border border-dashed">
                   <Heart className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-20" />
                   <h3 className="text-lg font-bold text-primary">لا توجد منتجات في المفضلة</h3>
                   <p className="text-muted-foreground text-xs">أضف بعض المنتجات التي تعجبك لتجدها هنا</p>
@@ -135,7 +136,7 @@ export default function FavoritesPage() {
                 {filteredStores.length > 0 ? (
                   filteredStores.map((store) => (
                     <Link key={store.id} href={`/stores/${store.id}`} className="block">
-                      <div className="bg-white p-4 rounded-2xl border shadow-sm flex items-center gap-4 hover:border-primary/20 transition-all group">
+                      <div className="bg-white p-4 rounded-xl border shadow-sm flex items-center gap-4 hover:border-primary/20 transition-all group">
                         <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-muted shrink-0 border">
                           <Image src={store.avatar} alt={store.name} fill className="object-cover" />
                         </div>
@@ -160,7 +161,7 @@ export default function FavoritesPage() {
                     </Link>
                   ))
                 ) : (
-                  <div className="text-center py-24 bg-muted/10 rounded-3xl border border-dashed">
+                  <div className="text-center py-24 bg-muted/10 rounded-xl border border-dashed">
                     <Store className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-20" />
                     <h3 className="text-lg font-bold text-primary">لا توجد متاجر في المفضلة</h3>
                     <p className="text-muted-foreground text-xs">تابع متاجرك المفضلة لتصل لمنتجاتهم بسرعة</p>

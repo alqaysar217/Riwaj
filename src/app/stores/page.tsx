@@ -25,60 +25,82 @@ const STORES = [
   },
   { 
     id: "2", 
-    name: "عسل الوادي", 
+    name: "رحيق الوادي", 
     category: "العسل الطبيعي", 
     rating: 4.9, 
-    location: "دوعن", 
-    products: 12, 
+    location: "حضرموت", 
+    products: 32, 
     verified: true, 
     avatar: "/logo-stores-2.png",
     banner: "/logo-stores-ditales-2.png"
   },
   { 
     id: "3", 
-    name: "تراث حضرموت", 
-    category: "الحرف اليدوية", 
-    rating: 4.6, 
-    location: "تريم", 
-    products: 89, 
-    verified: false, 
+    name: "عبق التراث", 
+    category: "العطور والبخور", 
+    rating: 4.7, 
+    location: "صنعاء", 
+    products: 28, 
+    verified: true, 
     avatar: "/logo-stores-3.png",
-    banner: "/logo-stores-ditales-3.png"
+    banner: "/logo-stores-ditales-2.png"
   },
   { 
     id: "4", 
-    name: "بخور عدني", 
-    category: "البخور والعطور", 
-    rating: 4.7, 
-    location: "عدن", 
-    products: 34, 
+    name: "سيوف الحرفيين", 
+    category: "المشغولات اليدوية", 
+    rating: 4.9, 
+    location: "صعدة", 
+    products: 15, 
     verified: true, 
     avatar: "/logo-stores-4.png",
-    banner: "/logo-stores-ditales-4.png"
+    banner: "/logo-stores-ditales-1.png"
   },
   { 
     id: "5", 
-    name: "منتجات مأرب", 
-    category: "مأكولات شعبية", 
-    rating: 4.5, 
-    location: "مأرب", 
+    name: "حياكة الأجداد", 
+    category: "الأزياء التقليدية", 
+    rating: 4.6, 
+    location: "تعز", 
     products: 22, 
     verified: true, 
     avatar: "/logo-stores-5.png",
-    banner: "/logo-stores-ditales-5.png"
+    banner: "/logo-stores-ditales-2.png"
   },
   { 
     id: "6", 
-    name: "منسوجات المكلا", 
-    category: "ملابس تقليدية", 
-    rating: 4.8, 
-    location: "المكلا", 
+    name: "أنامل تهامة", 
+    category: "المشغولات اليدوية", 
+    rating: 4.5, 
+    location: "الحديدة", 
+    products: 35, 
+    verified: false, 
+    avatar: "/logo-stores-6.png",
+    banner: "/logo-stores-ditales-1.png"
+  },
+  { 
+    id: "7", 
+    name: "صائغ العقيق", 
+    category: "المجوهرات والحلي", 
+    rating: 4.9, 
+    location: "صنعاء", 
     products: 18, 
     verified: true, 
-    avatar: "/logo-stores-6.png",
-    banner: "/logo-stores-ditales-6.png"
+    avatar: "/logo-stores-7.png",
+    banner: "/logo-stores-ditales-2.png"
   },
-]
+  { 
+    id: "8", 
+    name: "خبير البخور", 
+    category: "العطور والبخور", 
+    rating: 4.8, 
+    location: "عدن", 
+    products: 40, 
+    verified: true, 
+    avatar: "/logo-stores-8.png",
+    banner: "/logo-stores-ditales-1.png"
+  }
+];
 
 const STORE_CATEGORIES = [
   { name: "الكل", icon: LayoutGrid },
@@ -87,9 +109,7 @@ const STORE_CATEGORIES = [
   { name: "الحرف", icon: Palette },
   { name: "الملابس", icon: Shirt },
   { name: "العطور", icon: Wind },
-  { name: "الضيافة", icon: Utensils },
   { name: "المجوهرات", icon: Gem },
-  { name: "الهدايا", icon: Gift },
 ]
 
 export default function StoresDirectoryPage() {
@@ -99,12 +119,10 @@ export default function StoresDirectoryPage() {
     if (activeCategory === "الكل") return true
     if (activeCategory === "البن") return store.category.includes("البن")
     if (activeCategory === "العسل") return store.category.includes("العسل")
-    if (activeCategory === "الحرف") return store.category.includes("الحرف")
-    if (activeCategory === "الملابس") return store.category.includes("ملابس")
-    if (activeCategory === "العطور") return store.category.includes("البخور") || store.category.includes("العطور")
-    if (activeCategory === "الضيافة") return store.category.includes("مأكولات") || store.category.includes("ضيافة")
-    if (activeCategory === "المجوهرات") return store.category.includes("مجوهرات") || store.category.includes("حلي")
-    if (activeCategory === "الهدايا") return store.category.includes("هدايا")
+    if (activeCategory === "الحرف") return store.category.includes("المشغولات")
+    if (activeCategory === "الملابس") return store.category.includes("الأزياء")
+    if (activeCategory === "العطور") return store.category.includes("العطور")
+    if (activeCategory === "المجوهرات") return store.category.includes("المجوهرات")
     return true
   })
 
@@ -125,7 +143,7 @@ export default function StoresDirectoryPage() {
               key={i}
               onClick={() => setActiveCategory(cat.name)}
               className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-full border transition-all shrink-0 font-bold text-xs",
+                "flex items-center gap-2 px-4 py-2 rounded-xl border transition-all shrink-0 font-bold text-xs",
                 activeCategory === cat.name 
                 ? "bg-primary text-white border-primary shadow-md scale-105" 
                 : "bg-white text-muted-foreground border-border hover:border-primary/30"

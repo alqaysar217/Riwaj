@@ -6,7 +6,6 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { ProductCard } from "@/components/product/product-card"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { Search, SlidersHorizontal, X, ShoppingBag, Store, Star, MapPin, ShieldCheck, ChevronLeft, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { 
@@ -65,7 +64,7 @@ const ALL_PRODUCTS = [
     rating: 4.8,
     reviews: 42,
     category: "المشغولات اليدوية",
-    storeName: "السيوف والجمبيات",
+    storeName: "سيوف الحرفيين",
     image: "/products-4.png"
   },
   {
@@ -85,7 +84,7 @@ const ALL_PRODUCTS = [
     rating: 4.5,
     reviews: 78,
     category: "المشغولات اليدوية",
-    storeName: "أنامل يمنية",
+    storeName: "أنامل تهامة",
     image: "/products-6.png"
   },
   {
@@ -95,7 +94,7 @@ const ALL_PRODUCTS = [
     rating: 4.9,
     reviews: 55,
     category: "المجوهرات والحلي",
-    storeName: "صائغ اليمن",
+    storeName: "صائغ العقيق",
     image: "/products-7.png"
   },
   {
@@ -131,12 +130,17 @@ const ALL_PRODUCTS = [
 ];
 
 const ALL_STORES = [
-  { id: "1", name: "محامص الجبال", category: "البن اليمني", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
-  { id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, location: "دوعن", verified: true, avatar: "/logo-stores-2.png" },
-  { id: "3", name: "عبق التراث", category: "المشغولات اليدوية", rating: 4.6, location: "حضرموت", verified: true, avatar: "/logo-stores-3.png" },
+  { id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
+  { id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, location: "حضرموت", verified: true, avatar: "/logo-stores-2.png" },
+  { id: "3", name: "عبق التراث", category: "العطور والبخور", rating: 4.7, location: "صنعاء", verified: true, avatar: "/logo-stores-3.png" },
+  { id: "4", name: "سيوف الحرفيين", category: "المشغولات اليدوية", rating: 4.9, location: "صعدة", verified: true, avatar: "/logo-stores-4.png" },
+  { id: "5", name: "حياكة الأجداد", category: "الأزياء التقليدية", rating: 4.6, location: "تعز", verified: true, avatar: "/logo-stores-5.png" },
+  { id: "6", name: "أنامل تهامة", category: "المشغولات اليدوية", rating: 4.5, location: "الحديدة", verified: false, avatar: "/logo-stores-6.png" },
+  { id: "7", name: "صائغ العقيق", category: "المجوهرات والحلي", rating: 4.9, location: "صنعاء", verified: true, avatar: "/logo-stores-7.png" },
+  { id: "8", name: "خبير البخور", category: "العطور والبخور", rating: 4.8, location: "عدن", verified: true, avatar: "/logo-stores-8.png" },
 ]
 
-const CATEGORIES = ["البن اليمني", "العسل الطبيعي", "العطور والبخور", "المشغولات اليدوية", "الأزياء التقليدية", "الضيافة الشعبية"]
+const CATEGORIES = ["البن اليمني", "العسل الطبيعي", "العطور والبخور", "المشغولات اليدوية", "الأزياء التقليدية", "المجوهرات والحلي"]
 
 function SearchContent() {
   const searchParams = useSearchParams()
@@ -195,7 +199,7 @@ function SearchContent() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="ابحث عن المنتجات أو المتاجر..." 
-            className="h-14 pr-12 pl-12 rounded-2xl bg-muted/40 border-none text-base focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-sm"
+            className="h-14 pr-12 pl-12 rounded-xl bg-muted/40 border-none text-base focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-sm"
           />
           {searchInput && (
             <button 
@@ -211,16 +215,16 @@ function SearchContent() {
 
       <Tabs defaultValue="products" className="w-full" dir="rtl">
         <div className="flex items-center gap-3 mb-8">
-          <TabsList className="bg-primary/5 p-1 rounded-2xl h-12 border border-primary/10 shadow-inner flex-1">
+          <TabsList className="bg-primary/5 p-1 rounded-xl h-12 border border-primary/10 shadow-inner flex-1">
             <TabsTrigger 
               value="products" 
-              className="flex-1 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
+              className="flex-1 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
             >
               <ShoppingBag className="w-3.5 h-3.5" /> المنتجات
             </TabsTrigger>
             <TabsTrigger 
               value="stores" 
-              className="flex-1 rounded-xl data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
+              className="flex-1 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
             >
               <Store className="w-3.5 h-3.5" /> المتاجر
             </TabsTrigger>
@@ -228,7 +232,7 @@ function SearchContent() {
 
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="rounded-2xl shrink-0 border-primary/20 text-primary font-bold shadow-sm h-12 w-12 hover:bg-primary/5 relative">
+              <Button variant="outline" size="icon" className="rounded-xl shrink-0 border-primary/20 text-primary font-bold shadow-sm h-12 w-12 hover:bg-primary/5 relative">
                 <SlidersHorizontal className="w-5 h-5" />
                 {(selectedCategories.length > 0) && (
                   <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center border-2 border-white">
@@ -237,7 +241,7 @@ function SearchContent() {
                 )}
               </Button>
             </SheetTrigger>
-            <SheetContent side="bottom" className="rounded-t-[40px] h-[85vh] p-6 border-none shadow-2xl [&>button]:left-6 [&>button]:right-auto">
+            <SheetContent side="bottom" className="rounded-t-[32px] h-[85vh] p-6 border-none shadow-2xl [&>button]:left-6 [&>button]:right-auto">
               <SheetHeader className="mb-8">
                 <SheetTitle className="text-xl font-headline font-bold text-primary text-center">خيارات التصفية</SheetTitle>
               </SheetHeader>
@@ -302,7 +306,7 @@ function SearchContent() {
               <div className="absolute bottom-8 left-6 right-6 flex gap-3 bg-white pt-4">
                 <Button 
                   variant="ghost" 
-                  className="flex-1 rounded-2xl h-12 font-bold text-muted-foreground"
+                  className="flex-1 rounded-xl h-12 font-bold text-muted-foreground"
                   onClick={() => {
                     setSelectedCategories([])
                     setPriceRange([0, 50000])
@@ -312,7 +316,7 @@ function SearchContent() {
                   إعادة تعيين
                 </Button>
                 <SheetClose asChild>
-                  <Button className="flex-[2] rounded-2xl h-12 font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20">تطبيق الفلاتر</Button>
+                  <Button className="flex-[2] rounded-xl h-12 font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20">تطبيق الفلاتر</Button>
                 </SheetClose>
               </div>
             </SheetContent>
@@ -327,7 +331,7 @@ function SearchContent() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-24 bg-muted/10 rounded-3xl border border-dashed">
+            <div className="text-center py-24 bg-muted/10 rounded-xl border border-dashed">
               <Search className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-20" />
               <h3 className="text-lg font-bold text-primary">لا توجد نتائج للمنتجات</h3>
               <p className="text-muted-foreground text-xs">جرب كلمات بحث أخرى أو تغيير الفلاتر</p>
@@ -340,7 +344,7 @@ function SearchContent() {
             {filteredStores.length > 0 ? (
               filteredStores.map((store) => (
                 <Link key={store.id} href={`/stores/${store.id}`} className="block">
-                  <div className="bg-white p-4 rounded-2xl border shadow-sm flex items-center gap-4 hover:border-primary/20 transition-all group">
+                  <div className="bg-white p-4 rounded-xl border shadow-sm flex items-center gap-4 hover:border-primary/20 transition-all group">
                     <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-muted shrink-0 border">
                       <Image src={store.avatar} alt={store.name} fill className="object-cover" />
                     </div>
@@ -365,7 +369,7 @@ function SearchContent() {
                 </Link>
               ))
             ) : (
-              <div className="text-center py-24 bg-muted/10 rounded-3xl border border-dashed">
+              <div className="text-center py-24 bg-muted/10 rounded-xl border border-dashed">
                 <Store className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-20" />
                 <h3 className="text-lg font-bold text-primary">لا توجد متاجر مطابقة</h3>
                 <p className="text-muted-foreground text-xs">جرب البحث بكلمة أخرى أو تغيير الفئات</p>
