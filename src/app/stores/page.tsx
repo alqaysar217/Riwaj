@@ -43,7 +43,7 @@ const STORES = [
     products: 28, 
     verified: true, 
     avatar: "/logo-stores-3.png",
-    banner: "/logo-stores-ditales-2.png"
+    banner: "/logo-stores-ditales-3.png"
   },
   { 
     id: "4", 
@@ -54,7 +54,7 @@ const STORES = [
     products: 15, 
     verified: true, 
     avatar: "/logo-stores-4.png",
-    banner: "/logo-stores-ditales-1.png"
+    banner: "/logo-stores-ditales-4.png"
   },
   { 
     id: "5", 
@@ -65,7 +65,7 @@ const STORES = [
     products: 22, 
     verified: true, 
     avatar: "/logo-stores-5.png",
-    banner: "/logo-stores-ditales-2.png"
+    banner: "/logo-stores-ditales-5.png"
   },
   { 
     id: "6", 
@@ -76,7 +76,7 @@ const STORES = [
     products: 35, 
     verified: false, 
     avatar: "/logo-stores-6.png",
-    banner: "/logo-stores-ditales-1.png"
+    banner: "/logo-stores-ditales-6.png"
   },
   { 
     id: "7", 
@@ -87,7 +87,7 @@ const STORES = [
     products: 18, 
     verified: true, 
     avatar: "/logo-stores-7.png",
-    banner: "/logo-stores-ditales-2.png"
+    banner: "/logo-stores-ditales-7.png"
   },
   { 
     id: "8", 
@@ -98,7 +98,7 @@ const STORES = [
     products: 40, 
     verified: true, 
     avatar: "/logo-stores-8.png",
-    banner: "/logo-stores-ditales-1.png"
+    banner: "/logo-stores-ditales-8.png"
   }
 ];
 
