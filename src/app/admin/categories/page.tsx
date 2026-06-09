@@ -51,6 +51,7 @@ const AVAILABLE_ICONS = [
   { id: 'gem', icon: Gem, label: 'مجوهرات' },
   { id: 'gift', icon: Gift, label: 'هدايا' },
   { id: 'shopping-bag', icon: ShoppingBag, label: 'جلديات' },
+  { id: 'layout-grid', icon: LayoutGrid, label: 'أخرى' },
 ]
 
 const INITIAL_CATEGORIES = [
@@ -63,6 +64,7 @@ const INITIAL_CATEGORIES = [
   { id: 7, name: "المجوهرات والحلي", iconId: "gem", count: 67, image: "/categories-7.png" },
   { id: 8, name: "الهدايا الفاخرة", iconId: "gift", count: 29, image: "/categories-8.png" },
   { id: 9, name: "الجلديات والإكسسوارات", iconId: "shopping-bag", count: 45, image: "/categories-9.png" },
+  { id: 10, name: "أخرى", iconId: "layout-grid", count: 12, image: "/categories-10.png" },
 ]
 
 export default function AdminCategories() {
@@ -74,13 +76,13 @@ export default function AdminCategories() {
   // حالة النموذج
   const [formData, setFormData] = useState({
     name: "",
-    iconId: "shopping-bag",
+    iconId: "layout-grid",
     image: ""
   })
 
   const handleOpenAdd = () => {
     setEditingCategory(null)
-    setFormData({ name: "", iconId: "shopping-bag", image: "" })
+    setFormData({ name: "", iconId: "layout-grid", image: "" })
     setIsDialogOpen(true)
   }
 

@@ -53,6 +53,12 @@
       "description": "الجلديات والإكسسوارات",
       "imageUrl": "/categories-9.png",
       "imageHint": "leather bag"
+    },
+    {
+      "id": "cat-other",
+      "description": "أخرى",
+      "imageUrl": "/categories-10.png",
+      "imageHint": "miscellaneous items"
     }
   ]
 }

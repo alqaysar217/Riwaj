@@ -27,6 +27,10 @@ const CATEGORIES = [
   { name: "المشغولات اليدوية", icon: Palette, key: "المشغولات اليدوية" },
   { name: "الأزياء التقليدية", icon: Shirt, key: "الأزياء التقليدية" },
   { name: "الضيافة الشعبية", icon: Utensils, key: "الضيافة الشعبية" },
+  { name: "المجوهرات والحلي", icon: Gem, key: "المجوهرات والحلي" },
+  { name: "الهدايا الفاخرة", icon: Gift, key: "الهدايا الفاخرة" },
+  { name: "الجلديات والإكسسوارات", icon: ShoppingBag, key: "الجلديات والإكسسوارات" },
+  { name: "أخرى", icon: LayoutGrid, key: "أخرى" },
 ]
 
 const FEATURED_PRODUCTS = [

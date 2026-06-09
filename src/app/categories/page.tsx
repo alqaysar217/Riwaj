@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
-import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, Gift, ShoppingBag, ChevronLeft } from "lucide-react"
+import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, Gift, ShoppingBag, ChevronLeft, LayoutGrid } from "lucide-react"
 
 const CATEGORIES = [
   { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: "/categories-1.png" },
@@ -15,6 +15,7 @@ const CATEGORIES = [
   { id: "7", name: "المجوهرات والحلي", icon: Gem, count: 67, image: "/categories-7.png" },
   { id: "8", name: "الهدايا الفاخرة", icon: Gift, count: 29, image: "/categories-8.png" },
   { id: "9", name: "الجلديات والإكسسوارات", icon: ShoppingBag, count: 45, image: "/categories-9.png" },
+  { id: "10", name: "أخرى", icon: LayoutGrid, count: 12, image: "/categories-10.png" },
 ]
 
 export default function CategoriesPage() {
