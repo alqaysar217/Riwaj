@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react"
@@ -166,14 +167,6 @@ export default function LoginPage() {
               <Link href="/auth/register">إنشاء حساب جديد</Link>
             </Button>
           </div>
-        </div>
-        
-        {/* Info Tip for Proto Typing */}
-        <div className="bg-primary/5 p-4 rounded-2xl border border-primary/10 flex gap-3 items-start">
-           <ShieldAlert className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-           <p className="text-[10px] text-muted-foreground leading-relaxed">
-             <span className="text-primary font-bold">تلميح تجريبي:</span> استخدم "admin" أو "merchant" مع كلمة السر "123456" للتنقل السريع بين لوحات التحكم المختلفة للمنصة.
-           </p>
         </div>
       </main>
     </div>
