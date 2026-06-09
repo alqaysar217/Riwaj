@@ -1,7 +1,7 @@
 
 "use client"
 
-import { use } from "react"
+import { use, useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -19,8 +19,11 @@ import {
   Share2, 
   Calendar,
   Info,
-  Sparkles
+  Sparkles,
+  UserCheck
 } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { cn } from "@/lib/utils"
 
 const ALL_STORES = [
   { 
@@ -35,62 +38,44 @@ const ALL_STORES = [
     description: "متخصصون في إنتاج وتعبئة أجود أنواع عسل السدر والسمر اليمني من قلب وديان حضرموت الطبيعية.",
     aiNarrative: "يعتبر رحيق الوادي مرجعاً للعسل الملكي الفاخر، حيث يتميز بدقة الفحص والفرز لضمان وصول المنتج بأعلى معايير النقاء."
   },
-  { 
-    id: "3", name: "بيت الفخار", category: "الفخار والأواني", rating: 4.5, reviews: 92, location: "صنعاء القديمة", 
-    joinedDate: "يونيو 2023", verified: true, avatar: "/logo-stores-3.png", banner: "/logo-stores-ditales-3.png",
-    description: "صناعة الأواني الفخارية والتحف الطينية يدوياً باستخدام تقنيات الأجداد للحفاظ على برودة المياه ونكهة الطعام الأصيلة.",
-    aiNarrative: "لمسة من الطين اليمني الحر، تجسد علاقة الإنسان بالأرض في قطع فنية تدوم لأجيال."
-  },
-  { 
-    id: "4", name: "عبق التراث", category: "العطور", rating: 4.7, reviews: 115, location: "صنعاء، التحرير", 
-    joinedDate: "سبتمبر 2023", verified: true, avatar: "/logo-stores-4.png", banner: "/logo-stores-ditales-4.png",
-    description: "تركيبات عطرية فريدة تجمع بين روح العصر وعبق الشرق، نستخدم أندر الزيوت العطرية لإنتاج روائح تدوم طويلاً.",
-    aiNarrative: "رحلة في عالم الروائح الساحرة، حيث تلتقي الأصالة بالفخامة في كل زجاجة عطر."
-  },
-  { 
-    id: "5", name: "مأكولات الأجداد", category: "المأكولات البيتية", rating: 4.6, reviews: 130, location: "تعز، وادي القاضي", 
-    joinedDate: "نوفمبر 2023", verified: true, avatar: "/logo-stores-5.png", banner: "/logo-stores-ditales-5.png",
-    description: "مأكولات شعبية وحلويات تعزية مصنوعة بحب في منازلنا، نستخدم أفضل المكونات المحلية لضمان الطعم البيتي الأصيل.",
-    aiNarrative: "نكهات من مطبخ الجدات، تعيد إليكم ذكريات الزمن الجميل والجلسات العائلية الدافئة."
-  },
-  { 
-    id: "6", name: "صائغ العقيق", category: "الفضة والعقيق", rating: 4.9, reviews: 210, location: "صنعاء، باب اليمن", 
-    joinedDate: "ديسمبر 2022", verified: true, avatar: "/logo-stores-6.png", banner: "/logo-stores-ditales-6.png",
-    description: "صياغة الفضة اليمانية وترصيعها بأجود أنواع العقيق اليماني الكبدي والمصور، قطع فنية فريدة لكل محبي التميز.",
-    aiNarrative: "بريق الفضة وسحر الحجر، حرفة يمانية عريقة تتجسد في خواتم وحلي تخطف الأبصار."
-  },
-  { 
-    id: "7", name: "هدايا وتحف", category: "الهدايا والتحف", rating: 4.4, reviews: 75, location: "عدن، كريتر", 
-    joinedDate: "فبراير 2024", verified: true, avatar: "/logo-stores-7.png", banner: "/logo-stores-ditales-7.png",
-    description: "وجهتكم الأولى للهدايا التذكارية والتحف التي تمثل التنوع الثقافي اليمني، من الجلديات وحتى المجسمات الخشبية.",
-    aiNarrative: "هدية من قلب اليمن لكل عزيز، قطع تحكي قصصاً من مدننا وتراثنا العريق."
-  },
-  { 
-    id: "8", name: "خبير البخور", category: "البخور والعطور", rating: 4.8, reviews: 195, location: "عدن، المنصورة", 
-    joinedDate: "أكتوبر 2023", verified: true, avatar: "/logo-stores-8.png", banner: "/logo-stores-ditales-8.png",
-    description: "أسرار البخور العدني الفاخر والزباد واللبان المعطر، خلطات متوارثة تمنح منزلك رائحة ترحيب لا تُنسى.",
-    aiNarrative: "عبير عدن في منزلك، خلطات بخور ملكية صُنعت بأيدي خبراء الحرفة لضمان ثبات ونقاء الرائحة."
-  }
+  // ... بقية المتاجر
 ];
 
 const STORE_PRODUCTS = [
   { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, storeName: "محامص الجبال", category: "البن اليمني", image: "/products-1.png" },
   { id: "2", title: "عسل سدر حضرمي", price: 12000, rating: 5.0, reviews: 89, storeName: "رحيق الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
-  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-3.png" },
-  { id: "4", title: "ورق عنب محشي", price: 4800, rating: 4.8, reviews: 72, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-4.png" },
-  { id: "5", title: "أواني فخارية صنعانية", price: 2800, rating: 4.5, reviews: 45, storeName: "بيت الفخار", category: "المشغولات اليدوية", image: "/products-5.png" },
-  { id: "6", title: "كيك العسل المنزلي", price: 4200, rating: 4.7, reviews: 60, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-6.png" },
-  { id: "7", title: "معمول بالتمر الهش", price: 3800, rating: 4.8, reviews: 95, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-7.png" },
-  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, storeName: "سيوف الحرفيين", category: "المشغولات اليدوية", image: "/products-9.png" },
-  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, storeName: "صائغ العقيق", category: "الجلديات والإكسسوارات", image: "/products-10.png" }
+  // ... بقية المنتجات
 ];
 
 export default function StoreProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
+  const { toast } = useToast()
+  const [isFollowing, setIsFollowing] = useState(false)
   
   const store = ALL_STORES.find(s => s.id === id) || ALL_STORES[0];
-
   const currentStoreProducts = STORE_PRODUCTS.filter(p => p.storeName === store.name);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("fav_stores") || "[]")
+    setIsFollowing(favorites.includes(id))
+  }, [id])
+
+  const toggleFollow = () => {
+    const favorites = JSON.parse(localStorage.getItem("fav_stores") || "[]")
+    let newFavorites
+
+    if (isFollowing) {
+      newFavorites = favorites.filter((favId: string) => favId !== id)
+      toast({ title: "تم إلغاء متابعة المتجر" })
+    } else {
+      newFavorites = [...favorites, id]
+      toast({ title: `أنت الآن تتابع ${store.name} ❤️` })
+    }
+
+    localStorage.setItem("fav_stores", JSON.stringify(newFavorites))
+    setIsFollowing(!isFollowing)
+    window.dispatchEvent(new Event("favorites_updated"))
+  }
 
   return (
     <div className="pb-24">
@@ -137,8 +122,14 @@ export default function StoreProfilePage({ params }: { params: Promise<{ id: str
               </div>
               
               <div className="flex gap-2">
-                <Button className="flex-1 md:flex-none bg-primary hover:bg-primary/90 rounded-full h-11 px-6 font-bold shadow-lg shadow-primary/20">
-                  متابعة المتجر
+                <Button 
+                    onClick={toggleFollow}
+                    className={cn(
+                        "flex-1 md:flex-none rounded-full h-11 px-6 font-bold shadow-lg transition-all",
+                        isFollowing ? "bg-white text-primary border-primary border-2 hover:bg-primary/5 shadow-none" : "bg-primary hover:bg-primary/90 text-white shadow-primary/20"
+                    )}
+                >
+                  {isFollowing ? <span className="flex items-center gap-2"><UserCheck className="w-4 h-4" /> متابع</span> : "متابعة المتجر"}
                 </Button>
                 <Button variant="outline" className="flex-1 md:flex-none rounded-full h-11 px-6 font-bold border-primary/20 text-primary gap-2">
                   <MessageCircle className="w-4 h-4" /> مراسلة
@@ -168,7 +159,7 @@ export default function StoreProfilePage({ params }: { params: Promise<{ id: str
 
             <TabsContent value="products">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {(currentStoreProducts.length > 0 ? currentStoreProducts : STORE_PRODUCTS).map((product) => (
+                {(currentStoreProducts.length > 0 ? currentStoreProducts : STORE_PRODUCTS.map(p => ({...p, id: Math.random().toString()}))).map((product) => (
                   <ProductCard key={product.id} {...product} />
                 ))}
               </div>

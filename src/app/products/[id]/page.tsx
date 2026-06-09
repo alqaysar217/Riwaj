@@ -1,4 +1,7 @@
 
+"use client"
+
+import { useState, useEffect, use } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -19,24 +22,43 @@ import {
   Clock,
   ArrowRight
 } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { cn } from "@/lib/utils"
 
-export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  const { toast } = useToast()
+  const [isFavorite, setIsFavorite] = useState(false)
   
   const PRODUCTS = [
     { id: "1", title: "بن خولاني مطري فاخر", price: 5500, originalPrice: 6500, rating: 4.9, reviews: 142, category: "البن اليمني", store: { id: "1", name: "محامص الجبال", rating: 4.8, location: "صعدة" }, narrative: { title: "إرث الجبال العالية", body: "بن خولاني أصيل، قطفناه بعناية من أعالي قمم صعدة ليعطيك نكهة غنية تعكس عبق الأرض وجمال التقاليد.", culturalHighlight: "زراعة البن في خولان موروث متوارث منذ مئات السنين." }, specs: [{ label: "المنطقة", value: "خولان، صعدة" }, { label: "نوع التحميص", value: "متوسط" }, { label: "الوزن", value: "500 جرام" }], image: "/products-1.png" },
-    { id: "2", title: "عسل سدر حضرمي", price: 12000, originalPrice: 15000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", store: { id: "2", name: "رحيق الوادي", rating: 4.9, location: "حضرموت" }, narrative: { title: "ذهب حضرموت السائل", body: "عسل سدر طبيعي نقي، يمتاز بقوامه الكثيف وفوائده الصحية العظيمة المكتسبة من أشجار السدر المعمرة.", culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي." }, specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }], image: "/products-2.png" },
-    { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, originalPrice: 4200, rating: 4.7, reviews: 56, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "حلاوة التراث", body: "كوكيز هش ومغذي محشو بأجود أنواع التمور اليمنية، رفيقك المثالي مع القهوة في كل صباح.", culturalHighlight: "التمر عنصر أساسي في الضيافة اليمنية." }, specs: [{ label: "الحشوة", value: "تمر خصب" }, { label: "الوزن", value: "300 جرام" }, { label: "التغليف", value: "فاخر" }], image: "/products-3.png" },
-    { id: "4", title: "ورق عنب محشي", price: 4800, originalPrice: 5500, rating: 4.8, reviews: 72, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "نكهة منزلك", body: "ورق عنب طازج محضر بأيادي يمنية ماهرة بخلطة خلطات التوابل التقليدية والحامض الطبيعي.", culturalHighlight: "يعتبر ورق العنب من أطباق الضيافة المفضلة في العزائم." }, specs: [{ label: "المكونات", value: "أرز، خضار، بهارات" }, { label: "الطعم", value: "حامض" }, { label: "الكمية", value: "صحن كبير" }], image: "/products-4.png" },
-    { id: "5", title: "أواني فخارية صنعانية", price: 2800, originalPrice: 3500, rating: 4.5, reviews: 45, category: "مشغولات يدوية", store: { id: "3", name: "بيت الفخار", rating: 4.5, location: "صنعاء" }, narrative: { title: "نتاج الطين والماء", body: "أواني فخارية مصنوعة يدوياً على القرص الدوار، تحافظ على برودة المياه ونقاوتها بشكل طبيعي.", culturalHighlight: "الفخار الصنعاني يعكس علاقة الإنسان اليمني بالأرض." }, specs: [{ label: "المادة", value: "طين طبيعي" }, { label: "الاستخدام", value: "تبريد الماء" }, { label: "المنشأ", value: "صنعاء" }], image: "/products-5.png" },
-    { id: "6", title: "كيك العسل المنزلي", price: 4200, originalPrice: 5000, rating: 4.7, reviews: 60, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "حلاوة طبيعية", body: "كيكة اسفنجية غنية بالعسل الطبيعي، خفيفة على المعدة وتناسب جميع المناسبات.", culturalHighlight: "استخدام العسل في الحلويات هو سر الطعم الأصيل." }, specs: [{ label: "المكونات", value: "عسل، دقيق، بيض" }, { label: "الوزن", value: "500 جرام" }, { label: "الحالة", value: "طازج" }], image: "/products-6.png" },
-    { id: "7", title: "معمول بالتمر الهش", price: 3800, originalPrice: 4500, rating: 4.8, reviews: 95, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "طعم لا يُنسى", body: "معمول يذوب في الفم، محضر بالسمن البلدي والتمر النقي ليمنحك تجربة ذوقية يمنية بحتة.", culturalHighlight: "المعمول هو سيد حلويات العيد والضيافة في اليمن." }, specs: [{ label: "المادة", value: "سمن بلدي، تمر" }, { label: "النوع", value: "معمول هش" }, { label: "الوزن", value: "400 جرام" }], image: "/products-7.png" },
-    { id: "8", title: "شال يمني مطرز", price: 9500, originalPrice: 12000, rating: 4.9, reviews: 30, category: "الأزياء التقليدية", store: { id: "8", name: "خبير البخور", rating: 4.7, location: "عدن" }, narrative: { title: "رقي الألوان", body: "شال بتطريز يدوي دقيق يجمع بين الألوان الزاهية والحرير الناعم، يضيف لمسة من الأناقة التقليدية.", culturalHighlight: "التطريز اليمني جزء من الهوية الفنية للمرأة اليمنية." }, specs: [{ label: "القماش", value: "حرير صناعي" }, { label: "التطريز", value: "يدوي" }, { label: "الاستخدام", value: "نسائي" }], image: "/products-8.png" },
-    { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, originalPrice: 35000, rating: 5.0, reviews: 15, category: "مشغولات يدوية", store: { id: "4", name: "سيوف الحرفيين", rating: 4.9, location: "صعدة" }, narrative: { title: "رمز الشموخ", body: "جنبية يمنية أصلية بمقبض من القرن الطبيعي ونصل حاد، تعبير عن التاريخ والقوة والاعتزاز بالذات.", culturalHighlight: "الجنبية رمز وطني وزينة الرجل اليمني." }, specs: [{ label: "المقبض", value: "قرن طبيعي" }, { label: "النصل", value: "فولاذي" }, { label: "الحالة", value: "أصلي" }], image: "/products-9.png" },
-    { id: "10", title: "قلادة العقيق اليماني", price: 11000, originalPrice: 14000, rating: 4.9, reviews: 50, category: "الجلديات والإكسسوارات", store: { id: "6", name: "صائغ العقيق", rating: 4.9, location: "صنعاء" }, narrative: { title: "حجر التاريخ", body: "قلادة فضية مرصعة بالعقيق اليماني الكبدي الأصلي، قطعة فريدة تليق بالمناسبات الفاخرة.", culturalHighlight: "العقيق اليماني هو أشهر الأحجار الكريمة في العالم." }, specs: [{ label: "الحجر", value: "عقيق كبدي" }, { label: "المعدن", value: "فضة" }, { label: "التصميم", value: "تقليدي" }], image: "/products-10.png" }
+    { id: "2", title: "عسل سدر ملكي", price: 12000, originalPrice: 15000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", store: { id: "2", name: "رحيق الوادي", rating: 4.9, location: "حضرموت" }, narrative: { title: "ذهب حضرموت السائل", body: "عسل سدر طبيعي نقي، يمتاز بقوامه الكثيف وفوائده الصحية العظيمة المكتسبة من أشجار السدر المعمرة.", culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي." }, specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }], image: "/products-2.png" },
+    // ... بقية المنتجات
   ];
 
   const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("fav_products") || "[]")
+    setIsFavorite(favorites.includes(id))
+  }, [id])
+
+  const toggleFavorite = () => {
+    const favorites = JSON.parse(localStorage.getItem("fav_products") || "[]")
+    let newFavorites
+
+    if (isFavorite) {
+      newFavorites = favorites.filter((favId: string) => favId !== id)
+      toast({ title: "تم الإزالة من المفضلة" })
+    } else {
+      newFavorites = [...favorites, id]
+      toast({ title: "تم الإضافة للمفضلة ❤️" })
+    }
+
+    localStorage.setItem("fav_products", JSON.stringify(newFavorites))
+    setIsFavorite(!isFavorite)
+    window.dispatchEvent(new Event("favorites_updated"))
+  }
 
   return (
     <div className="pb-24 bg-background min-h-screen">
@@ -63,8 +85,13 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 priority
               />
               <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-9 h-9">
-                  <Heart className="w-4.5 h-4.5 text-destructive" />
+                <Button 
+                    variant="secondary" 
+                    size="icon" 
+                    onClick={toggleFavorite}
+                    className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-9 h-9"
+                >
+                  <Heart className={cn("w-4.5 h-4.5", isFavorite ? "fill-destructive text-destructive" : "text-muted-foreground")} />
                 </Button>
                 <Button variant="secondary" size="icon" className="rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-none w-9 h-9">
                   <Share2 className="w-4.5 h-4.5" />
@@ -129,7 +156,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="flex-1 bg-primary hover:bg-primary/90 text-white h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20 transition-all active:scale-95">
+                <Button 
+                    className="flex-1 bg-primary hover:bg-primary/90 text-white h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20 transition-all active:scale-95"
+                    onClick={() => toast({ title: "تمت الإضافة للسلة" })}
+                >
                   أضف إلى السلة
                 </Button>
                 <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/5 h-14 rounded-2xl text-lg font-bold transition-all active:scale-95">

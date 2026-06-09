@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { ProductCard } from "@/components/product/product-card"
@@ -13,16 +13,17 @@ import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
-const FAVORITE_PRODUCTS = [
+const ALL_PRODUCTS = [
   { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, category: "البن اليمني", storeName: "محامص الجبال", image: "/products-1.png" },
   { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
+  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-3.png" },
   { id: "4", title: "خنجر يمني (جنبية)", price: 25000, rating: 4.8, reviews: 42, category: "المشغولات اليدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
   { id: "7", title: "عقد فضة وعقيق", price: 9500, rating: 4.9, reviews: 55, category: "المجوهرات والحلي", storeName: "صائغ اليمن", image: "/products-7.png" },
   { id: "8", title: "بخور عدني فاخر", price: 6000, rating: 4.8, reviews: 112, category: "العطور والبخور", storeName: "خبير البخور", image: "/products-8.png" },
   { id: "10", title: "فخار صنعاني أصيل", price: 2500, rating: 4.5, reviews: 92, category: "المشغولات اليدوية", storeName: "بيت الفخار", image: "/products-10.png" }
 ]
 
-const FAVORITE_STORES = [
+const ALL_STORES = [
   { id: "1", name: "محامص الجبال", category: "البن والقهوة", rating: 4.8, location: "صنعاء", verified: true, avatar: "/logo-stores-1.png" },
   { id: "2", name: "رحيق الوادي", category: "العسل الطبيعي", rating: 4.9, location: "حضرموت", verified: true, avatar: "/logo-stores-2.png" },
   { id: "3", name: "بيت الفخار", category: "الفخار والأواني", rating: 4.5, location: "صنعاء", verified: true, avatar: "/logo-stores-3.png" },
@@ -33,20 +34,60 @@ const FAVORITE_STORES = [
 
 export default function FavoritesPage() {
   const [searchInput, setSearchInput] = useState("")
+  const [favoriteProductIds, setFavoriteProductIds] = useState<string[]>([])
+  const [favoriteStoreIds, setFavoriteStoreIds] = useState<string[]>([])
+
+  const loadFavorites = () => {
+    const pFavs = JSON.parse(localStorage.getItem("fav_products") || "[]")
+    const sFavs = JSON.parse(localStorage.getItem("fav_stores") || "[]")
+    
+    // إذا كانت المفضلة فارغة في البداية، نقوم بوضع بعض القيم الافتراضية للتجربة
+    if (pFavs.length === 0 && !localStorage.getItem("fav_initialized")) {
+      const initialFavs = ["1", "2", "4"]
+      localStorage.setItem("fav_products", JSON.stringify(initialFavs))
+      localStorage.setItem("fav_initialized", "true")
+      setFavoriteProductIds(initialFavs)
+    } else {
+      setFavoriteProductIds(pFavs)
+    }
+
+    if (sFavs.length === 0 && !localStorage.getItem("fav_stores_initialized")) {
+        const initialStoreFavs = ["1", "2"]
+        localStorage.setItem("fav_stores", JSON.stringify(initialStoreFavs))
+        localStorage.setItem("fav_stores_initialized", "true")
+        setFavoriteStoreIds(initialStoreFavs)
+    } else {
+        setFavoriteStoreIds(sFavs)
+    }
+  }
+
+  useEffect(() => {
+    loadFavorites()
+    window.addEventListener("favorites_updated", loadFavorites)
+    return () => window.removeEventListener("favorites_updated", loadFavorites)
+  }, [])
+
+  const favoriteProducts = useMemo(() => {
+    return ALL_PRODUCTS.filter(p => favoriteProductIds.includes(p.id))
+  }, [favoriteProductIds])
+
+  const favoriteStores = useMemo(() => {
+    return ALL_STORES.filter(s => favoriteStoreIds.includes(s.id))
+  }, [favoriteStoreIds])
 
   const filteredProducts = useMemo(() => {
-    return FAVORITE_PRODUCTS.filter(product => 
+    return favoriteProducts.filter(product => 
       product.title.toLowerCase().includes(searchInput.toLowerCase()) || 
       product.storeName.toLowerCase().includes(searchInput.toLowerCase())
     )
-  }, [searchInput])
+  }, [searchInput, favoriteProducts])
 
   const filteredStores = useMemo(() => {
-    return FAVORITE_STORES.filter(store => 
+    return favoriteStores.filter(store => 
       store.name.toLowerCase().includes(searchInput.toLowerCase()) || 
       store.category.toLowerCase().includes(searchInput.toLowerCase())
     )
-  }, [searchInput])
+  }, [searchInput, favoriteStores])
 
   return (
     <div className="pb-24">
