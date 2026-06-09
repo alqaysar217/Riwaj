@@ -14,8 +14,26 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 const FAVORITE_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "البن اليمني", image: "/products-1.png" },
-  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
+  {
+    id: "1",
+    title: "بن خولاني مطري فاخر",
+    price: 5500,
+    rating: 4.9,
+    reviews: 142,
+    category: "البن اليمني",
+    storeName: "محامص الجبال",
+    image: "/products-1.png"
+  },
+  {
+    id: "2",
+    title: "عسل سدر ملكي",
+    price: 12000,
+    rating: 5.0,
+    reviews: 89,
+    category: "العسل الطبيعي",
+    storeName: "رحيق الوادي",
+    image: "/products-2.png"
+  },
 ]
 
 const FAVORITE_STORES = [

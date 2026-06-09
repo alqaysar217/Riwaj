@@ -34,13 +34,107 @@ const CATEGORIES = [
 ]
 
 const FEATURED_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "البن اليمني", image: "/products-1.png" },
-  { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
-  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "المشغولات اليدوية", image: "/products-3.png" },
-  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "العطور والبخور", image: "/products-4.png" },
-  { id: "5", title: "جنبية صيفاني قديمة", price: 25000, rating: 4.9, reviews: 12, storeName: "فضيات صنعاء", category: "المشغولات اليدوية", image: "/products-5.png" },
-  { id: "6", title: "ثوب يمني مطرز", price: 8500, rating: 4.6, reviews: 34, storeName: "أزياء سبأ", category: "الأزياء التقليدية", image: "/products-6.png" },
-]
+  {
+    id: "1",
+    title: "بن خولاني مطري فاخر",
+    price: 5500,
+    rating: 4.9,
+    reviews: 142,
+    category: "البن اليمني",
+    storeName: "محامص الجبال",
+    image: "/products-1.png"
+  },
+  {
+    id: "2",
+    title: "عسل سدر ملكي",
+    price: 12000,
+    rating: 5.0,
+    reviews: 89,
+    category: "العسل الطبيعي",
+    storeName: "رحيق الوادي",
+    image: "/products-2.png"
+  },
+  {
+    id: "3",
+    title: "مبخرة نحاسية تراثية",
+    price: 4500,
+    rating: 4.7,
+    reviews: 65,
+    category: "العطور والبخور",
+    storeName: "عبق التراث",
+    image: "/products-3.png"
+  },
+  {
+    id: "4",
+    title: "خنجر يمني (جنبية)",
+    price: 25000,
+    rating: 4.8,
+    reviews: 42,
+    category: "المشغولات اليدوية",
+    storeName: "السيوف والجمبيات",
+    image: "/products-4.png"
+  },
+  {
+    id: "5",
+    title: "فستان مطرز يدوياً",
+    price: 18000,
+    rating: 4.6,
+    reviews: 35,
+    category: "الأزياء التقليدية",
+    storeName: "حياكة الأجداد",
+    image: "/products-5.png"
+  },
+  {
+    id: "6",
+    title: "سلة خوص ملونة",
+    price: 3200,
+    rating: 4.5,
+    reviews: 78,
+    category: "المشغولات اليدوية",
+    storeName: "أنامل يمنية",
+    image: "/products-6.png"
+  },
+  {
+    id: "7",
+    title: "عقد فضة وعقيق",
+    price: 9500,
+    rating: 4.9,
+    reviews: 55,
+    category: "المجوهرات والحلي",
+    storeName: "صائغ اليمن",
+    image: "/products-7.png"
+  },
+  {
+    id: "8",
+    title: "بخور عدني فاخر",
+    price: 6000,
+    rating: 4.8,
+    reviews: 112,
+    category: "العطور والبخور",
+    storeName: "خبير البخور",
+    image: "/products-8.png"
+  },
+  {
+    id: "9",
+    title: "حقيبة جلد طبيعي",
+    price: 15000,
+    rating: 4.7,
+    reviews: 48,
+    category: "الجلديات والإكسسوارات",
+    storeName: "دباغة الجلود",
+    image: "/products-9.png"
+  },
+  {
+    id: "10",
+    title: "فخار صنعاني أصيل",
+    price: 2500,
+    rating: 4.5,
+    reviews: 92,
+    category: "المشغولات اليدوية",
+    storeName: "بيت الفخار",
+    image: "/products-10.png"
+  }
+];
 
 const HERO_SLIDES = [
   { image: "/Onboarding-1.png" },

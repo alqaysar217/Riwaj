@@ -23,7 +23,6 @@ import {
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   
-  // Mock data - This will be replaced with real data when user provides it
   const PRODUCTS = [
     {
       id: "1",
@@ -40,7 +39,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "زراعة البن في خولان موروث متوارث منذ مئات السنين."
       },
       specs: [{ label: "المنطقة", value: "خولان، صعدة" }, { label: "نوع التحميص", value: "متوسط" }, { label: "الوزن", value: "500 جرام" }],
-      image: "/products-1.webp"
+      image: "/products-1.png"
     },
     {
       id: "2",
@@ -57,7 +56,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي."
       },
       specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }],
-      image: "/products-2.webp"
+      image: "/products-2.png"
     },
     {
       id: "3",
@@ -74,7 +73,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "فن نقش النحاس في صنعاء القديمة مهنة يتوارثها الحرفيون."
       },
       specs: [{ label: "المادة", value: "نحاس نقي" }, { label: "التصميم", value: "نقوش صنعانية" }, { label: "الاستخدام", value: "بخور/ديكور" }],
-      image: "/products-3.webp"
+      image: "/products-3.png"
     },
     {
       id: "4",
@@ -91,7 +90,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "الجنبية هي رمز الهوية الوطنية وزينة الرجل اليمني."
       },
       specs: [{ label: "المقبض", value: "صيفاني طبيعي" }, { label: "المنشأ", value: "اليمن" }, { label: "الحالة", value: "جديد" }],
-      image: "/products-4.webp"
+      image: "/products-4.png"
     },
     {
       id: "5",
@@ -108,7 +107,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "التطريز اليمني يعتمد على خيوط الحرير والألوان الزاهية."
       },
       specs: [{ label: "الخامة", value: "حرير وقطن" }, { label: "نوع التطريز", value: "يدوي" }, { label: "المقاس", value: "متعدد" }],
-      image: "/products-5.webp"
+      image: "/products-5.png"
     },
     {
       id: "6",
@@ -125,7 +124,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "تعتبر صناعة الخوص من أعرق الحرف في المناطق الساحلية."
       },
       specs: [{ label: "المادة", value: "سعف نخيل" }, { label: "الوزن", value: "500 جرام" }, { label: "المتانة", value: "عالية" }],
-      image: "/products-6.webp"
+      image: "/products-6.png"
     },
     {
       id: "7",
@@ -142,7 +141,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "العقيق اليماني هو الحجر الأكثر شهرة في التاريخ الإسلامي."
       },
       specs: [{ label: "المعدن", value: "فضة عيار 925" }, { label: "الحجر", value: "عقيق يماني" }, { label: "الوزن", value: "80 جرام" }],
-      image: "/products-7.webp"
+      image: "/products-7.png"
     },
     {
       id: "8",
@@ -159,7 +158,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "البخور جزء لا يتجزأ من طقوس الضيافة اليمنية."
       },
       specs: [{ label: "الوزن", value: "250 جرام" }, { label: "النوع", value: "عدني" }, { label: "الثبات", value: "عالي" }],
-      image: "/products-8.webp"
+      image: "/products-8.png"
     },
     {
       id: "9",
@@ -176,7 +175,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "اشتهرت اليمن قديماً بصناعة الجلود ودباغتها."
       },
       specs: [{ label: "المادة", value: "جلد بقر طبيعي" }, { label: "اللون", value: "بني" }, { label: "الاستخدام", value: "يومي" }],
-      image: "/products-9.webp"
+      image: "/products-9.png"
     },
     {
       id: "10",
@@ -193,9 +192,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         culturalHighlight: "الفخار الصنعاني يعكس علاقة الإنسان اليمني بالأرض."
       },
       specs: [{ label: "المادة", value: "طين طبيعي" }, { label: "الاستخدام", value: "حفظ الماء" }, { label: "المنشأ", value: "صنعاء" }],
-      image: "/products-10.webp"
+      image: "/products-10.png"
     }
-  ]
+  ];
+
+  const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
 
   return (
     <div className="pb-24 bg-background min-h-screen">
