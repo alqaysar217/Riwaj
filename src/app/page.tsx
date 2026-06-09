@@ -4,12 +4,11 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, Zap, Star, LayoutGrid } from "lucide-react"
+import { ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, Zap, Star, LayoutGrid, Utensils, Gem, Gift, ShoppingBag } from "lucide-react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product/product-card"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 import Autoplay from "embla-carousel-autoplay"
 import { cn } from "@/lib/utils"
 import {
@@ -22,11 +21,12 @@ import {
 
 const CATEGORIES = [
   { name: "الكل", icon: LayoutGrid, key: "all" },
-  { name: "بن يمني", icon: Coffee, key: "بن" },
-  { name: "عسل سدر", icon: Droplets, key: "عسل" },
-  { name: "بخور", icon: Wind, key: "بخور" },
-  { name: "حرف يدوية", icon: Palette, key: "حرف" },
-  { name: "ملابس", icon: Shirt, key: "ملابس" },
+  { name: "البن اليمني", icon: Coffee, key: "بن" },
+  { name: "العسل الطبيعي", icon: Droplets, key: "عسل" },
+  { name: "العطور والبخور", icon: Wind, key: "بخور" },
+  { name: "المشغولات اليدوية", icon: Palette, key: "حرف" },
+  { name: "الأزياء التقليدية", icon: Shirt, key: "ملابس" },
+  { name: "الضيافة الشعبية", icon: Utensils, key: "أطعمة" },
 ]
 
 const FEATURED_PRODUCTS = [
@@ -70,7 +70,7 @@ export default function Home() {
             <CarouselContent>
               {HERO_SLIDES.map((slide, index) => (
                 <CarouselItem key={index}>
-                  <div className="relative h-[180px] md:h-[420px] overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-white bg-muted group">
+                  <div className="relative h-[180px] md:h-[420px] overflow-hidden rounded-xl shadow-2xl border-4 border-white bg-muted group">
                     <Image 
                       src={slide.image}
                       alt="رواج"

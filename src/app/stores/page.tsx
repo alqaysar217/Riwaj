@@ -8,7 +8,7 @@ import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, MapPin, ShieldCheck, ArrowLeft, ShoppingBag, LayoutGrid, Coffee, Droplets, Palette, Shirt, Wind } from "lucide-react"
+import { Star, MapPin, ShieldCheck, ArrowLeft, ShoppingBag, LayoutGrid, Coffee, Droplets, Palette, Shirt, Wind, Utensils, Gem, Gift } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const STORES = [
@@ -87,6 +87,9 @@ const STORE_CATEGORIES = [
   { name: "الحرف", icon: Palette },
   { name: "الملابس", icon: Shirt },
   { name: "العطور", icon: Wind },
+  { name: "الضيافة", icon: Utensils },
+  { name: "المجوهرات", icon: Gem },
+  { name: "الهدايا", icon: Gift },
 ]
 
 export default function StoresDirectoryPage() {
@@ -99,6 +102,9 @@ export default function StoresDirectoryPage() {
     if (activeCategory === "الحرف") return store.category.includes("الحرف")
     if (activeCategory === "الملابس") return store.category.includes("ملابس")
     if (activeCategory === "العطور") return store.category.includes("البخور") || store.category.includes("العطور")
+    if (activeCategory === "الضيافة") return store.category.includes("مأكولات") || store.category.includes("ضيافة")
+    if (activeCategory === "المجوهرات") return store.category.includes("مجوهرات") || store.category.includes("حلي")
+    if (activeCategory === "الهدايا") return store.category.includes("هدايا")
     return true
   })
 
@@ -141,7 +147,7 @@ export default function StoresDirectoryPage() {
           {filteredStores.length > 0 ? (
             filteredStores.map((store) => (
               <Link key={store.id} href={`/stores/${store.id}`}>
-                <Card className="overflow-hidden border-none shadow-sm hover:shadow-md transition-all group bg-white rounded-2xl">
+                <Card className="overflow-hidden border-none shadow-sm hover:shadow-md transition-all group bg-white rounded-xl">
                   <CardContent className="p-0">
                     <div className="relative h-24 bg-muted">
                       <Image 
@@ -155,7 +161,7 @@ export default function StoresDirectoryPage() {
                     
                     <div className="p-4 relative">
                       <div className="absolute -top-10 right-4">
-                        <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-4 border-white shadow-md bg-white">
+                        <div className="relative w-16 h-16 rounded-xl overflow-hidden border-4 border-white shadow-md bg-white">
                           <Image src={store.avatar} alt={store.name} fill className="object-cover" />
                         </div>
                       </div>

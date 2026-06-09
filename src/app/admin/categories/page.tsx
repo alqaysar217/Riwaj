@@ -21,7 +21,8 @@ import {
   Gem,
   ShoppingBag,
   Sparkles,
-  Type
+  Type,
+  Gift
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -47,15 +48,21 @@ const AVAILABLE_ICONS = [
   { id: 'palette', icon: Palette, label: 'حرف' },
   { id: 'shirt', icon: Shirt, label: 'ملابس' },
   { id: 'utensils', icon: Utensils, label: 'أطعمة' },
-  { id: 'gem', icon: Gem, label: 'فضيات' },
-  { id: 'shopping-bag', icon: ShoppingBag, label: 'أخرى' },
+  { id: 'gem', icon: Gem, label: 'مجوهرات' },
+  { id: 'gift', icon: Gift, label: 'هدايا' },
+  { id: 'shopping-bag', icon: ShoppingBag, label: 'جلديات' },
 ]
 
 const INITIAL_CATEGORIES = [
-  { id: 1, name: "البن اليمني", iconId: "coffee", count: 124, image: "https://picsum.photos/seed/cat1/400/300" },
-  { id: 2, name: "عسل طبيعي", iconId: "droplets", count: 56, image: "https://picsum.photos/seed/cat2/400/300" },
-  { id: 3, name: "بخور وعطور", iconId: "wind", count: 89, image: "https://picsum.photos/seed/cat3/400/300" },
-  { id: 4, name: "حرف يدوية", iconId: "palette", count: 142, image: "https://picsum.photos/seed/cat4/400/300" },
+  { id: 1, name: "البن اليمني", iconId: "coffee", count: 124, image: "/coffee-beans-roasting-traditional.webp" },
+  { id: 2, name: "العسل الطبيعي", iconId: "droplets", count: 85, image: "/natural-organic-honey-jar.webp" },
+  { id: 3, name: "العطور والبخور", iconId: "wind", count: 42, image: "/luxury-oud-perfumes-collection.webp" },
+  { id: 4, name: "المشغولات اليدوية", iconId: "palette", count: 56, image: "/traditional-handicrafts-pottery.webp" },
+  { id: 5, name: "الأزياء التقليدية", iconId: "shirt", count: 38, image: "/traditional-wedding-attire-couple.webp" },
+  { id: 6, name: "الضيافة الشعبية", iconId: "utensils", count: 92, image: "/family-traditional-dining-feast.webp" },
+  { id: 7, name: "المجوهرات والحلي", iconId: "gem", count: 67, image: "/vintage-silver-jewelry-collection.webp" },
+  { id: 8, name: "الهدايا الفاخرة", iconId: "gift", count: 29, image: "/luxury-gift-set-traditional-items.webp" },
+  { id: 9, name: "الجلديات والإكسسوارات", iconId: "shopping-bag", count: 45, image: "/elegant-leather-handbag-accessories.webp" },
 ]
 
 export default function AdminCategories() {
@@ -97,7 +104,7 @@ export default function AdminCategories() {
         id: Date.now(),
         name: formData.name,
         iconId: formData.iconId,
-        image: formData.image || `https://picsum.photos/seed/${Date.now()}/400/300`,
+        image: formData.image || `/coffee-beans-roasting-traditional.webp`,
         count: 0
       }
       setCategories([...categories, newCat])
@@ -133,7 +140,7 @@ export default function AdminCategories() {
       </div>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((cat) => {
           const CategoryIcon = getIconComponent(cat.iconId);
           return (

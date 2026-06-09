@@ -3,18 +3,18 @@ import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
-import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, ShoppingBag, ChevronLeft } from "lucide-react"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
+import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, Gift, ShoppingBag, ChevronLeft } from "lucide-react"
 
 const CATEGORIES = [
-  { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: "/categories-1.png" },
-  { id: "2", name: "عسل طبيعي", icon: Droplets, count: 56, image: "/categories-2.png" },
-  { id: "3", name: "بخور وعطور", icon: Wind, count: 89, image: "/categories-3.png" },
-  { id: "4", name: "حرف يدوية", icon: Palette, count: 142, image: "/categories-4.png" },
-  { id: "5", name: "ملابس تقليدية", icon: Shirt, count: 73, image: "/categories-5.png" },
-  { id: "6", name: "مأكولات بيتية", icon: Utensils, count: 45, image: "/categories-6.png" },
-  { id: "7", name: "فضيات وهدايا", icon: Gem, count: 32, image: "/categories-7.png" },
-  { id: "8", name: "أخرى", icon: ShoppingBag, count: 21, image: "/categories-8.png" },
+  { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: "/coffee-beans-roasting-traditional.webp" },
+  { id: "2", name: "العسل الطبيعي", icon: Droplets, count: 85, image: "/natural-organic-honey-jar.webp" },
+  { id: "3", name: "العطور والبخور", icon: Wind, count: 42, image: "/luxury-oud-perfumes-collection.webp" },
+  { id: "4", name: "المشغولات اليدوية", icon: Palette, count: 56, image: "/traditional-handicrafts-pottery.webp" },
+  { id: "5", name: "الأزياء التقليدية", icon: Shirt, count: 38, image: "/traditional-wedding-attire-couple.webp" },
+  { id: "6", name: "الضيافة الشعبية", icon: Utensils, count: 92, image: "/family-traditional-dining-feast.webp" },
+  { id: "7", name: "المجوهرات والحلي", icon: Gem, count: 67, image: "/vintage-silver-jewelry-collection.webp" },
+  { id: "8", name: "الهدايا الفاخرة", icon: Gift, count: 29, image: "/luxury-gift-set-traditional-items.webp" },
+  { id: "9", name: "الجلديات والإكسسوارات", icon: ShoppingBag, count: 45, image: "/elegant-leather-handbag-accessories.webp" },
 ]
 
 export default function CategoriesPage() {
@@ -33,11 +33,11 @@ export default function CategoriesPage() {
             <Link 
               key={cat.id} 
               href={`/search?q=${encodeURIComponent(cat.name)}`} 
-              className="group relative block aspect-[4/5] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500"
+              className="group relative block aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500"
             >
               {/* Category Image */}
               <Image 
-                src={cat.image || ""} 
+                src={cat.image} 
                 alt={cat.name} 
                 fill 
                 className="object-cover group-hover:scale-110 transition-transform duration-700"
