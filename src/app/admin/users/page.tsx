@@ -53,11 +53,17 @@ import { useToast } from "@/hooks/use-toast"
 import { cn } from "@/lib/utils"
 
 const INITIAL_USERS = [
-  { id: 1, name: "أحمد علي محمد", email: "ahmed@mail.com", phone: "775258830", joined: "24 مايو 2024", role: "customer", status: "active", orders: 12 },
-  { id: 2, name: "سارة محمود", email: "sara@mail.com", phone: "771234567", joined: "12 مايو 2024", role: "merchant", status: "active", orders: 45 },
-  { id: 3, name: "خالد بن الوليد", email: "khaled@mail.com", phone: "733333333", joined: "1 مايو 2024", role: "customer", status: "suspended", orders: 2 },
-  { id: 4, name: "ليلى حسن", email: "laila@mail.com", phone: "770000000", joined: "15 أبريل 2024", role: "merchant", status: "active", orders: 31 },
-]
+  { id: 1, name: "أحمد علي محمد", email: "ahmed@mail.com", phone: "775258830", joined: "24 مايو 2024", role: "customer", status: "active", orders: 12, image: "/user-1.png" },
+  { id: 2, name: "فاطمة حسن القاضي", email: "fatima@mail.com", phone: "771234567", joined: "12 يونيو 2024", role: "customer", status: "active", orders: 8, image: "/user-2.png" },
+  { id: 3, name: "خالد سعيد باوزير", email: "khaled@mail.com", phone: "770987654", joined: "05 يوليو 2024", role: "customer", status: "suspended", orders: 2, image: "/user-3.png" },
+  { id: 4, name: "سارة عبدالله حسين", email: "sarah@mail.com", phone: "773456789", joined: "18 أغسطس 2024", role: "customer", status: "active", orders: 25, image: "/user-4.png" },
+  { id: 5, name: "محمد ناصر اليافعي", email: "mohammed@mail.com", phone: "774123987", joined: "30 أغسطس 2024", role: "admin", status: "active", orders: 0, image: "/user-5.png" },
+  { id: 6, name: "ليلى محمود الصبري", email: "layla@mail.com", phone: "776543210", joined: "14 سبتمبر 2024", role: "customer", status: "active", orders: 15, image: "/user-6.png" },
+  { id: 7, name: "عمر فاروق الشميري", email: "omar@mail.com", phone: "778899001", joined: "02 أكتوبر 2024", role: "customer", status: "active", orders: 5, image: "/user-7.png" },
+  { id: 8, name: "نورة يوسف الحمادي", email: "noura@mail.com", phone: "772233445", joined: "21 أكتوبر 2024", role: "customer", status: "suspended", orders: 1, image: "/user-8.png" },
+  { id: 9, name: "بدر خالد العولقي", email: "badr@mail.com", phone: "779988776", joined: "10 نوفمبر 2024", role: "customer", status: "active", orders: 9, image: "/user-9.png" },
+  { id: 10, name: "منى إبراهيم المنصوري", email: "mona@mail.com", phone: "771122334", joined: "29 نوفمبر 2024", role: "customer", status: "active", orders: 18, image: "/user-10.png" }
+];
 
 export default function AdminUsers() {
   const { toast } = useToast()
@@ -119,13 +125,13 @@ export default function AdminUsers() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center bg-white p-8 rounded-[35px] border shadow-sm">
+      <div className="flex justify-between items-center bg-white p-6 rounded-xl border shadow-sm">
         <div>
           <h1 className="text-3xl font-headline font-bold text-primary">إدارة المستخدمين</h1>
           <p className="text-muted-foreground text-sm mt-1">التحكم في صلاحيات وحسابات أعضاء منصة رواج</p>
         </div>
-        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shadow-inner">
-          <Users className="w-8 h-8" />
+        <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary shadow-inner">
+          <Users className="w-7 h-7" />
         </div>
       </div>
 
@@ -135,7 +141,7 @@ export default function AdminUsers() {
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <Input 
             placeholder="بحث بالاسم، البريد، أو رقم الهاتف..." 
-            className="h-12 pr-11 pl-10 rounded-2xl bg-white border-none shadow-sm focus-visible:ring-1 focus-visible:ring-primary/20"
+            className="h-12 pr-11 pl-10 rounded-xl bg-white border-none shadow-sm focus-visible:ring-1 focus-visible:ring-primary/20"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -150,7 +156,7 @@ export default function AdminUsers() {
         </div>
         <div className="w-full md:w-48">
           <Select value={roleFilter} onValueChange={setRoleFilter}>
-            <SelectTrigger className="h-12 rounded-2xl bg-white border-none shadow-sm font-bold text-xs">
+            <SelectTrigger className="h-12 rounded-xl bg-white border-none shadow-sm font-bold text-xs">
               <div className="flex items-center gap-2">
                 <Filter className="w-3.5 h-3.5 text-primary" />
                 <SelectValue placeholder="تصفية الدور" />
@@ -160,6 +166,7 @@ export default function AdminUsers() {
               <SelectItem value="all">كل الأدوار</SelectItem>
               <SelectItem value="customer">مشتري</SelectItem>
               <SelectItem value="merchant">تاجر</SelectItem>
+              <SelectItem value="admin">مدير</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -169,22 +176,23 @@ export default function AdminUsers() {
       <div className="grid grid-cols-1 gap-4">
         {filteredUsers.length > 0 ? (
           filteredUsers.map((user) => (
-            <Card key={user.id} className="border-none shadow-sm rounded-[32px] overflow-hidden group hover:shadow-md transition-all border border-transparent hover:border-primary/10">
-              <CardContent className="p-6">
+            <Card key={user.id} className="border-none shadow-sm rounded-xl overflow-hidden group hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+              <CardContent className="p-5">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                   <div className="flex items-center gap-5 w-full md:w-auto">
-                     <Avatar className="w-14 h-14 border-2 border-primary/5 shadow-sm">
-                        <AvatarImage src={`https://picsum.photos/seed/u${user.id}/100/100`} />
-                        <AvatarFallback className="bg-primary/10 text-primary font-bold">{user.name[0]}</AvatarFallback>
+                     <Avatar className="w-14 h-14 border-2 border-primary/5 shadow-sm rounded-xl">
+                        <AvatarImage src={user.image} className="object-cover" />
+                        <AvatarFallback className="bg-primary/10 text-primary font-bold rounded-xl">{user.name[0]}</AvatarFallback>
                      </Avatar>
                      <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-bold text-base truncate">{user.name}</h3>
                           <Badge className={cn(
                             "text-[8px] font-bold px-2 py-0.5 border-none",
-                            user.role === 'merchant' ? "bg-secondary text-white" : "bg-primary text-white"
+                            user.role === 'merchant' ? "bg-secondary text-white" : 
+                            user.role === 'admin' ? "bg-red-600 text-white" : "bg-primary text-white"
                           )}>
-                            {user.role === 'merchant' ? 'تاجر' : 'مشتري'}
+                            {user.role === 'merchant' ? 'تاجر' : user.role === 'admin' ? 'مدير' : 'مشتري'}
                           </Badge>
                         </div>
                         <div className="flex flex-wrap items-center gap-4 text-[10px] text-muted-foreground font-medium">
@@ -216,16 +224,16 @@ export default function AdminUsers() {
                             <MoreVertical className="w-5 h-5" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="rounded-2xl p-2 w-56 shadow-xl border-none bg-white">
+                        <DropdownMenuContent align="end" className="rounded-xl p-2 w-56 shadow-xl border-none bg-white">
                           <DropdownMenuItem 
-                            className="rounded-xl gap-3 font-bold text-xs py-3 cursor-pointer"
+                            className="rounded-lg gap-3 font-bold text-xs py-3 cursor-pointer"
                             onClick={() => handleOpenEdit(user)}
                           >
                              <ShieldCheck className="w-4 h-4 text-primary" /> تعديل الصلاحيات
                           </DropdownMenuItem>
                           <DropdownMenuItem 
                             className={cn(
-                              "rounded-xl gap-3 font-bold text-xs py-3 cursor-pointer",
+                              "rounded-lg gap-3 font-bold text-xs py-3 cursor-pointer",
                               user.status === 'active' ? "text-destructive" : "text-green-600"
                             )}
                             onClick={() => toggleUserStatus(user.id, user.status)}
@@ -244,7 +252,7 @@ export default function AdminUsers() {
             </Card>
           ))
         ) : (
-          <div className="text-center py-24 bg-muted/20 rounded-[40px] border border-dashed border-primary/20">
+          <div className="text-center py-24 bg-muted/20 rounded-xl border border-dashed border-primary/20">
              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
                 <Search className="w-10 h-10 text-primary opacity-20" />
              </div>
@@ -256,7 +264,7 @@ export default function AdminUsers() {
 
       {/* Edit Permissions Dialog */}
       <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-        <DialogContent className="rounded-[40px] sm:max-w-md border-none shadow-2xl p-0 overflow-hidden [&>button]:left-6 [&>button]:right-auto">
+        <DialogContent className="rounded-xl sm:max-w-md border-none shadow-2xl p-0 overflow-hidden [&>button]:left-6 [&>button]:right-auto">
           <DialogHeader className="p-8 bg-muted/30 border-b">
             <DialogTitle className="text-2xl font-headline font-bold text-primary text-right flex items-center gap-3">
               <ShieldCheck className="w-7 h-7 text-secondary" />
@@ -265,10 +273,10 @@ export default function AdminUsers() {
           </DialogHeader>
           
           <div className="p-8 space-y-8">
-            <div className="flex items-center gap-4 p-4 rounded-2xl bg-primary/5 border border-primary/10">
-               <Avatar className="w-12 h-12">
-                  <AvatarImage src={`https://picsum.photos/seed/u${editingUser?.id}/100/100`} />
-                  <AvatarFallback>{editingUser?.name[0]}</AvatarFallback>
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
+               <Avatar className="w-12 h-12 rounded-xl">
+                  <AvatarImage src={editingUser?.image} className="object-cover" />
+                  <AvatarFallback className="rounded-xl">{editingUser?.name[0]}</AvatarFallback>
                </Avatar>
                <div>
                   <h4 className="font-bold text-sm">{editingUser?.name}</h4>
@@ -285,12 +293,13 @@ export default function AdminUsers() {
                     value={editFormData.role} 
                     onValueChange={(v) => setEditFormData({...editFormData, role: v})}
                   >
-                    <SelectTrigger className="h-14 rounded-2xl bg-muted/20 border-none px-6 font-bold">
+                    <SelectTrigger className="h-12 rounded-xl bg-muted/20 border-none px-6 font-bold">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="rounded-2xl border-none shadow-2xl">
+                    <SelectContent className="rounded-xl border-none shadow-2xl">
                       <SelectItem value="customer">مشتري (Customer)</SelectItem>
                       <SelectItem value="merchant">تاجر (Merchant)</SelectItem>
+                      <SelectItem value="admin">مدير (Admin)</SelectItem>
                     </SelectContent>
                   </Select>
                   <p className="text-[9px] text-muted-foreground mr-2 italic">تغيير الدور يؤثر على الواجهات والوظائف المتاحة للمستخدم.</p>
@@ -304,10 +313,10 @@ export default function AdminUsers() {
                     value={editFormData.status} 
                     onValueChange={(v) => setEditFormData({...editFormData, status: v})}
                   >
-                    <SelectTrigger className="h-14 rounded-2xl bg-muted/20 border-none px-6 font-bold">
+                    <SelectTrigger className="h-12 rounded-xl bg-muted/20 border-none px-6 font-bold">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="rounded-2xl border-none shadow-2xl">
+                    <SelectContent className="rounded-xl border-none shadow-2xl">
                       <SelectItem value="active" className="text-green-600 font-bold">نشط (Active)</SelectItem>
                       <SelectItem value="suspended" className="text-destructive font-bold">موقوف (Suspended)</SelectItem>
                     </SelectContent>
@@ -318,14 +327,14 @@ export default function AdminUsers() {
             <div className="flex gap-4 pt-4">
               <Button 
                 onClick={handleSavePermissions} 
-                className="flex-[2] h-14 rounded-2xl bg-primary hover:bg-primary/90 font-bold gap-2 shadow-lg shadow-primary/20"
+                className="flex-[2] h-12 rounded-xl bg-primary hover:bg-primary/90 font-bold gap-2 shadow-lg shadow-primary/20"
               >
                 <Save className="w-5 h-5" /> حفظ الصلاحيات
               </Button>
               <Button 
                 variant="ghost" 
                 onClick={() => setIsEditOpen(false)} 
-                className="flex-1 h-14 rounded-2xl font-bold text-muted-foreground"
+                className="flex-1 h-12 rounded-xl font-bold text-muted-foreground"
               >
                 إلغاء
               </Button>
