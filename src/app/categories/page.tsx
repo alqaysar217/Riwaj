@@ -6,15 +6,15 @@ import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, Gift, ShoppingBag, ChevronLeft } from "lucide-react"
 
 const CATEGORIES = [
-  { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: "/coffee-beans-roasting-traditional.webp" },
-  { id: "2", name: "العسل الطبيعي", icon: Droplets, count: 85, image: "/natural-organic-honey-jar.webp" },
-  { id: "3", name: "العطور والبخور", icon: Wind, count: 42, image: "/luxury-oud-perfumes-collection.webp" },
-  { id: "4", name: "المشغولات اليدوية", icon: Palette, count: 56, image: "/traditional-handicrafts-pottery.webp" },
-  { id: "5", name: "الأزياء التقليدية", icon: Shirt, count: 38, image: "/traditional-wedding-attire-couple.webp" },
-  { id: "6", name: "الضيافة الشعبية", icon: Utensils, count: 92, image: "/family-traditional-dining-feast.webp" },
-  { id: "7", name: "المجوهرات والحلي", icon: Gem, count: 67, image: "/vintage-silver-jewelry-collection.webp" },
-  { id: "8", name: "الهدايا الفاخرة", icon: Gift, count: 29, image: "/luxury-gift-set-traditional-items.webp" },
-  { id: "9", name: "الجلديات والإكسسوارات", icon: ShoppingBag, count: 45, image: "/elegant-leather-handbag-accessories.webp" },
+  { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: "/categories-1.png" },
+  { id: "2", name: "العسل الطبيعي", icon: Droplets, count: 85, image: "/categories-2.png" },
+  { id: "3", name: "العطور والبخور", icon: Wind, count: 42, image: "/categories-3.png" },
+  { id: "4", name: "المشغولات اليدوية", icon: Palette, count: 56, image: "/categories-4.png" },
+  { id: "5", name: "الأزياء التقليدية", icon: Shirt, count: 38, image: "/categories-5.png" },
+  { id: "6", name: "الضيافة الشعبية", icon: Utensils, count: 92, image: "/categories-6.png" },
+  { id: "7", name: "المجوهرات والحلي", icon: Gem, count: 67, image: "/categories-7.png" },
+  { id: "8", name: "الهدايا الفاخرة", icon: Gift, count: 29, image: "/categories-8.png" },
+  { id: "9", name: "الجلديات والإكسسوارات", icon: ShoppingBag, count: 45, image: "/categories-9.png" },
 ]
 
 export default function CategoriesPage() {
@@ -35,7 +35,6 @@ export default function CategoriesPage() {
               href={`/search?q=${encodeURIComponent(cat.name)}`} 
               className="group relative block aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500"
             >
-              {/* Category Image */}
               <Image 
                 src={cat.image} 
                 alt={cat.name} 
@@ -44,10 +43,8 @@ export default function CategoriesPage() {
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
               />
               
-              {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
               
-              {/* Content Overlay */}
               <div className="absolute inset-0 flex flex-col items-center justify-end p-5 text-white text-center">
                 <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-3 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
                   <cat.icon className="w-6 h-6 stroke-[1.5]" />

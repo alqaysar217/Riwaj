@@ -21,21 +21,21 @@ import {
 
 const CATEGORIES = [
   { name: "الكل", icon: LayoutGrid, key: "all" },
-  { name: "البن اليمني", icon: Coffee, key: "بن" },
-  { name: "العسل الطبيعي", icon: Droplets, key: "عسل" },
-  { name: "العطور والبخور", icon: Wind, key: "بخور" },
-  { name: "المشغولات اليدوية", icon: Palette, key: "حرف" },
-  { name: "الأزياء التقليدية", icon: Shirt, key: "ملابس" },
-  { name: "الضيافة الشعبية", icon: Utensils, key: "أطعمة" },
+  { name: "البن اليمني", icon: Coffee, key: "البن اليمني" },
+  { name: "العسل الطبيعي", icon: Droplets, key: "العسل الطبيعي" },
+  { name: "العطور والبخور", icon: Wind, key: "العطور والبخور" },
+  { name: "المشغولات اليدوية", icon: Palette, key: "المشغولات اليدوية" },
+  { name: "الأزياء التقليدية", icon: Shirt, key: "الأزياء التقليدية" },
+  { name: "الضيافة الشعبية", icon: Utensils, key: "الضيافة الشعبية" },
 ]
 
 const FEATURED_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "بن", image: "/products-1.png" },
-  { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "عسل", image: "/products-2.png" },
-  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "حرف", image: "/products-3.png" },
-  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "بخور", image: "/products-4.png" },
-  { id: "5", title: "جنبية صيفاني قديمة", price: 25000, rating: 4.9, reviews: 12, storeName: "فضيات صنعاء", category: "حرف", image: "/products-5.png" },
-  { id: "6", title: "ثوب يمني مطرز", price: 8500, rating: 4.6, reviews: 34, storeName: "أزياء سبأ", category: "ملابس", image: "/products-6.png" },
+  { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "البن اليمني", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
+  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "المشغولات اليدوية", image: "/products-3.png" },
+  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "العطور والبخور", image: "/products-4.png" },
+  { id: "5", title: "جنبية صيفاني قديمة", price: 25000, rating: 4.9, reviews: 12, storeName: "فضيات صنعاء", category: "المشغولات اليدوية", image: "/products-5.png" },
+  { id: "6", title: "ثوب يمني مطرز", price: 8500, rating: 4.6, reviews: 34, storeName: "أزياء سبأ", category: "الأزياء التقليدية", image: "/products-6.png" },
 ]
 
 const HERO_SLIDES = [

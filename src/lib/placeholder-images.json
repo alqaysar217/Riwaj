@@ -1,40 +1,58 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-coffee",
-      "description": "Premium Yemeni Coffee",
-      "imageUrl": "/products-1.png",
+      "id": "cat-coffee",
+      "description": "البن اليمني",
+      "imageUrl": "/categories-1.png",
       "imageHint": "coffee beans"
     },
     {
       "id": "cat-honey",
-      "description": "Sidr Honey",
+      "description": "العسل الطبيعي",
       "imageUrl": "/categories-2.png",
       "imageHint": "honey jar"
     },
     {
-      "id": "cat-handicrafts",
-      "description": "Yemeni Handicrafts",
+      "id": "cat-perfume",
+      "description": "العطور والبخور",
+      "imageUrl": "/categories-3.png",
+      "imageHint": "perfume bottle"
+    },
+    {
+      "id": "cat-pottery",
+      "description": "المشغولات اليدوية",
       "imageUrl": "/categories-4.png",
       "imageHint": "traditional pottery"
     },
     {
-      "id": "product-qishr",
-      "description": "Traditional Qishr Coffee",
-      "imageUrl": "/products-5.png",
-      "imageHint": "coffee cup"
+      "id": "cat-dress",
+      "description": "الأزياء التقليدية",
+      "imageUrl": "/categories-5.png",
+      "imageHint": "traditional dress"
     },
     {
-      "id": "product-incense",
-      "description": "Premium Bakhoor",
-      "imageUrl": "/products-4.png",
-      "imageHint": "incense smoke"
+      "id": "cat-food",
+      "description": "الضيافة الشعبية",
+      "imageUrl": "/categories-6.png",
+      "imageHint": "traditional food"
     },
     {
-      "id": "store-banner",
-      "description": "Traditional Yemeni Architecture",
-      "imageUrl": "/logo-stores-ditales-1.png",
-      "imageHint": "historical building"
+      "id": "cat-gem",
+      "description": "المجوهرات والحلي",
+      "imageUrl": "/categories-7.png",
+      "imageHint": "silver jewelry"
+    },
+    {
+      "id": "cat-gift",
+      "description": "الهدايا الفاخرة",
+      "imageUrl": "/categories-8.png",
+      "imageHint": "gift box"
+    },
+    {
+      "id": "cat-handbag",
+      "description": "الجلديات والإكسسوارات",
+      "imageUrl": "/categories-9.png",
+      "imageHint": "leather bag"
     }
   ]
 }

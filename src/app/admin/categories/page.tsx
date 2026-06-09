@@ -54,15 +54,15 @@ const AVAILABLE_ICONS = [
 ]
 
 const INITIAL_CATEGORIES = [
-  { id: 1, name: "البن اليمني", iconId: "coffee", count: 124, image: "/coffee-beans-roasting-traditional.webp" },
-  { id: 2, name: "العسل الطبيعي", iconId: "droplets", count: 85, image: "/natural-organic-honey-jar.webp" },
-  { id: 3, name: "العطور والبخور", iconId: "wind", count: 42, image: "/luxury-oud-perfumes-collection.webp" },
-  { id: 4, name: "المشغولات اليدوية", iconId: "palette", count: 56, image: "/traditional-handicrafts-pottery.webp" },
-  { id: 5, name: "الأزياء التقليدية", iconId: "shirt", count: 38, image: "/traditional-wedding-attire-couple.webp" },
-  { id: 6, name: "الضيافة الشعبية", iconId: "utensils", count: 92, image: "/family-traditional-dining-feast.webp" },
-  { id: 7, name: "المجوهرات والحلي", iconId: "gem", count: 67, image: "/vintage-silver-jewelry-collection.webp" },
-  { id: 8, name: "الهدايا الفاخرة", iconId: "gift", count: 29, image: "/luxury-gift-set-traditional-items.webp" },
-  { id: 9, name: "الجلديات والإكسسوارات", iconId: "shopping-bag", count: 45, image: "/elegant-leather-handbag-accessories.webp" },
+  { id: 1, name: "البن اليمني", iconId: "coffee", count: 124, image: "/categories-1.png" },
+  { id: 2, name: "العسل الطبيعي", iconId: "droplets", count: 85, image: "/categories-2.png" },
+  { id: 3, name: "العطور والبخور", iconId: "wind", count: 42, image: "/categories-3.png" },
+  { id: 4, name: "المشغولات اليدوية", iconId: "palette", count: 56, image: "/categories-4.png" },
+  { id: 5, name: "الأزياء التقليدية", iconId: "shirt", count: 38, image: "/categories-5.png" },
+  { id: 6, name: "الضيافة الشعبية", iconId: "utensils", count: 92, image: "/categories-6.png" },
+  { id: 7, name: "المجوهرات والحلي", iconId: "gem", count: 67, image: "/categories-7.png" },
+  { id: 8, name: "الهدايا الفاخرة", iconId: "gift", count: 29, image: "/categories-8.png" },
+  { id: 9, name: "الجلديات والإكسسوارات", iconId: "shopping-bag", count: 45, image: "/categories-9.png" },
 ]
 
 export default function AdminCategories() {
@@ -104,7 +104,7 @@ export default function AdminCategories() {
         id: Date.now(),
         name: formData.name,
         iconId: formData.iconId,
-        image: formData.image || `/coffee-beans-roasting-traditional.webp`,
+        image: formData.image || `/categories-1.png`,
         count: 0
       }
       setCategories([...categories, newCat])
@@ -205,11 +205,11 @@ export default function AdminCategories() {
                  <Label className="text-xs font-bold text-muted-foreground pr-1 flex items-center gap-2">
                    <Type className="w-3.5 h-3.5 text-primary" /> اسم الفئة
                  </Label>
-                 <Input 
+                 <input 
                   placeholder="مثلاً: مأكولات يمنية، فضيات وهدايا..." 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="h-12 rounded-lg bg-muted/20 border-none px-4 font-bold focus-visible:ring-1 focus-visible:ring-primary/20" 
+                  className="w-full h-12 rounded-lg bg-muted/20 border-none px-4 font-bold focus:outline-none focus:ring-1 focus:ring-primary/20" 
                 />
               </div>
 
@@ -256,7 +256,7 @@ export default function AdminCategories() {
                         </>
                       )}
                     </div>
-                    <Input 
+                    <input 
                       type="file" 
                       className="absolute inset-0 opacity-0 cursor-pointer" 
                       onChange={(e) => {

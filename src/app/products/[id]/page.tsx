@@ -24,34 +24,178 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const { id } = await params
   
   // Mock data - This will be replaced with real data when user provides it
-  const product = {
-    id: id,
-    title: "بن خولاني مطري فاخر - درجة أولى",
-    price: 5500,
-    originalPrice: 6500,
-    rating: 4.9,
-    reviews: 142,
-    category: "البن اليمني",
-    store: {
+  const PRODUCTS = [
+    {
       id: "1",
-      name: "محامص الجبال",
+      title: "بن خولاني مطري فاخر",
+      price: 5500,
+      originalPrice: 6500,
+      rating: 4.9,
+      reviews: 142,
+      category: "البن اليمني",
+      store: { id: "1", name: "محامص الجبال", rating: 4.8, location: "صعدة، اليمن", verified: true },
+      narrative: {
+        title: "إرث الجبال العالية",
+        body: "بن خولاني أصيل، قطفناه بعناية من أعالي قمم صعدة ليعطيك نكهة غنية تعكس عبق الأرض وجمال التقاليد.",
+        culturalHighlight: "زراعة البن في خولان موروث متوارث منذ مئات السنين."
+      },
+      specs: [{ label: "المنطقة", value: "خولان، صعدة" }, { label: "نوع التحميص", value: "متوسط" }, { label: "الوزن", value: "500 جرام" }],
+      image: "/products-1.webp"
+    },
+    {
+      id: "2",
+      title: "عسل سدر ملكي",
+      price: 12000,
+      originalPrice: 15000,
+      rating: 5.0,
+      reviews: 89,
+      category: "العسل الطبيعي",
+      store: { id: "2", name: "رحيق الوادي", rating: 4.9, location: "حضرموت، اليمن", verified: true },
+      narrative: {
+        title: "ذهب حضرموت السائل",
+        body: "عسل سدر طبيعي من أشجار السدر المعمرة في وديان حضرموت، يمتاز بقوامه الكثيف وطعمه الفريد وفوائده العظيمة.",
+        culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي."
+      },
+      specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }],
+      image: "/products-2.webp"
+    },
+    {
+      id: "3",
+      title: "مبخرة نحاسية تراثية",
+      price: 4500,
+      originalPrice: 5500,
+      rating: 4.7,
+      reviews: 65,
+      category: "العطور والبخور",
+      store: { id: "3", name: "عبق التراث", rating: 4.6, location: "صنعاء، اليمن", verified: true },
+      narrative: {
+        title: "فخامة الأصالة",
+        body: "مبخرة نحاسية مصنوعة يدوياً بنقوش إسلامية دقيقة، تضيف لمسة من الفخامة والعراقة لأي ركن في منزلك.",
+        culturalHighlight: "فن نقش النحاس في صنعاء القديمة مهنة يتوارثها الحرفيون."
+      },
+      specs: [{ label: "المادة", value: "نحاس نقي" }, { label: "التصميم", value: "نقوش صنعانية" }, { label: "الاستخدام", value: "بخور/ديكور" }],
+      image: "/products-3.webp"
+    },
+    {
+      id: "4",
+      title: "خنجر يمني (جنبية)",
+      price: 25000,
+      originalPrice: 30000,
       rating: 4.8,
-      location: "صعدة، اليمن",
-      verified: true
+      reviews: 42,
+      category: "المشغولات اليدوية",
+      store: { id: "4", name: "السيوف والجمبيات", rating: 4.9, location: "صنعاء، اليمن", verified: true },
+      narrative: {
+        title: "رمز الرجولة والشموخ",
+        body: "جنبية يمنية أصلية بمقبض من قرن وحيد القرن الطبيعي، ونصل فولاذي حاد، قطعة فنية تجمع التاريخ والقوة.",
+        culturalHighlight: "الجنبية هي رمز الهوية الوطنية وزينة الرجل اليمني."
+      },
+      specs: [{ label: "المقبض", value: "صيفاني طبيعي" }, { label: "المنشأ", value: "اليمن" }, { label: "الحالة", value: "جديد" }],
+      image: "/products-4.webp"
     },
-    narrative: {
-      title: "قصة من قلب جبال خولان",
-      body: "من أعالي قمم الجبال التي تعانق السحاب في صعدة، نأتيكم بهذا البن الخولاني الأصيل. تم انتقاء كل حبة يدوياً بعناية فائقة، وتجفيفها طبيعياً تحت أشعة الشمس الذهبية للحفاظ على نكهتها الغنية التي تجمع بين عبق الأرض وحلاوة الفواكه المجففة.",
-      culturalHighlight: "زراعة البن في خولان هي إرث يتناقله الأجيال، حيث تعامل كل شجرة كجزء من أفراد العائلة."
+    {
+      id: "5",
+      title: "فستان مطرز يدوياً",
+      price: 18000,
+      originalPrice: 22000,
+      rating: 4.6,
+      reviews: 35,
+      category: "الأزياء التقليدية",
+      store: { id: "5", name: "حياكة الأجداد", rating: 4.7, location: "تعز، اليمن", verified: true },
+      narrative: {
+        title: "أناقة الحاضر بروح الماضي",
+        body: "فستان نسائي بتطريز يدوي دقيق يعكس دقة الحرفيين اليمنيين، مصمم ليمنحكِ إطلالة ملكية في المناسبات.",
+        culturalHighlight: "التطريز اليمني يعتمد على خيوط الحرير والألوان الزاهية."
+      },
+      specs: [{ label: "الخامة", value: "حرير وقطن" }, { label: "نوع التطريز", value: "يدوي" }, { label: "المقاس", value: "متعدد" }],
+      image: "/products-5.webp"
     },
-    specs: [
-      { label: "المنطقة", value: "خولان، صعدة" },
-      { label: "نوع التحميص", value: "متوسط" },
-      { label: "الوزن", value: "500 جرام" },
-      { label: "المعالجة", value: "تجفيف طبيعي" }
-    ],
-    image: "/products-1.png"
-  }
+    {
+      id: "6",
+      title: "سلة خوص ملونة",
+      price: 3200,
+      originalPrice: 4000,
+      rating: 4.5,
+      reviews: 78,
+      category: "المشغولات اليدوية",
+      store: { id: "6", name: "أنامل يمنية", rating: 4.4, location: "تهامة، اليمن", verified: true },
+      narrative: {
+        title: "فن الحياكة الطبيعية",
+        body: "سلة خوص مصنوعة من سعف النخيل الطبيعي، ملونة بأصباغ مستخلصة من الطبيعة، مثالية للتنظيم والديكور.",
+        culturalHighlight: "تعتبر صناعة الخوص من أعرق الحرف في المناطق الساحلية."
+      },
+      specs: [{ label: "المادة", value: "سعف نخيل" }, { label: "الوزن", value: "500 جرام" }, { label: "المتانة", value: "عالية" }],
+      image: "/products-6.webp"
+    },
+    {
+      id: "7",
+      title: "عقد فضة وعقيق",
+      price: 9500,
+      originalPrice: 11000,
+      rating: 4.9,
+      reviews: 55,
+      category: "المجوهرات والحلي",
+      store: { id: "7", name: "صائغ اليمن", rating: 4.8, location: "صنعاء، اليمن", verified: true },
+      narrative: {
+        title: "بريق العقيق اليماني",
+        body: "عقد من الفضة الخالصة مرصع بالعقيق اليماني الكبدي الأصلي، يجمع بين بريق الفضة وجمال الحجر التاريخي.",
+        culturalHighlight: "العقيق اليماني هو الحجر الأكثر شهرة في التاريخ الإسلامي."
+      },
+      specs: [{ label: "المعدن", value: "فضة عيار 925" }, { label: "الحجر", value: "عقيق يماني" }, { label: "الوزن", value: "80 جرام" }],
+      image: "/products-7.webp"
+    },
+    {
+      id: "8",
+      title: "بخور عدني فاخر",
+      price: 6000,
+      originalPrice: 7500,
+      rating: 4.8,
+      reviews: 112,
+      category: "العطور والبخور",
+      store: { id: "8", name: "خبير البخور", rating: 4.9, location: "عدن، اليمن", verified: true },
+      narrative: {
+        title: "رائحة الحب والذكريات",
+        body: "خلطة بخور عدني أصلية، مكونة من أجود أنواع العود والعطور الشرقية التي تدوم طويلاً وتملأ المكان بالسكينة.",
+        culturalHighlight: "البخور جزء لا يتجزأ من طقوس الضيافة اليمنية."
+      },
+      specs: [{ label: "الوزن", value: "250 جرام" }, { label: "النوع", value: "عدني" }, { label: "الثبات", value: "عالي" }],
+      image: "/products-8.webp"
+    },
+    {
+      id: "9",
+      title: "حقيبة جلد طبيعي",
+      price: 15000,
+      originalPrice: 18000,
+      rating: 4.7,
+      reviews: 48,
+      category: "الجلديات والإكسسوارات",
+      store: { id: "9", name: "دباغة الجلود", rating: 4.6, location: "صنعاء، اليمن", verified: true },
+      narrative: {
+        title: "متانة تعيش طويلاً",
+        body: "حقيبة نسائية من الجلد الطبيعي المعالج يدوياً، بتصميم يجمع بين الحداثة والتراث اليمني.",
+        culturalHighlight: "اشتهرت اليمن قديماً بصناعة الجلود ودباغتها."
+      },
+      specs: [{ label: "المادة", value: "جلد بقر طبيعي" }, { label: "اللون", value: "بني" }, { label: "الاستخدام", value: "يومي" }],
+      image: "/products-9.webp"
+    },
+    {
+      id: "10",
+      title: "فخار صنعاني أصيل",
+      price: 2500,
+      originalPrice: 3000,
+      rating: 4.5,
+      reviews: 92,
+      category: "المشغولات اليدوية",
+      store: { id: "10", name: "بيت الفخار", rating: 4.4, location: "صنعاء، اليمن", verified: true },
+      narrative: {
+        title: "نتاج الطين والماء",
+        body: "أواني فخارية مصنوعة يدوياً على القرص الدوار، تستخدم لحفظ الماء وتبريده بشكل طبيعي وصحي.",
+        culturalHighlight: "الفخار الصنعاني يعكس علاقة الإنسان اليمني بالأرض."
+      },
+      specs: [{ label: "المادة", value: "طين طبيعي" }, { label: "الاستخدام", value: "حفظ الماء" }, { label: "المنشأ", value: "صنعاء" }],
+      image: "/products-10.webp"
+    }
+  ]
 
   return (
     <div className="pb-24 bg-background min-h-screen">
