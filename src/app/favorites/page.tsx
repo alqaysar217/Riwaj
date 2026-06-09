@@ -14,26 +14,10 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 const FAVORITE_PRODUCTS = [
-  {
-    id: "1",
-    title: "بن خولاني مطري فاخر",
-    price: 5500,
-    rating: 4.9,
-    reviews: 142,
-    category: "البن اليمني",
-    storeName: "محامص الجبال",
-    image: "/products-1.png"
-  },
-  {
-    id: "2",
-    title: "عسل سدر ملكي",
-    price: 12000,
-    rating: 5.0,
-    reviews: 89,
-    category: "العسل الطبيعي",
-    storeName: "رحيق الوادي",
-    image: "/products-2.png"
-  },
+  { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, category: "البن اليمني", storeName: "محامص الجبال", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر حضرمي", price: 12000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
+  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, category: "المشغولات اليدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
+  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, category: "الجلديات والإكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
 ]
 
 const FAVORITE_STORES = [

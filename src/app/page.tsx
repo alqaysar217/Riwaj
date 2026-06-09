@@ -28,112 +28,21 @@ const CATEGORIES = [
   { name: "الأزياء التقليدية", icon: Shirt, key: "الأزياء التقليدية" },
   { name: "الضيافة الشعبية", icon: Utensils, key: "الضيافة الشعبية" },
   { name: "المجوهرات والحلي", icon: Gem, key: "المجوهرات والحلي" },
-  { name: "الهدايا الفاخرة", icon: Gift, key: "الهدايا الفاخرة" },
   { name: "الجلديات والإكسسوارات", icon: ShoppingBag, key: "الجلديات والإكسسوارات" },
   { name: "أخرى", icon: LayoutGrid, key: "أخرى" },
 ]
 
 const FEATURED_PRODUCTS = [
-  {
-    id: "1",
-    title: "بن خولاني مطري فاخر",
-    price: 5500,
-    rating: 4.9,
-    reviews: 142,
-    category: "البن اليمني",
-    storeName: "محامص الجبال",
-    image: "/products-1.png"
-  },
-  {
-    id: "2",
-    title: "عسل سدر ملكي",
-    price: 12000,
-    rating: 5.0,
-    reviews: 89,
-    category: "العسل الطبيعي",
-    storeName: "رحيق الوادي",
-    image: "/products-2.png"
-  },
-  {
-    id: "3",
-    title: "مبخرة نحاسية تراثية",
-    price: 4500,
-    rating: 4.7,
-    reviews: 65,
-    category: "العطور والبخور",
-    storeName: "عبق التراث",
-    image: "/products-3.png"
-  },
-  {
-    id: "4",
-    title: "خنجر يمني (جنبية)",
-    price: 25000,
-    rating: 4.8,
-    reviews: 42,
-    category: "المشغولات اليدوية",
-    storeName: "السيوف والجمبيات",
-    image: "/products-4.png"
-  },
-  {
-    id: "5",
-    title: "فستان مطرز يدوياً",
-    price: 18000,
-    rating: 4.6,
-    reviews: 35,
-    category: "الأزياء التقليدية",
-    storeName: "حياكة الأجداد",
-    image: "/products-5.png"
-  },
-  {
-    id: "6",
-    title: "سلة خوص ملونة",
-    price: 3200,
-    rating: 4.5,
-    reviews: 78,
-    category: "المشغولات اليدوية",
-    storeName: "أنامل يمنية",
-    image: "/products-6.png"
-  },
-  {
-    id: "7",
-    title: "عقد فضة وعقيق",
-    price: 9500,
-    rating: 4.9,
-    reviews: 55,
-    category: "المجوهرات والحلي",
-    storeName: "صائغ اليمن",
-    image: "/products-7.png"
-  },
-  {
-    id: "8",
-    title: "بخور عدني فاخر",
-    price: 6000,
-    rating: 4.8,
-    reviews: 112,
-    category: "العطور والبخور",
-    storeName: "خبير البخور",
-    image: "/products-8.png"
-  },
-  {
-    id: "9",
-    title: "حقيبة جلد طبيعي",
-    price: 15000,
-    rating: 4.7,
-    reviews: 48,
-    category: "الجلديات والإكسسوارات",
-    storeName: "دباغة الجلود",
-    image: "/products-9.png"
-  },
-  {
-    id: "10",
-    title: "فخار صنعاني أصيل",
-    price: 2500,
-    rating: 4.5,
-    reviews: 92,
-    category: "المشغولات اليدوية",
-    storeName: "بيت الفخار",
-    image: "/products-10.png"
-  }
+  { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, category: "البن اليمني", storeName: "محامص الجبال", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر حضرمي", price: 12000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
+  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-3.png" },
+  { id: "4", title: "ورق عنب محشي", price: 4800, rating: 4.8, reviews: 72, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-4.png" },
+  { id: "5", title: "أواني فخارية صنعانية", price: 2800, rating: 4.5, reviews: 45, category: "المشغولات اليدوية", storeName: "بيت الفخار", image: "/products-5.png" },
+  { id: "6", title: "كيك العسل المنزلي", price: 4200, rating: 4.7, reviews: 60, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-6.png" },
+  { id: "7", title: "معمول بالتمر الهش", price: 3800, rating: 4.8, reviews: 95, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-7.png" },
+  { id: "8", title: "شال يمني مطرز", price: 9500, rating: 4.9, reviews: 30, category: "الأزياء التقليدية", storeName: "أناقة يمنية", image: "/products-8.png" },
+  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, category: "المشغولات اليدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
+  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, category: "الجلديات والإكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
 ];
 
 const HERO_SLIDES = [
@@ -259,7 +168,7 @@ export default function Home() {
                 <Star className="w-5 h-5 text-secondary fill-secondary" /> الأكثر مبيعاً
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-                {[...FEATURED_PRODUCTS].reverse().slice(0, 4).map((product) => (
+                {[...FEATURED_PRODUCTS].reverse().slice(0, 6).map((product) => (
                   <ProductCard key={product.id} {...product} />
                 ))}
               </div>

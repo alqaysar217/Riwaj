@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProductCard } from "@/components/product/product-card"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { 
   Star, 
   MapPin, 
@@ -75,11 +74,16 @@ const ALL_STORES = [
 ];
 
 const STORE_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: "محامص الجبال", category: "بن", image: "/products-1.png" },
-  { id: "10", title: "فخار صنعاني أصيل", price: 2500, rating: 4.5, reviews: 92, storeName: "بيت الفخار", category: "المشغولات اليدوية", image: "/products-10.png" },
-  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, storeName: "رحيق الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
-  { id: "8", title: "بخور عدني فاخر", price: 6000, rating: 4.8, reviews: 112, storeName: "خبير البخور", category: "العطور والبخور", image: "/products-8.png" },
-]
+  { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, storeName: "محامص الجبال", category: "البن اليمني", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر حضرمي", price: 12000, rating: 5.0, reviews: 89, storeName: "رحيق الوادي", category: "العسل الطبيعي", image: "/products-2.png" },
+  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-3.png" },
+  { id: "4", title: "ورق عنب محشي", price: 4800, rating: 4.8, reviews: 72, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-4.png" },
+  { id: "5", title: "أواني فخارية صنعانية", price: 2800, rating: 4.5, reviews: 45, storeName: "بيت الفخار", category: "المشغولات اليدوية", image: "/products-5.png" },
+  { id: "6", title: "كيك العسل المنزلي", price: 4200, rating: 4.7, reviews: 60, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-6.png" },
+  { id: "7", title: "معمول بالتمر الهش", price: 3800, rating: 4.8, reviews: 95, storeName: "مأكولات الأجداد", category: "الضيافة الشعبية", image: "/products-7.png" },
+  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, storeName: "سيوف الحرفيين", category: "المشغولات اليدوية", image: "/products-9.png" },
+  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, storeName: "صائغ العقيق", category: "الجلديات والإكسسوارات", image: "/products-10.png" }
+];
 
 export default function StoreProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)

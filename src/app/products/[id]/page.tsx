@@ -24,176 +24,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const { id } = await params
   
   const PRODUCTS = [
-    {
-      id: "1",
-      title: "بن خولاني مطري فاخر",
-      price: 5500,
-      originalPrice: 6500,
-      rating: 4.9,
-      reviews: 142,
-      category: "البن اليمني",
-      store: { id: "1", name: "محامص الجبال", rating: 4.8, location: "صعدة، اليمن", verified: true },
-      narrative: {
-        title: "إرث الجبال العالية",
-        body: "بن خولاني أصيل، قطفناه بعناية من أعالي قمم صعدة ليعطيك نكهة غنية تعكس عبق الأرض وجمال التقاليد.",
-        culturalHighlight: "زراعة البن في خولان موروث متوارث منذ مئات السنين."
-      },
-      specs: [{ label: "المنطقة", value: "خولان، صعدة" }, { label: "نوع التحميص", value: "متوسط" }, { label: "الوزن", value: "500 جرام" }],
-      image: "/products-1.png"
-    },
-    {
-      id: "2",
-      title: "عسل سدر ملكي",
-      price: 12000,
-      originalPrice: 15000,
-      rating: 5.0,
-      reviews: 89,
-      category: "العسل الطبيعي",
-      store: { id: "2", name: "رحيق الوادي", rating: 4.9, location: "حضرموت، اليمن", verified: true },
-      narrative: {
-        title: "ذهب حضرموت السائل",
-        body: "عسل سدر طبيعي من أشجار السدر المعمرة في وديان حضرموت، يمتاز بقوامه الكثيف وطعمه الفريد وفوائده العظيمة.",
-        culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي."
-      },
-      specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }],
-      image: "/products-2.png"
-    },
-    {
-      id: "3",
-      title: "مبخرة نحاسية تراثية",
-      price: 4500,
-      originalPrice: 5500,
-      rating: 4.7,
-      reviews: 65,
-      category: "العطور والبخور",
-      store: { id: "4", name: "عبق التراث", rating: 4.7, location: "صنعاء، اليمن", verified: true },
-      narrative: {
-        title: "فخامة الأصالة",
-        body: "مبخرة نحاسية مصنوعة يدوياً بنقوش إسلامية دقيقة، تضيف لمسة من الفخامة والعراقة لأي ركن في منزلك.",
-        culturalHighlight: "فن نقش النحاس في صنعاء القديمة مهنة يتوارثها الحرفيون."
-      },
-      specs: [{ label: "المادة", value: "نحاس نقي" }, { label: "التصميم", value: "نقوش صنعانية" }, { label: "الاستخدام", value: "بخور/ديكور" }],
-      image: "/products-3.png"
-    },
-    {
-      id: "4",
-      title: "خنجر يمني (جنبية)",
-      price: 25000,
-      originalPrice: 30000,
-      rating: 4.8,
-      reviews: 42,
-      category: "المشغولات اليدوية",
-      store: { id: "6", name: "صائغ العقيق", rating: 4.9, location: "صنعاء، اليمن", verified: true },
-      narrative: {
-        title: "رمز الرجولة والشموخ",
-        body: "جنبية يمنية أصلية بمقبض من قرن وحيد القرن الطبيعي، ونصل فولاذي حاد، قطعة فنية تجمع التاريخ والقوة.",
-        culturalHighlight: "الجنبية هي رمز الهوية الوطنية وزينة الرجل اليمني."
-      },
-      specs: [{ label: "المقبض", value: "صيفاني طبيعي" }, { label: "المنشأ", value: "اليمن" }, { label: "الحالة", value: "جديد" }],
-      image: "/products-4.png"
-    },
-    {
-      id: "5",
-      title: "فستان مطرز يدوياً",
-      price: 18000,
-      originalPrice: 22000,
-      rating: 4.6,
-      reviews: 35,
-      category: "الأزياء التقليدية",
-      store: { id: "7", name: "هدايا وتحف", rating: 4.4, location: "عدن، اليمن", verified: true },
-      narrative: {
-        title: "أناقة الحاضر بروح الماضي",
-        body: "فستان نسائي بتطريز يدوي دقيق يعكس دقة الحرفيين اليمنيين، مصمم ليمنحكِ إطلالة ملكية في المناسبات.",
-        culturalHighlight: "التطريز اليمني يعتمد على خيوط الحرير والألوان الزاهية."
-      },
-      specs: [{ label: "الخامة", value: "حرير وقطن" }, { label: "نوع التطريز", value: "يدوي" }, { label: "المقاس", value: "متعدد" }],
-      image: "/products-5.png"
-    },
-    {
-      id: "6",
-      title: "سلة خوص ملونة",
-      price: 3200,
-      originalPrice: 4000,
-      rating: 4.5,
-      reviews: 78,
-      category: "المشغولات اليدوية",
-      store: { id: "7", name: "هدايا وتحف", rating: 4.4, location: "عدن، اليمن", verified: true },
-      narrative: {
-        title: "فن الحياكة الطبيعية",
-        body: "سلة خوص مصنوعة من سعف النخيل الطبيعي، ملونة بأصباغ مستخلصة من الطبيعة، مثالية للتنظيم والديكور.",
-        culturalHighlight: "تعتبر صناعة الخوص من أعرق الحرف في المناطق الساحلية."
-      },
-      specs: [{ label: "المادة", value: "سعف نخيل" }, { label: "الوزن", value: "500 جرام" }, { label: "المتانة", value: "عالية" }],
-      image: "/products-6.png"
-    },
-    {
-      id: "7",
-      title: "عقد فضة وعقيق",
-      price: 9500,
-      originalPrice: 11000,
-      rating: 4.9,
-      reviews: 55,
-      category: "المجوهرات والحلي",
-      store: { id: "6", name: "صائغ العقيق", rating: 4.9, location: "صنعاء، اليمن", verified: true },
-      narrative: {
-        title: "بريق العقيق اليماني",
-        body: "عقد من الفضة الخالصة مرصع بالعقيق اليماني الكبدي الأصلي، يجمع بين بريق الفضة وجمال الحجر التاريخي.",
-        culturalHighlight: "العقيق اليماني هو الحجر الأكثر شهرة في التاريخ الإسلامي."
-      },
-      specs: [{ label: "المعدن", value: "فضة عيار 925" }, { label: "الحجر", value: "عقيق يماني" }, { label: "الوزن", value: "80 جرام" }],
-      image: "/products-7.png"
-    },
-    {
-      id: "8",
-      title: "بخور عدني فاخر",
-      price: 6000,
-      originalPrice: 7500,
-      rating: 4.8,
-      reviews: 112,
-      category: "العطور والبخور",
-      store: { id: "8", name: "خبير البخور", rating: 4.8, location: "عدن، اليمن", verified: true },
-      narrative: {
-        title: "رائحة الحب والذكريات",
-        body: "خلطة بخور عدني أصلية، مكونة من أجود أنواع العود والعطور الشرقية التي تدوم طويلاً وتملأ المكان بالسكينة.",
-        culturalHighlight: "البخور جزء لا يتجزأ من طقوس الضيافة اليمنية."
-      },
-      specs: [{ label: "الوزن", value: "250 جرام" }, { label: "النوع", value: "عدني" }, { label: "الثبات", value: "عالي" }],
-      image: "/products-8.png"
-    },
-    {
-      id: "9",
-      title: "حقيبة جلد طبيعي",
-      price: 15000,
-      originalPrice: 18000,
-      rating: 4.7,
-      reviews: 48,
-      category: "الجلديات والإكسسوارات",
-      store: { id: "7", name: "هدايا وتحف", rating: 4.4, location: "عدن، اليمن", verified: true },
-      narrative: {
-        title: "متانة تعيش طويلاً",
-        body: "حقيبة نسائية من الجلد الطبيعي المعالج يدوياً، بتصميم يجمع بين الحداثة والتراث اليمني.",
-        culturalHighlight: "اشتهرت اليمن قديماً بصناعة الجلود ودباغتها."
-      },
-      specs: [{ label: "المادة", value: "جلد بقر طبيعي" }, { label: "اللون", value: "بني" }, { label: "الاستخدام", value: "يومي" }],
-      image: "/products-9.png"
-    },
-    {
-      id: "10",
-      title: "فخار صنعاني أصيل",
-      price: 2500,
-      originalPrice: 3000,
-      rating: 4.5,
-      reviews: 92,
-      category: "المشغولات اليدوية",
-      store: { id: "3", name: "بيت الفخار", rating: 4.5, location: "صنعاء، اليمن", verified: true },
-      narrative: {
-        title: "نتاج الطين والماء",
-        body: "أواني فخارية مصنوعة يدوياً على القرص الدوار، تستخدم لحفظ الماء وتبريده بشكل طبيعي وصحي.",
-        culturalHighlight: "الفخار الصنعاني يعكس علاقة الإنسان اليمني بالأرض."
-      },
-      specs: [{ label: "المادة", value: "طين طبيعي" }, { label: "الاستخدام", value: "حفظ الماء" }, { label: "المنشأ", value: "صنعاء" }],
-      image: "/products-10.png"
-    }
+    { id: "1", title: "بن خولاني مطري فاخر", price: 5500, originalPrice: 6500, rating: 4.9, reviews: 142, category: "البن اليمني", store: { id: "1", name: "محامص الجبال", rating: 4.8, location: "صعدة" }, narrative: { title: "إرث الجبال العالية", body: "بن خولاني أصيل، قطفناه بعناية من أعالي قمم صعدة ليعطيك نكهة غنية تعكس عبق الأرض وجمال التقاليد.", culturalHighlight: "زراعة البن في خولان موروث متوارث منذ مئات السنين." }, specs: [{ label: "المنطقة", value: "خولان، صعدة" }, { label: "نوع التحميص", value: "متوسط" }, { label: "الوزن", value: "500 جرام" }], image: "/products-1.png" },
+    { id: "2", title: "عسل سدر حضرمي", price: 12000, originalPrice: 15000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", store: { id: "2", name: "رحيق الوادي", rating: 4.9, location: "حضرموت" }, narrative: { title: "ذهب حضرموت السائل", body: "عسل سدر طبيعي نقي، يمتاز بقوامه الكثيف وفوائده الصحية العظيمة المكتسبة من أشجار السدر المعمرة.", culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي." }, specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }], image: "/products-2.png" },
+    { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, originalPrice: 4200, rating: 4.7, reviews: 56, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "حلاوة التراث", body: "كوكيز هش ومغذي محشو بأجود أنواع التمور اليمنية، رفيقك المثالي مع القهوة في كل صباح.", culturalHighlight: "التمر عنصر أساسي في الضيافة اليمنية." }, specs: [{ label: "الحشوة", value: "تمر خصب" }, { label: "الوزن", value: "300 جرام" }, { label: "التغليف", value: "فاخر" }], image: "/products-3.png" },
+    { id: "4", title: "ورق عنب محشي", price: 4800, originalPrice: 5500, rating: 4.8, reviews: 72, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "نكهة منزلك", body: "ورق عنب طازج محضر بأيادي يمنية ماهرة بخلطة خلطات التوابل التقليدية والحامض الطبيعي.", culturalHighlight: "يعتبر ورق العنب من أطباق الضيافة المفضلة في العزائم." }, specs: [{ label: "المكونات", value: "أرز، خضار، بهارات" }, { label: "الطعم", value: "حامض" }, { label: "الكمية", value: "صحن كبير" }], image: "/products-4.png" },
+    { id: "5", title: "أواني فخارية صنعانية", price: 2800, originalPrice: 3500, rating: 4.5, reviews: 45, category: "مشغولات يدوية", store: { id: "3", name: "بيت الفخار", rating: 4.5, location: "صنعاء" }, narrative: { title: "نتاج الطين والماء", body: "أواني فخارية مصنوعة يدوياً على القرص الدوار، تحافظ على برودة المياه ونقاوتها بشكل طبيعي.", culturalHighlight: "الفخار الصنعاني يعكس علاقة الإنسان اليمني بالأرض." }, specs: [{ label: "المادة", value: "طين طبيعي" }, { label: "الاستخدام", value: "تبريد الماء" }, { label: "المنشأ", value: "صنعاء" }], image: "/products-5.png" },
+    { id: "6", title: "كيك العسل المنزلي", price: 4200, originalPrice: 5000, rating: 4.7, reviews: 60, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "حلاوة طبيعية", body: "كيكة اسفنجية غنية بالعسل الطبيعي، خفيفة على المعدة وتناسب جميع المناسبات.", culturalHighlight: "استخدام العسل في الحلويات هو سر الطعم الأصيل." }, specs: [{ label: "المكونات", value: "عسل، دقيق، بيض" }, { label: "الوزن", value: "500 جرام" }, { label: "الحالة", value: "طازج" }], image: "/products-6.png" },
+    { id: "7", title: "معمول بالتمر الهش", price: 3800, originalPrice: 4500, rating: 4.8, reviews: 95, category: "الضيافة الشعبية", store: { id: "5", name: "مأكولات الأجداد", rating: 4.6, location: "تعز" }, narrative: { title: "طعم لا يُنسى", body: "معمول يذوب في الفم، محضر بالسمن البلدي والتمر النقي ليمنحك تجربة ذوقية يمنية بحتة.", culturalHighlight: "المعمول هو سيد حلويات العيد والضيافة في اليمن." }, specs: [{ label: "المادة", value: "سمن بلدي، تمر" }, { label: "النوع", value: "معمول هش" }, { label: "الوزن", value: "400 جرام" }], image: "/products-7.png" },
+    { id: "8", title: "شال يمني مطرز", price: 9500, originalPrice: 12000, rating: 4.9, reviews: 30, category: "الأزياء التقليدية", store: { id: "8", name: "خبير البخور", rating: 4.7, location: "عدن" }, narrative: { title: "رقي الألوان", body: "شال بتطريز يدوي دقيق يجمع بين الألوان الزاهية والحرير الناعم، يضيف لمسة من الأناقة التقليدية.", culturalHighlight: "التطريز اليمني جزء من الهوية الفنية للمرأة اليمنية." }, specs: [{ label: "القماش", value: "حرير صناعي" }, { label: "التطريز", value: "يدوي" }, { label: "الاستخدام", value: "نسائي" }], image: "/products-8.png" },
+    { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, originalPrice: 35000, rating: 5.0, reviews: 15, category: "مشغولات يدوية", store: { id: "4", name: "سيوف الحرفيين", rating: 4.9, location: "صعدة" }, narrative: { title: "رمز الشموخ", body: "جنبية يمنية أصلية بمقبض من القرن الطبيعي ونصل حاد، تعبير عن التاريخ والقوة والاعتزاز بالذات.", culturalHighlight: "الجنبية رمز وطني وزينة الرجل اليمني." }, specs: [{ label: "المقبض", value: "قرن طبيعي" }, { label: "النصل", value: "فولاذي" }, { label: "الحالة", value: "أصلي" }], image: "/products-9.png" },
+    { id: "10", title: "قلادة العقيق اليماني", price: 11000, originalPrice: 14000, rating: 4.9, reviews: 50, category: "الجلديات والإكسسوارات", store: { id: "6", name: "صائغ العقيق", rating: 4.9, location: "صنعاء" }, narrative: { title: "حجر التاريخ", body: "قلادة فضية مرصعة بالعقيق اليماني الكبدي الأصلي، قطعة فريدة تليق بالمناسبات الفاخرة.", culturalHighlight: "العقيق اليماني هو أشهر الأحجار الكريمة في العالم." }, specs: [{ label: "الحجر", value: "عقيق كبدي" }, { label: "المعدن", value: "فضة" }, { label: "التصميم", value: "تقليدي" }], image: "/products-10.png" }
   ];
 
   const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
@@ -242,11 +82,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <div className="lg:col-span-8 space-y-6">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                {product.store.verified && (
-                  <Badge className="bg-green-50 text-green-700 hover:bg-green-50 border-green-200 gap-1.5 text-[10px] font-bold py-1 px-3 rounded-full">
-                    <ShieldCheck className="w-3.5 h-3.5" /> منتج أصلي موثق
-                  </Badge>
-                )}
+                <Badge className="bg-green-50 text-green-700 hover:bg-green-50 border-green-200 gap-1.5 text-[10px] font-bold py-1 px-3 rounded-full">
+                  <ShieldCheck className="w-3.5 h-3.5" /> منتج أصلي موثق
+                </Badge>
               </div>
               <h1 className="text-3xl font-headline font-bold text-primary leading-tight">
                 {product.title}
@@ -278,10 +116,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   <p className="text-xs text-muted-foreground mb-1 font-bold uppercase tracking-wider">السعر الحالي</p>
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-bold text-primary">{product.price.toLocaleString()} ر.ي</span>
-                    <span className="text-muted-foreground line-through text-lg font-medium">{product.originalPrice.toLocaleString()} ر.ي</span>
+                    {product.originalPrice && (
+                      <span className="text-muted-foreground line-through text-lg font-medium">{product.originalPrice.toLocaleString()} ر.ي</span>
+                    )}
                   </div>
                 </div>
-                <Badge className="bg-secondary text-white px-4 py-1.5 font-bold rounded-xl text-sm shadow-lg shadow-secondary/20">توفير 15%</Badge>
+                {product.originalPrice && (
+                  <Badge className="bg-secondary text-white px-4 py-1.5 font-bold rounded-xl text-sm shadow-lg shadow-secondary/20">
+                    توفير {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+                  </Badge>
+                )}
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
