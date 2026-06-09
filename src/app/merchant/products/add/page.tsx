@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react"
@@ -40,7 +39,8 @@ import {
   Card, 
   CardHeader, 
   CardTitle, 
-  CardContent 
+  CardContent,
+  CardDescription
 } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 import { generateProductNarrative } from "@/ai/flows/generate-product-narrative"
@@ -329,6 +329,7 @@ export default function AddProductPage() {
                  </div>
                  الكلمات الدلالية (Tags)
               </CardTitle>
+              <CardDescription className="font-medium text-muted-foreground/70 pr-14">أضف كلمات مفتاحية تساعد العملاء في الوصول لمنتجك بسهولة</CardDescription>
             </CardHeader>
             <CardContent className="p-10 space-y-6">
               <div className="flex flex-wrap gap-3">
