@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Header } from "@/components/layout/header"
@@ -38,7 +39,7 @@ export default function ProfilePage() {
             
             <div className="flex items-center gap-5 relative z-10">
               <Avatar className="w-20 h-20 border-2 border-white/30 shadow-md">
-                <AvatarImage src="https://picsum.photos/seed/user1/200/200" />
+                <AvatarImage src="/user-1.png" />
                 <AvatarFallback className="bg-secondary text-white text-xl font-bold">أ م</AvatarFallback>
               </Avatar>
               

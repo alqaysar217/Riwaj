@@ -20,8 +20,8 @@ const STORES = [
     location: "صنعاء", 
     products: 45, 
     verified: true, 
-    avatar: "https://picsum.photos/seed/store1/100/100",
-    banner: "https://picsum.photos/seed/b1/600/200"
+    avatar: "/logo-stores-1.png",
+    banner: "/logo-stores-ditales-1.png"
   },
   { 
     id: "2", 
@@ -31,8 +31,8 @@ const STORES = [
     location: "دوعن", 
     products: 12, 
     verified: true, 
-    avatar: "https://picsum.photos/seed/store2/100/100",
-    banner: "https://picsum.photos/seed/b2/600/200"
+    avatar: "/logo-stores-2.png",
+    banner: "/logo-stores-ditales-2.png"
   },
   { 
     id: "3", 
@@ -42,8 +42,8 @@ const STORES = [
     location: "تريم", 
     products: 89, 
     verified: false, 
-    avatar: "https://picsum.photos/seed/store3/100/100",
-    banner: "https://picsum.photos/seed/b3/600/200"
+    avatar: "/logo-stores-3.png",
+    banner: "/logo-stores-ditales-3.png"
   },
   { 
     id: "4", 
@@ -53,8 +53,8 @@ const STORES = [
     location: "عدن", 
     products: 34, 
     verified: true, 
-    avatar: "https://picsum.photos/seed/store4/100/100",
-    banner: "https://picsum.photos/seed/b4/600/200"
+    avatar: "/logo-stores-4.png",
+    banner: "/logo-stores-ditales-4.png"
   },
   { 
     id: "5", 
@@ -64,8 +64,8 @@ const STORES = [
     location: "مأرب", 
     products: 22, 
     verified: true, 
-    avatar: "https://picsum.photos/seed/store5/100/100",
-    banner: "https://picsum.photos/seed/b5/600/200"
+    avatar: "/logo-stores-5.png",
+    banner: "/logo-stores-ditales-5.png"
   },
   { 
     id: "6", 
@@ -75,8 +75,8 @@ const STORES = [
     location: "المكلا", 
     products: 18, 
     verified: true, 
-    avatar: "https://picsum.photos/seed/store6/100/100",
-    banner: "https://picsum.photos/seed/b6/600/200"
+    avatar: "/logo-stores-6.png",
+    banner: "/logo-stores-ditales-6.png"
   },
 ]
 

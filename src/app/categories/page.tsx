@@ -1,3 +1,4 @@
+
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -6,14 +7,14 @@ import { Coffee, Droplets, Wind, Palette, Shirt, Utensils, Gem, ShoppingBag, Che
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 const CATEGORIES = [
-  { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
-  { id: "2", name: "عسل طبيعي", icon: Droplets, count: 56, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
-  { id: "3", name: "بخور وعطور", icon: Wind, count: 89, image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl },
-  { id: "4", name: "حرف يدوية", icon: Palette, count: 142, image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl },
-  { id: "5", name: "ملابس تقليدية", icon: Shirt, count: 73, image: "https://picsum.photos/seed/clothes-cat/400/500" },
-  { id: "6", name: "مأكولات بيتية", icon: Utensils, count: 45, image: "https://picsum.photos/seed/food-cat/400/500" },
-  { id: "7", name: "فضيات وهدايا", icon: Gem, count: 32, image: "https://picsum.photos/seed/silver-cat/400/500" },
-  { id: "8", name: "أخرى", icon: ShoppingBag, count: 21, image: "https://picsum.photos/seed/other-cat/400/500" },
+  { id: "1", name: "البن اليمني", icon: Coffee, count: 124, image: "/categories-1.png" },
+  { id: "2", name: "عسل طبيعي", icon: Droplets, count: 56, image: "/categories-2.png" },
+  { id: "3", name: "بخور وعطور", icon: Wind, count: 89, image: "/categories-3.png" },
+  { id: "4", name: "حرف يدوية", icon: Palette, count: 142, image: "/categories-4.png" },
+  { id: "5", name: "ملابس تقليدية", icon: Shirt, count: 73, image: "/categories-5.png" },
+  { id: "6", name: "مأكولات بيتية", icon: Utensils, count: 45, image: "/categories-6.png" },
+  { id: "7", name: "فضيات وهدايا", icon: Gem, count: 32, image: "/categories-7.png" },
+  { id: "8", name: "أخرى", icon: ShoppingBag, count: 21, image: "/categories-8.png" },
 ]
 
 export default function CategoriesPage() {

@@ -3,37 +3,37 @@
     {
       "id": "hero-coffee",
       "description": "Premium Yemeni Coffee",
-      "imageUrl": "https://picsum.photos/seed/yemen-coffee/1200/600",
+      "imageUrl": "/products-1.png",
       "imageHint": "coffee beans"
     },
     {
       "id": "cat-honey",
       "description": "Sidr Honey",
-      "imageUrl": "https://picsum.photos/seed/honey/400/400",
+      "imageUrl": "/categories-2.png",
       "imageHint": "honey jar"
     },
     {
       "id": "cat-handicrafts",
       "description": "Yemeni Handicrafts",
-      "imageUrl": "https://picsum.photos/seed/crafts/400/400",
+      "imageUrl": "/categories-4.png",
       "imageHint": "traditional pottery"
     },
     {
       "id": "product-qishr",
       "description": "Traditional Qishr Coffee",
-      "imageUrl": "https://picsum.photos/seed/qishr/600/600",
+      "imageUrl": "/products-5.png",
       "imageHint": "coffee cup"
     },
     {
       "id": "product-incense",
       "description": "Premium Bakhoor",
-      "imageUrl": "https://picsum.photos/seed/incense/600/600",
+      "imageUrl": "/products-4.png",
       "imageHint": "incense smoke"
     },
     {
       "id": "store-banner",
       "description": "Traditional Yemeni Architecture",
-      "imageUrl": "https://picsum.photos/seed/architecture/800/300",
+      "imageUrl": "/logo-stores-ditales-1.png",
       "imageHint": "historical building"
     }
   ]

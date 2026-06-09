@@ -14,19 +14,19 @@ const SLIDES = [
   {
     title: "كنوز اليمن بين يديك",
     description: "اكتشف أجود أنواع البن والعسل والحرف اليدوية من قلب اليمن الأصيل، حيث تلتقي الجودة بالهوية.",
-    image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl,
+    image: "/Onboarding-1.png",
     icon: Sparkles
   },
   {
     title: "ادعم الأسر المنتجة",
     description: "رواج هو حلقة الوصل بينك وبين صناع الجمال والحرفيين المبدعين في جميع أنحاء البلاد.",
-    image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl,
+    image: "/Onboarding-2.png",
     icon: ShoppingBag
   },
   {
     title: "ابدأ تجارتك الخاصة",
     description: "حوّل شغفك إلى مشروع رابح. انضم إلى مئات التجار والأسر المنتجة وافتح متجرك الإلكتروني اليوم.",
-    image: PlaceHolderImages.find(i => i.id === "store-banner")?.imageUrl,
+    image: "/Onboarding-3.png",
     icon: Store
   }
 ]

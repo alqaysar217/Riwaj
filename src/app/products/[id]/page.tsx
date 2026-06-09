@@ -51,7 +51,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       { label: "الوزن", value: "500 جرام" },
       { label: "المعالجة", value: "تجفيف طبيعي" }
     ],
-    image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || ""
+    image: "/products-1.png"
   }
 
   return (

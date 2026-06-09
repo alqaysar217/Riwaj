@@ -30,23 +30,23 @@ const CATEGORIES = [
 ]
 
 const FEATURED_PRODUCTS = [
-  { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "بن", image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "" },
-  { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "عسل", image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "" },
-  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "حرف", image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl || "" },
-  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "بخور", image: PlaceHolderImages.find(i => i.id === "product-incense")?.imageUrl || "" },
-  { id: "5", title: "جنبية صيفاني قديمة", price: 25000, rating: 4.9, reviews: 12, storeName: "فضيات صنعاء", category: "حرف", image: "https://picsum.photos/seed/janbia/400/400" },
-  { id: "6", title: "ثوب يمني مطرز", price: 8500, rating: 4.6, reviews: 34, storeName: "أزياء سبأ", category: "ملابس", image: "https://picsum.photos/seed/clothes/400/400" },
+  { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, rating: 4.9, reviews: 124, storeName: "متجر خولان", category: "بن", image: "/products-1.png" },
+  { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, rating: 5.0, reviews: 89, storeName: "عسل الوادي", category: "عسل", image: "/products-2.png" },
+  { id: "3", title: "مبخرة صنعانية تقليدية", price: 3500, rating: 4.7, reviews: 45, storeName: "تراث اليمن", category: "حرف", image: "/products-3.png" },
+  { id: "4", title: "بخور عدني خاص", price: 2800, rating: 4.8, reviews: 67, storeName: "بخور الملكة", category: "بخور", image: "/products-4.png" },
+  { id: "5", title: "جنبية صيفاني قديمة", price: 25000, rating: 4.9, reviews: 12, storeName: "فضيات صنعاء", category: "حرف", image: "/products-5.png" },
+  { id: "6", title: "ثوب يمني مطرز", price: 8500, rating: 4.6, reviews: 34, storeName: "أزياء سبأ", category: "ملابس", image: "/products-6.png" },
 ]
 
 const HERO_SLIDES = [
   {
-    image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "",
+    image: "/Onboarding-1.png",
   },
   {
-    image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "",
+    image: "/Onboarding-2.png",
   },
   {
-    image: PlaceHolderImages.find(i => i.id === "cat-handicrafts")?.imageUrl || "",
+    image: "/Onboarding-3.png",
   },
 ]
 
