@@ -22,8 +22,10 @@ export default function LoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     
+    const lowerEmail = email.toLowerCase().trim();
+
     // Admin login logic
-    if (email === "مدير" && password === "123456") {
+    if (lowerEmail === "admin" && password === "123456") {
       toast({
         title: "مرحباً أيها المدير",
         description: "جاري توجيهك إلى لوحة الإدارة المركزية لـ رواج.",
@@ -33,7 +35,7 @@ export default function LoginPage() {
     }
 
     // Merchant login logic
-    if (email === "تاجر" && password === "123456") {
+    if (lowerEmail === "merchant" && password === "123456") {
       toast({
         title: "أهلاً بك يا شريك النجاح",
         description: "جاري توجيهك إلى لوحة تحكم متجرك.",
@@ -92,13 +94,13 @@ export default function LoginPage() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-xs font-bold text-muted-foreground flex items-center gap-2 pr-1">
-                  <User className="w-3.5 h-3.5 text-primary" /> البريد أو اسم المستخدم
+                  <User className="w-3.5 h-3.5 text-primary" /> اسم المستخدم أو البريد
                 </Label>
                 <Input 
                   id="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="أدخل اسمك أو بريدك الإلكتروني" 
+                  placeholder="أدخل اسم المستخدم أو البريد" 
                   className="h-14 rounded-2xl bg-muted/30 border-none px-6 focus-visible:ring-2 focus-visible:ring-primary/20 text-right font-bold" 
                   required
                 />
@@ -140,20 +142,20 @@ export default function LoginPage() {
           </form>
 
           {/* Dynamic Badge for Shortcut Login */}
-          {(email === "مدير" || email === "تاجر") && (
+          {(email.toLowerCase().trim() === "admin" || email.toLowerCase().trim() === "merchant") && (
             <div className={cn(
               "p-4 rounded-2xl flex items-center gap-3 border animate-in fade-in zoom-in-95 duration-300",
-              email === "مدير" ? "bg-orange-50 border-orange-100 text-orange-700" : "bg-blue-50 border-blue-100 text-blue-700"
+              email.toLowerCase().trim() === "admin" ? "bg-orange-50 border-orange-100 text-orange-700" : "bg-blue-50 border-blue-100 text-blue-700"
             )}>
                <div className={cn(
                  "w-10 h-10 rounded-xl flex items-center justify-center shadow-sm",
-                 email === "مدير" ? "bg-white text-orange-600" : "bg-white text-blue-600"
+                 email.toLowerCase().trim() === "admin" ? "bg-white text-orange-600" : "bg-white text-blue-600"
                )}>
-                 {email === "مدير" ? <ShieldAlert className="w-5 h-5" /> : <Store className="w-5 h-5" />}
+                 {email.toLowerCase().trim() === "admin" ? <ShieldAlert className="w-5 h-5" /> : <Store className="w-5 h-5" />}
                </div>
                <div>
                  <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">وضع الدخول السريع</p>
-                 <p className="text-xs font-bold">نمط الدخول كـ {email === "مدير" ? "مدير للنظام" : "تاجر معتمد"} مفعّل.</p>
+                 <p className="text-xs font-bold">نمط الدخول كـ {email.toLowerCase().trim() === "admin" ? "مدير للنظام" : "تاجر معتمد"} مفعّل.</p>
                </div>
             </div>
           )}
@@ -170,7 +172,7 @@ export default function LoginPage() {
         <div className="bg-primary/5 p-4 rounded-2xl border border-primary/10 flex gap-3 items-start">
            <ShieldAlert className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
            <p className="text-[10px] text-muted-foreground leading-relaxed">
-             <span className="text-primary font-bold">تلميح تجريبي:</span> استخدم "مدير" أو "تاجر" مع كلمة السر "123456" للتنقل السريع بين لوحات التحكم المختلفة للمنصة.
+             <span className="text-primary font-bold">تلميح تجريبي:</span> استخدم "admin" أو "merchant" مع كلمة السر "123456" للتنقل السريع بين لوحات التحكم المختلفة للمنصة.
            </p>
         </div>
       </main>
