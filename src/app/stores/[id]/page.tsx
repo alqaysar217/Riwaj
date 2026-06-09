@@ -36,17 +36,17 @@ export default function StoreProfilePage({ params }: { params: Promise<{ id: str
     location: "صنعاء، حي حدة",
     joinedDate: "يناير 2023",
     verified: true,
-    avatar: "https://picsum.photos/seed/store1/200/200",
-    banner: "https://picsum.photos/seed/b1/1200/400",
+    avatar: "/logo-stores-1.png",
+    banner: "/logo-stores-ditales-1.png",
     description: "نحن في محامص الجبال نفخر بتقديم أجود أنواع البن اليمني الأصيل، نعتني بكل حبة بن من المزرعة وحتى محمصة القهوة لنضمن لكم نكهة لا تنسى تجسد تراث اليمن العريق.",
     aiNarrative: "يتميز هذا المتجر بالتزامه بتقاليد زراعة البن في جبال خولان، حيث يتم التجفيف طبيعياً تحت أشعة الشمس، مما يمنح محاصيله نكهة فاكهية فريدة تعكس جودة التربة اليمنية."
   }
 
   const STORE_PRODUCTS = [
-    { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: store.name, category: "بن", image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || "" },
-    { id: "2", title: "قشر قهوة يمني", price: 1500, rating: 4.7, reviews: 56, storeName: store.name, category: "بن", image: PlaceHolderImages.find(i => i.id === "product-qishr")?.imageUrl || "" },
-    { id: "3", title: "عسل سدر مطري", price: 15000, rating: 5.0, reviews: 32, storeName: store.name, category: "عسل", image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl || "" },
-    { id: "4", title: "خلطة بن عربي", price: 3800, rating: 4.8, reviews: 89, storeName: store.name, category: "بن", image: "https://picsum.photos/seed/mix/400/400" },
+    { id: "1", title: "بن خولاني فاخر", price: 4500, rating: 4.9, reviews: 124, storeName: store.name, category: "بن", image: "/products-1.png" },
+    { id: "2", title: "قشر قهوة يمني", price: 1500, rating: 4.7, reviews: 56, storeName: store.name, category: "بن", image: "/products-2.png" },
+    { id: "3", title: "عسل سدر مطري", price: 15000, rating: 5.0, reviews: 32, storeName: store.name, category: "عسل", image: "/products-3.png" },
+    { id: "4", title: "خلطة بن عربي", price: 3800, rating: 4.8, reviews: 89, storeName: store.name, category: "بن", image: "/products-4.png" },
   ]
 
   return (

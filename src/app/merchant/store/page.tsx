@@ -45,13 +45,6 @@ export default function MerchantStoreProfile() {
     facebook: "jibal.coffee.yemen"
   })
 
-  const handleSave = () => {
-    toast({
-      title: "تم الحفظ بنجاح!",
-      description: "تم تحديث بيانات متجرك وهي تظهر الآن للعملاء بشكلها الجديد.",
-    })
-  }
-
   return (
     <div className="container mx-auto px-4 py-8 space-y-8 pb-24 max-w-6xl">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -59,7 +52,7 @@ export default function MerchantStoreProfile() {
           <h1 className="text-3xl font-headline font-bold text-primary">بروفايل المتجر</h1>
           <p className="text-muted-foreground text-sm mt-1">تحكم في هوية متجرك البصرية وكيف يراك العملاء في رواج</p>
         </div>
-        <Button onClick={handleSave} className="rounded-2xl h-14 bg-primary hover:bg-primary/90 gap-2 px-10 shadow-lg shadow-primary/20 text-lg font-bold">
+        <Button onClick={() => toast({ title: "تم الحفظ بنجاح!" })} className="rounded-2xl h-14 bg-primary hover:bg-primary/90 gap-2 px-10 shadow-lg shadow-primary/20 text-lg font-bold">
           <Save className="w-5 h-5" /> حفظ التغييرات
         </Button>
       </div>
@@ -69,7 +62,7 @@ export default function MerchantStoreProfile() {
         <div className="lg:col-span-4 space-y-8">
           <Card className="border-none shadow-xl rounded-[40px] overflow-hidden bg-white">
             <div className="relative h-44 bg-muted group">
-               <Image src="https://picsum.photos/seed/b1/800/400" alt="Banner" fill className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
+               <Image src="/logo-stores-ditales-1.png" alt="Banner" fill className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" />
                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-[2px]">
                   <Button variant="secondary" size="sm" className="rounded-full gap-2 font-bold shadow-xl">
                     <Camera className="w-4 h-4" /> تغيير الغلاف
@@ -79,7 +72,7 @@ export default function MerchantStoreProfile() {
             <CardContent className="relative pt-16 pb-10 px-8 text-center">
               <div className="absolute -top-14 left-1/2 -translate-x-1/2">
                 <div className="relative w-28 h-28 rounded-[35px] overflow-hidden border-4 border-white shadow-2xl bg-white group rotate-3 hover:rotate-0 transition-transform duration-500">
-                   <Image src="https://picsum.photos/seed/s1/300/300" alt="Avatar" fill className="object-cover" />
+                   <Image src="/logo-stores-1.png" alt="Avatar" fill className="object-cover" />
                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                       <Camera className="w-6 h-6 text-white" />
                    </div>
@@ -238,7 +231,7 @@ export default function MerchantStoreProfile() {
           </Card>
 
           <div className="flex gap-4 items-center">
-             <Button onClick={handleSave} className="flex-[3] h-16 rounded-[25px] bg-primary hover:bg-primary/90 text-white font-bold text-xl gap-3 shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-100">
+             <Button onClick={() => toast({ title: "تم الحفظ بنجاح!" })} className="flex-[3] h-16 rounded-[25px] bg-primary hover:bg-primary/90 text-white font-bold text-xl gap-3 shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-100">
                 <Save className="w-6 h-6" /> حفظ ونشر كافة التعديلات
              </Button>
              <Button variant="ghost" className="flex-1 h-16 rounded-[25px] font-bold text-destructive hover:bg-destructive/5 px-8 gap-2 border border-transparent hover:border-destructive/20 transition-all">

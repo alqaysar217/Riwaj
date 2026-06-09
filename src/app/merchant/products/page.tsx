@@ -39,10 +39,10 @@ import {
 } from "@/components/ui/select"
 
 const MERCHANT_PRODUCTS = [
-  { id: "1", name: "بن خولاني فاخر - درجة أولى", price: 4500, stock: 45, sales: 124, status: "active", rating: 4.9, image: "https://picsum.photos/seed/p1/200/200", category: "بن" },
-  { id: "2", name: "بن مطري - تحميص متوسط", price: 5000, stock: 12, sales: 89, status: "active", rating: 4.8, image: "https://picsum.photos/seed/p2/200/200", category: "بن" },
-  { id: "3", name: "قشر قهوة مطحون", price: 1800, stock: 0, sales: 234, status: "out_of_stock", rating: 4.7, image: "https://picsum.photos/seed/p3/200/200", category: "بن" },
-  { id: "4", name: "خلطة بن عربي بالهيل", price: 3500, stock: 28, sales: 56, status: "active", rating: 4.9, image: "https://picsum.photos/seed/p4/200/200", category: "بن" },
+  { id: "1", name: "بن خولاني فاخر - درجة أولى", price: 4500, stock: 45, sales: 124, status: "active", rating: 4.9, image: "/products-1.png", category: "بن" },
+  { id: "2", name: "بن مطري - تحميص متوسط", price: 5000, stock: 12, sales: 89, status: "active", rating: 4.8, image: "/products-2.png", category: "بن" },
+  { id: "3", name: "قشر قهوة مطحون", price: 1800, stock: 0, sales: 234, status: "out_of_stock", rating: 4.7, image: "/products-3.png", category: "بن" },
+  { id: "4", name: "خلطة بن عربي بالهيل", price: 3500, stock: 28, sales: 56, status: "active", rating: 4.9, image: "/products-4.png", category: "بن" },
 ]
 
 export default function MerchantProducts() {

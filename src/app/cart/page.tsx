@@ -59,8 +59,8 @@ import {
 export default function CartPage() {
   const { toast } = useToast()
   const [cartItems, setCartItems] = useState([
-    { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl },
-    { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: PlaceHolderImages.find(i => i.id === "cat-honey")?.imageUrl },
+    { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: "/products-1.png" },
+    { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: "/products-2.png" },
   ])
 
   const [showNote, setShowNote] = useState(false)
@@ -72,10 +72,10 @@ export default function CartPage() {
   const [walletBalance] = useState(50000)
 
   const banks = [
-    { id: "kuraimi", name: "بنك الكريمي", account: "1234567", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/kuraimi/100/100" },
-    { id: "busairi", name: "شركة البسيري للصرافة", account: "7654321", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/busairi/100/100" },
-    { id: "dawood", name: "بن دول للصرافة", account: "9876543", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/dawood/100/100" },
-    { id: "amjad", name: "أمجاد حضرموت", account: "1122334", owner: "مؤسسة رواج التجارية", logo: "https://picsum.photos/seed/amjad/100/100" },
+    { id: "kuraimi", name: "بنك الكريمي", account: "1234567", owner: "مؤسسة رواج التجارية", logo: "/logo-stores-1.png" },
+    { id: "busairi", name: "شركة البسيري للصرافة", account: "7654321", owner: "مؤسسة رواج التجارية", logo: "/logo-stores-2.png" },
+    { id: "dawood", name: "بن دول للصرافة", account: "9876543", owner: "مؤسسة رواج التجارية", logo: "/logo-stores-3.png" },
+    { id: "amjad", name: "أمجاد حضرموت", account: "1122334", owner: "مؤسسة رواج التجارية", logo: "/logo-stores-4.png" },
   ]
 
   const savedAddresses = [
