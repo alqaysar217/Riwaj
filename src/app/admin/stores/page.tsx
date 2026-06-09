@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo } from "react"
@@ -89,24 +88,6 @@ export default function AdminStores() {
             <p className="text-xl font-bold text-orange-600">{stores.filter(s => s.status === 'pending').length}</p>
           </div>
         </div>
-      </div>
-
-      {/* Info Notice: Lifecycle Explanation */}
-      <div className="bg-secondary/10 p-6 rounded-[2rem] border border-secondary/20 flex flex-col md:flex-row gap-5 items-start">
-         <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-secondary shrink-0">
-            <Info className="w-6 h-6" />
-         </div>
-         <div className="space-y-2">
-            <h4 className="font-bold text-primary text-sm">كيف تتم إضافة المتاجر؟</h4>
-            <p className="text-[11px] text-muted-foreground leading-relaxed">
-              المتاجر في "رواج" لا تُضاف يدوياً من قِبل المدير. يقوم التجار بإنشاء حساباتهم ورفع وثائق التوثيق الخاصة بهم، ثم تظهر طلباتهم في صفحة <Link href="/admin/verifications" className="text-primary font-bold underline">توثيق المتاجر</Link>. بمجرد قبولك للطلب، يظهر المتجر هنا في القائمة النشطة.
-            </p>
-            <Button variant="link" size="sm" asChild className="p-0 h-auto text-primary font-bold text-[10px]">
-               <Link href="/admin/verifications" className="flex items-center gap-1">
-                  عرض طلبات التوثيق الجديدة <ArrowLeft className="w-3 h-3" />
-               </Link>
-            </Button>
-         </div>
       </div>
 
       {/* Search & Filter */}
