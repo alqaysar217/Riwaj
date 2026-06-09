@@ -51,6 +51,11 @@ export default function WelcomePage() {
     router.push('/auth/login')
   }
 
+  const handleSkip = () => {
+    localStorage.setItem('hasSeenWelcome', 'true')
+    router.push('/auth/login')
+  }
+
   return (
     <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
       {/* Background Images Layer */}
@@ -120,7 +125,7 @@ export default function WelcomePage() {
             <Button variant="outline" onClick={handleLogin} className="flex-1 h-12 rounded-2xl border-primary/20 text-primary font-bold hover:bg-primary/5">
               تسجيل الدخول
             </Button>
-            <Button variant="ghost" onClick={handleStart} className="flex-1 h-12 rounded-2xl text-muted-foreground font-bold">
+            <Button variant="ghost" onClick={handleSkip} className="flex-1 h-12 rounded-2xl text-muted-foreground font-bold">
               تخطي
             </Button>
           </div>
