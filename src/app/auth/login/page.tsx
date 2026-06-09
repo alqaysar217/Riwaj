@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react"
@@ -36,15 +35,19 @@ export default function LoginPage() {
     router.push('/')
   }
 
+  // Safe image lookup
+  const heroImage = PlaceHolderImages.find(i => i.id === "hero-1")?.imageUrl || "/hero-1.png"
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top Image Section */}
       <div className="relative h-[30vh] w-full">
         <Image 
-          src={PlaceHolderImages.find(i => i.id === "hero-coffee")?.imageUrl || ""} 
+          src={heroImage} 
           alt="Login" 
           fill 
           className="object-cover"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
         <Button 

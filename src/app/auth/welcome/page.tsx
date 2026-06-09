@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react"
@@ -10,36 +9,36 @@ import { Sparkles, ShoppingBag, Store, ChevronLeft } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { cn } from "@/lib/utils"
 
-const SLIDES = [
-  {
-    title: "كنوز اليمن بين يديك",
-    description: "اكتشف أجود أنواع البن والعسل والحرف اليدوية من قلب اليمن الأصيل، حيث تلتقي الجودة بالهوية.",
-    image: "/Onboarding-1.png",
-    icon: Sparkles
-  },
-  {
-    title: "ادعم الأسر المنتجة",
-    description: "رواج هو حلقة الوصل بينك وبين صناع الجمال والحرفيين المبدعين في جميع أنحاء البلاد.",
-    image: "/Onboarding-2.png",
-    icon: ShoppingBag
-  },
-  {
-    title: "ابدأ تجارتك الخاصة",
-    description: "حوّل شغفك إلى مشروع رابح. انضم إلى مئات التجار والأسر المنتجة وافتح متجرك الإلكتروني اليوم.",
-    image: "/Onboarding-3.png",
-    icon: Store
-  }
-]
-
 export default function WelcomePage() {
   const [currentSlide, setCurrentSlide] = useState(0)
+
+  const SLIDES = [
+    {
+      title: "كنوز اليمن بين يديك",
+      description: "اكتشف أجود أنواع البن والعسل والحرف اليدوية من قلب اليمن الأصيل، حيث تلتقي الجودة بالهوية.",
+      image: PlaceHolderImages.find(i => i.id === "onboarding-1")?.imageUrl || "/Onboarding-1.png",
+      icon: Sparkles
+    },
+    {
+      title: "ادعم الأسر المنتجة",
+      description: "رواج هو حلقة الوصل بينك وبين صناع الجمال والحرفيين المبدعين في جميع أنحاء البلاد.",
+      image: PlaceHolderImages.find(i => i.id === "onboarding-2")?.imageUrl || "/Onboarding-2.png",
+      icon: ShoppingBag
+    },
+    {
+      title: "ابدأ تجارتك الخاصة",
+      description: "حوّل شغفك إلى مشروع رابح. انضم إلى مئات التجار والأسر المنتجة وافتح متجرك الإلكتروني اليوم.",
+      image: PlaceHolderImages.find(i => i.id === "onboarding-3")?.imageUrl || "/Onboarding-3.png",
+      icon: Store
+    }
+  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length)
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [SLIDES.length])
 
   return (
     <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
@@ -55,7 +54,7 @@ export default function WelcomePage() {
             style={{ transitionProperty: "opacity, transform" }}
           >
             <Image 
-              src={slide.image || ""} 
+              src={slide.image} 
               alt="" 
               fill 
               className="object-cover"

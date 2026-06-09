@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react"
@@ -11,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product/product-card"
 import Autoplay from "embla-carousel-autoplay"
 import { cn } from "@/lib/utils"
+import { PlaceHolderImages } from "@/lib/placeholder-images"
 import {
   Carousel,
   CarouselContent,
@@ -35,22 +35,16 @@ const CATEGORIES = [
 
 const FEATURED_PRODUCTS = [
   { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, category: "البن اليمني", storeName: "محامص الجبال", image: "/products-1.png" },
-  { id: "2", title: "عسل سدر ملكي", price: 12000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
-  { id: "3", title: "مبخرة نحاسية تراثية", price: 4500, rating: 4.7, reviews: 65, category: "العطور والبخور", storeName: "عبق التراث", image: "/products-3.png" },
-  { id: "4", title: "خنجر يمني (جنبية)", price: 25000, rating: 4.8, reviews: 42, category: "المشغولات اليدوية", storeName: "السيوف والجمبيات", image: "/products-4.png" },
-  { id: "5", title: "فستان مطرز يدوياً", price: 18000, rating: 4.6, reviews: 35, category: "الأزياء التقليدية", storeName: "حياكة الأجداد", image: "/products-5.png" },
-  { id: "6", title: "سلة خوص ملونة", price: 3200, rating: 4.5, reviews: 78, category: "المشغولات اليدوية", storeName: "أنامل يمنية", image: "/products-6.png" },
-  { id: "7", title: "عقد فضة وعقيق", price: 9500, rating: 4.9, reviews: 55, category: "المجوهرات والحلي", storeName: "صائغ اليمن", image: "/products-7.png" },
-  { id: "8", title: "بخور عدني فاخر", price: 6000, rating: 4.8, reviews: 112, category: "العطور والبخور", storeName: "خبير البخور", image: "/products-8.png" },
-  { id: "9", title: "حقيبة جلد طبيعي", price: 15000, rating: 4.7, reviews: 48, category: "الجلديات والإكسسوارات", storeName: "دباغة الجلود", image: "/products-9.png" },
-  { id: "10", title: "فخار صنعاني أصيل", price: 2500, rating: 4.5, reviews: 92, category: "المشغولات اليدوية", storeName: "بيت الفخار", image: "/products-10.png" }
+  { id: "2", title: "عسل سدر حضرمي", price: 12000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
+  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-3.png" },
+  { id: "4", title: "ورق عنب محشي", price: 4800, rating: 4.8, reviews: 72, category: "مأكولات بيتية", storeName: "مأكولات الأجداد", image: "/products-4.png" },
+  { id: "5", title: "أواني فخارية صنعانية", price: 2800, rating: 4.5, reviews: 45, category: "مشغولات يدوية", storeName: "بيت الفخار", image: "/products-5.png" },
+  { id: "6", title: "كيك العسل المنزلي", price: 4200, rating: 4.7, reviews: 60, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-6.png" },
+  { id: "7", title: "معمول بالتمر الهش", price: 3800, rating: 4.8, reviews: 95, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-7.png" },
+  { id: "8", title: "شال يمني مطرز", price: 9500, rating: 4.9, reviews: 30, category: "أزياء تراثية", storeName: "أناقة يمنية", image: "/products-8.png" },
+  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, category: "مشغولات يدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
+  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, category: "إكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
 ];
-
-const HERO_SLIDES = [
-  { image: "/hero-1.png" },
-  { image: "/hero-2.png" },
-  { image: "/hero-3.png" },
-]
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all")
@@ -58,6 +52,13 @@ export default function Home() {
   const filteredProducts = activeCategory === "all" 
     ? FEATURED_PRODUCTS 
     : FEATURED_PRODUCTS.filter(p => p.category === activeCategory)
+
+  // Get hero images from JSON
+  const heroSlides = [
+    PlaceHolderImages.find(i => i.id === "hero-1")?.imageUrl || "/hero-1.png",
+    PlaceHolderImages.find(i => i.id === "hero-2")?.imageUrl || "/hero-2.png",
+    PlaceHolderImages.find(i => i.id === "hero-3")?.imageUrl || "/hero-3.png",
+  ]
 
   return (
     <div className="pb-20 md:pb-0">
@@ -79,11 +80,11 @@ export default function Home() {
             ]}
           >
             <CarouselContent>
-              {HERO_SLIDES.map((slide, index) => (
+              {heroSlides.map((image, index) => (
                 <CarouselItem key={index} className="basis-full">
                   <div className="relative h-[180px] md:h-[420px] overflow-hidden rounded-xl shadow-2xl border-4 border-white bg-muted group w-full">
                     <Image 
-                      src={slide.image}
+                      src={image}
                       alt="رواج"
                       fill
                       className="object-cover transition-transform duration-1000 group-hover:scale-105"

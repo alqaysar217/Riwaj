@@ -1,6 +1,42 @@
 {
   "placeholderImages": [
     {
+      "id": "hero-1",
+      "description": "البن اليمني الأصيل",
+      "imageUrl": "/hero-1.png",
+      "imageHint": "yemeni coffee"
+    },
+    {
+      "id": "hero-2",
+      "description": "العسل الحضرمي الملكي",
+      "imageUrl": "/hero-2.png",
+      "imageHint": "yemeni honey"
+    },
+    {
+      "id": "hero-3",
+      "description": "الحرف اليدوية اليمانية",
+      "imageUrl": "/hero-3.png",
+      "imageHint": "yemeni handicraft"
+    },
+    {
+      "id": "onboarding-1",
+      "description": "كنوز اليمن بين يديك",
+      "imageUrl": "/Onboarding-1.png",
+      "imageHint": "yemen treasures"
+    },
+    {
+      "id": "onboarding-2",
+      "description": "ادعم الأسر المنتجة",
+      "imageUrl": "/Onboarding-2.png",
+      "imageHint": "yemen artisan"
+    },
+    {
+      "id": "onboarding-3",
+      "description": "ابدأ تجارتك الخاصة",
+      "imageUrl": "/Onboarding-3.png",
+      "imageHint": "yemen business"
+    },
+    {
       "id": "cat-coffee",
       "description": "البن اليمني",
       "imageUrl": "/categories-1.png",
