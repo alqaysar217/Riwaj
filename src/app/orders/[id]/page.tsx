@@ -1,7 +1,7 @@
 
 "use client"
 
-import { use } from "react"
+import { use, useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Header } from "@/components/layout/header"
@@ -22,7 +22,9 @@ import {
   Phone,
   Calendar,
   Wallet,
-  Receipt
+  Receipt,
+  Loader2,
+  AlertCircle
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import {
@@ -34,27 +36,69 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-export default function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
-  const { toast } = useToast()
-
-  // Mock data for the specific order
-  const order = {
-    id: id,
+// مكتبة الطلبات التجريبية
+const MOCK_ORDERS_DB: Record<string, any> = {
+  "RW-9021": {
+    id: "RW-9021",
     date: "24 مايو 2024",
-    status: "ongoing", // ongoing, delivered, shipped
+    status: "ongoing",
     items: [
       { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: "/products-1.png" },
       { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: "/products-2.png" },
     ],
-    paymentMethod: "accounts", // cod, wallet, accounts
+    paymentMethod: "accounts",
     selectedBank: { name: "بنك الكريمي", account: "1234567", owner: "مؤسسة رواج التجارية" },
     address: { title: "المنزل", details: "صنعاء، حي حدة، شارع الخمسين بجوار فندق برج العرب", phone: "775258830" },
     subtotal: 21000,
     shipping: 1000,
     total: 22000,
     note: "يرجى تغليف العسل جيداً لضمان عدم التسرب."
+  },
+  "RW-8912": {
+    id: "RW-8912",
+    date: "12 مايو 2024",
+    status: "delivered",
+    items: [
+      { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, quantity: 1, image: "/products-3.png" },
+    ],
+    paymentMethod: "cod",
+    address: { title: "العمل", details: "صنعاء، التحرير، عمارة البركة الدور الثاني", phone: "775258830" },
+    subtotal: 3500,
+    shipping: 1000,
+    total: 4500,
+    note: ""
+  },
+  "RW-7856": {
+    id: "RW-7856",
+    date: "1 مايو 2024",
+    status: "delivered",
+    items: [
+      { id: "2", title: "عسل سدر ملكي", price: 12000, quantity: 1, image: "/products-2.png" },
+    ],
+    paymentMethod: "wallet",
+    address: { title: "المنزل", details: "صنعاء، حي حدة، شارع الخمسين", phone: "775258830" },
+    subtotal: 12000,
+    shipping: 0,
+    total: 12000,
+    note: "توصيل سريع من فضلك"
   }
+}
+
+export default function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  const { toast } = useToast()
+  const [order, setOrder] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // محاكاة جلب البيانات
+    const timer = setTimeout(() => {
+      const foundOrder = MOCK_ORDERS_DB[id] || MOCK_ORDERS_DB["RW-9021"]
+      setOrder(foundOrder)
+      setLoading(false)
+    }, 800)
+    return () => clearTimeout(timer)
+  }, [id])
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -62,6 +106,15 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
       title: "تم النسخ!",
       description: `تم نسخ رقم الحساب ${text} إلى الحافظة.`,
     })
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        <p className="text-sm font-bold text-muted-foreground">جاري تحميل تفاصيل الطلب...</p>
+      </div>
+    )
   }
 
   return (
@@ -127,32 +180,46 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                         <p className="text-xs text-muted-foreground">{order.date} - 10:30 صباحاً</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4 mr-1">
-                      <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-white relative z-10 shrink-0 animate-pulse">
-                        <Package className="w-4 h-4" />
+                    
+                    <div className={cn("flex items-start gap-4 mr-1", order.status === 'delivered' ? "opacity-100" : "opacity-100")}>
+                      <div className={cn(
+                        "w-6 h-6 rounded-full flex items-center justify-center text-white relative z-10 shrink-0",
+                        order.status === 'delivered' ? "bg-primary" : "bg-secondary animate-pulse"
+                      )}>
+                        {order.status === 'delivered' ? <CheckCircle2 className="w-4 h-4" /> : <Package className="w-4 h-4" />}
                       </div>
                       <div>
-                        <p className="font-bold text-sm text-secondary">جاري تجهيز المنتجات في المخازن</p>
-                        <p className="text-xs text-muted-foreground">توقع الشحن خلال 24 ساعة</p>
+                        <p className={cn("font-bold text-sm", order.status === 'ongoing' && "text-secondary")}>
+                          {order.status === 'delivered' ? "تم تجهيز وتغليف المنتجات" : "جاري تجهيز المنتجات في المخازن"}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {order.status === 'delivered' ? "تمت العملية بنجاح" : "توقع الشحن خلال 24 ساعة"}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4 mr-1 opacity-30">
-                      <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-muted-foreground relative z-10 shrink-0">
-                        <Truck className="w-4 h-4" />
+
+                    <div className={cn("flex items-start gap-4 mr-1", order.status === 'delivered' ? "opacity-100" : "opacity-30")}>
+                      <div className={cn(
+                        "w-6 h-6 rounded-full flex items-center justify-center relative z-10 shrink-0",
+                        order.status === 'delivered' ? "bg-primary text-white" : "bg-muted text-muted-foreground"
+                      )}>
+                        {order.status === 'delivered' ? <CheckCircle2 className="w-4 h-4" /> : <Truck className="w-4 h-4" />}
                       </div>
                       <div>
                         <p className="font-bold text-sm">في الطريق إليك مع مندوب التوصيل</p>
-                        <p className="text-xs text-muted-foreground">لم يتم بعد</p>
+                        <p className="text-xs text-muted-foreground">
+                          {order.status === 'delivered' ? "تم التسليم للعميل" : "لم يتم بعد"}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Products Table - Matching Cart Style */}
+              {/* Products Table */}
               <div className="bg-white rounded-3xl border shadow-sm overflow-hidden">
                 <div className="p-4 bg-muted/20 border-b">
-                  <h3 className="font-bold text-sm">المنتجات المطلوبة</h3>
+                  <h3 className="font-bold text-sm">المنتجات المطلوبة ({order.items.length})</h3>
                 </div>
                 <div className="overflow-x-auto no-scrollbar">
                   <Table className="min-w-[400px] md:min-w-full">
@@ -165,7 +232,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {order.items.map((item) => (
+                      {order.items.map((item: any) => (
                         <TableRow key={item.id} className="hover:bg-muted/5">
                           <TableCell className="text-right px-4 py-4">
                             <div className="flex items-center gap-3">
@@ -229,16 +296,16 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground font-medium">المجموع الفرعي</span>
-                    <span className="font-bold">{order.subtotal} ر.ي</span>
+                    <span className="font-bold">{order.subtotal.toLocaleString()} ر.ي</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground font-medium">رسوم التوصيل</span>
-                    <span className="font-bold text-green-600">{order.shipping} ر.ي</span>
+                    <span className="font-bold text-green-600">{order.shipping.toLocaleString()} ر.ي</span>
                   </div>
                   <Separator className="my-2" />
                   <div className="flex justify-between items-center pt-2">
                     <span className="font-bold text-base text-primary">الإجمالي الكلي</span>
-                    <span className="font-bold text-primary text-xl">{order.total} ر.ي</span>
+                    <span className="font-bold text-primary text-xl">{order.total.toLocaleString()} ر.ي</span>
                   </div>
                 </div>
 
@@ -248,7 +315,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                     <CreditCard className="w-3.5 h-3.5" /> وسيلة الدفع
                   </h3>
                   
-                  {order.paymentMethod === 'accounts' && (
+                  {order.paymentMethod === 'accounts' && order.selectedBank && (
                     <div className="space-y-4">
                       <div className="bg-secondary/5 p-3 rounded-xl border border-secondary/20 flex items-center gap-3">
                         <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-secondary shadow-sm shrink-0">
@@ -274,10 +341,19 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
 
                   {order.paymentMethod === 'cod' && (
                     <div className="bg-primary/5 p-3 rounded-xl border border-primary/10 flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm shrink-0">
                         <Truck className="w-4 h-4" />
                       </div>
                       <p className="text-xs font-bold">الدفع عند الاستلام</p>
+                    </div>
+                  )}
+
+                  {order.paymentMethod === 'wallet' && (
+                    <div className="bg-primary/5 p-3 rounded-xl border border-primary/10 flex items-center gap-3">
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm shrink-0">
+                        <Wallet className="w-4 h-4" />
+                      </div>
+                      <p className="text-xs font-bold">الدفع من محفظة رواج</p>
                     </div>
                   )}
                 </div>
