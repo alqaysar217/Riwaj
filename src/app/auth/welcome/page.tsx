@@ -1,8 +1,8 @@
+
 'use client';
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sparkles, ShoppingBag, Store, ChevronLeft } from "lucide-react"
@@ -10,6 +10,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { cn } from "@/lib/utils"
 
 export default function WelcomePage() {
+  const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const SLIDES = [
@@ -39,6 +40,16 @@ export default function WelcomePage() {
     }, 5000)
     return () => clearInterval(timer)
   }, [SLIDES.length])
+
+  const handleStart = () => {
+    localStorage.setItem('hasSeenWelcome', 'true')
+    router.push('/auth/register')
+  }
+
+  const handleLogin = () => {
+    localStorage.setItem('hasSeenWelcome', 'true')
+    router.push('/auth/login')
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
@@ -102,17 +113,15 @@ export default function WelcomePage() {
         </div>
 
         <div className="space-y-4">
-          <Button asChild className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 gap-2">
-            <Link href="/auth/register">
-              ابدأ الآن <ChevronLeft className="w-5 h-5" />
-            </Link>
+          <Button onClick={handleStart} className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 gap-2">
+            ابدأ الآن <ChevronLeft className="w-5 h-5" />
           </Button>
           <div className="flex gap-3">
-            <Button variant="outline" asChild className="flex-1 h-12 rounded-2xl border-primary/20 text-primary font-bold hover:bg-primary/5">
-              <Link href="/auth/login">تسجيل الدخول</Link>
+            <Button variant="outline" onClick={handleLogin} className="flex-1 h-12 rounded-2xl border-primary/20 text-primary font-bold hover:bg-primary/5">
+              تسجيل الدخول
             </Button>
-            <Button variant="ghost" asChild className="flex-1 h-12 rounded-2xl text-muted-foreground font-bold">
-              <Link href="/">تخطي</Link>
+            <Button variant="ghost" onClick={handleStart} className="flex-1 h-12 rounded-2xl text-muted-foreground font-bold">
+              تخطي
             </Button>
           </div>
         </div>

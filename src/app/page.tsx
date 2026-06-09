@@ -1,9 +1,11 @@
+
 'use client';
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, Zap, Star, LayoutGrid, Utensils, Gem, Gift, ShoppingBag } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { ChevronLeft, Coffee, Droplets, Wind, Palette, Shirt, Zap, Star, LayoutGrid, Utensils, Gem, Gift, ShoppingBag, Loader2 } from "lucide-react"
 import { Header } from "@/components/layout/header"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { Button } from "@/components/ui/button"
@@ -47,18 +49,57 @@ const FEATURED_PRODUCTS = [
 ];
 
 export default function Home() {
+  const router = useRouter()
+  const [isChecking, setIsChecking] = useState(true)
   const [activeCategory, setActiveCategory] = useState("all")
+
+  useEffect(() => {
+    // محاكاة واجهة التحميل وفحص حالة المستخدم
+    const checkUser = () => {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+      const hasSeenWelcome = localStorage.getItem('hasSeenWelcome') === 'true'
+
+      if (!isLoggedIn) {
+        if (!hasSeenWelcome) {
+          router.push('/auth/welcome')
+        } else {
+          router.push('/auth/login')
+        }
+      } else {
+        setIsChecking(false)
+      }
+    }
+
+    const timer = setTimeout(checkUser, 1500) // وقت التحميل الظاهري
+    return () => clearTimeout(timer)
+  }, [router])
 
   const filteredProducts = activeCategory === "all" 
     ? FEATURED_PRODUCTS 
     : FEATURED_PRODUCTS.filter(p => p.category === activeCategory)
 
-  // Get hero images from JSON
   const heroSlides = [
     PlaceHolderImages.find(i => i.id === "hero-1")?.imageUrl || "/hero-1.png",
     PlaceHolderImages.find(i => i.id === "hero-2")?.imageUrl || "/hero-2.png",
     PlaceHolderImages.find(i => i.id === "hero-3")?.imageUrl || "/hero-3.png",
   ]
+
+  if (isChecking) {
+    return (
+      <div className="fixed inset-0 bg-background flex flex-col items-center justify-center gap-6">
+        <div className="w-24 h-24 relative animate-spin">
+          <div className="absolute inset-0 border-4 border-primary/10 rounded-3xl border-t-primary" />
+          <div className="absolute inset-2 flex items-center justify-center">
+             <Image src="/logo.png" alt="رواج" width={40} height={40} className="animate-pulse" />
+          </div>
+        </div>
+        <div className="text-center">
+          <h2 className="text-2xl font-headline font-bold text-primary">رواج</h2>
+          <p className="text-[10px] text-secondary font-bold uppercase tracking-widest mt-1">جاري تجهيز السوق...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pb-20 md:pb-0">

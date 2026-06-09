@@ -22,8 +22,9 @@ export default function ProfilePage() {
   const router = useRouter()
 
   const handleLogout = () => {
-    // محاكاة تسجيل الخروج والعودة للترحيب
-    router.push('/auth/welcome')
+    localStorage.removeItem('isLoggedIn')
+    // نترك hasSeenWelcome لكي لا يضطر لرؤية الترحيب مرة أخرى إذا سجل خروج فقط
+    router.push('/auth/login')
   }
 
   return (

@@ -25,6 +25,10 @@ export default function LoginPage() {
     
     const lowerEmail = email.toLowerCase().trim();
 
+    // محاكاة نجاح الدخول
+    localStorage.setItem('isLoggedIn', 'true')
+    localStorage.setItem('hasSeenWelcome', 'true')
+
     // Admin login logic
     if (lowerEmail === "admin" && password === "123456") {
       toast({
@@ -53,7 +57,6 @@ export default function LoginPage() {
     router.push('/')
   }
 
-  // Safe image lookup
   const heroImage = PlaceHolderImages.find(i => i.id === "hero-1")?.imageUrl || "/hero-1.png"
 
   return (
@@ -77,7 +80,6 @@ export default function LoginPage() {
           <ArrowRight className="w-5 h-5" />
         </Button>
         
-        {/* Logo Overlay on image */}
         <div className="absolute bottom-12 right-8 z-20">
           <h2 className="text-4xl font-headline font-bold text-white drop-shadow-lg">رواج</h2>
           <p className="text-white/80 text-[10px] font-bold uppercase tracking-[0.3em]">بوابتك للمنتجات اليمنية</p>
@@ -142,7 +144,6 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          {/* Dynamic Badge for Shortcut Login */}
           {(email.toLowerCase().trim() === "admin" || email.toLowerCase().trim() === "merchant") && (
             <div className={cn(
               "p-4 rounded-2xl flex items-center gap-3 border animate-in fade-in zoom-in-95 duration-300",
