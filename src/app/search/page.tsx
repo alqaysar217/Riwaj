@@ -29,14 +29,14 @@ import { cn } from "@/lib/utils"
 const ALL_PRODUCTS = [
   { id: "1", title: "بن خولاني مطري فاخر", price: 5500, originalPrice: 6500, rating: 4.9, reviews: 142, category: "البن اليمني", storeName: "محامص الجبال", image: "/products-1.png" },
   { id: "2", title: "عسل سدر حضرمي", price: 12000, originalPrice: 15000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
-  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, originalPrice: 4200, rating: 4.7, reviews: 56, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-3.png" },
-  { id: "4", title: "ورق عنب محشي", price: 4800, originalPrice: 5500, rating: 4.8, reviews: 72, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-4.png" },
-  { id: "5", title: "أواني فخارية صنعانية", price: 2800, originalPrice: 3500, rating: 4.5, reviews: 45, category: "المشغولات اليدوية", storeName: "بيت الفخار", image: "/products-5.png" },
-  { id: "6", title: "كيك العسل المنزلي", price: 4200, originalPrice: 5000, rating: 4.7, reviews: 60, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-6.png" },
-  { id: "7", title: "معمول بالتمر الهش", price: 3800, originalPrice: 4500, rating: 4.8, reviews: 95, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-7.png" },
-  { id: "8", title: "شال يمني مطرز", price: 9500, originalPrice: 12000, rating: 4.9, reviews: 30, category: "الأزياء التقليدية", storeName: "أناقة يمنية", image: "/products-8.png" },
-  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, originalPrice: 35000, rating: 5.0, reviews: 15, category: "المشغولات اليدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
-  { id: "10", title: "قلادة العقيق اليماني", price: 11000, originalPrice: 14000, rating: 4.9, reviews: 50, category: "الجلديات والإكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
+  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, originalPrice: 4200, rating: 4.7, reviews: 56, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-3.png" },
+  { id: "4", title: "ورق عنب محشي", price: 4800, originalPrice: 5500, rating: 4.8, reviews: 72, category: "مأكولات بيتية", storeName: "مأكولات الأجداد", image: "/products-4.png" },
+  { id: "5", title: "أواني فخارية صنعانية", price: 2800, originalPrice: 3500, rating: 4.5, reviews: 45, category: "مشغولات يدوية", storeName: "بيت الفخار", image: "/products-5.png" },
+  { id: "6", title: "كيك العسل المنزلي", price: 4200, originalPrice: 5000, rating: 4.7, reviews: 60, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-6.png" },
+  { id: "7", title: "معمول بالتمر الهش", price: 3800, originalPrice: 4500, rating: 4.8, reviews: 95, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-7.png" },
+  { id: "8", title: "شال يمني مطرز", price: 9500, originalPrice: 12000, rating: 4.9, reviews: 30, category: "أزياء تراثية", storeName: "أناقة يمنية", image: "/products-8.png" },
+  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, originalPrice: 35000, rating: 5.0, reviews: 15, category: "مشغولات يدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
+  { id: "10", title: "قلادة العقيق اليماني", price: 11000, originalPrice: 14000, rating: 4.9, reviews: 50, category: "إكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
 ];
 
 const ALL_STORES = [
@@ -50,21 +50,43 @@ const ALL_STORES = [
   { id: "8", name: "خبير البخور", category: "البخور والعطور", rating: 4.8, location: "عدن", verified: true, avatar: "/logo-stores-8.png", banner: "/logo-stores-ditales-8.png" },
 ]
 
-const CATEGORIES = ["البن اليمني", "العسل الطبيعي", "العطور والبخور", "المشغولات اليدوية", "الأزياء التقليدية", "المجوهرات والحلي", "الضيافة الشعبية", "الجلديات والإكسسوارات"]
+const CATEGORIES = [
+  "البن اليمني", 
+  "العسل الطبيعي", 
+  "العطور والبخور", 
+  "المشغولات اليدوية", 
+  "الأزياء التقليدية", 
+  "المجوهرات والحلي", 
+  "الضيافة الشعبية", 
+  "الجلديات والإكسسوارات",
+  "حلويات",
+  "مأكولات بيتية",
+  "مشغولات يدوية",
+  "أزياء تراثية",
+  "إكسسوارات",
+  "أخرى"
+]
 
 function SearchContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const queryParam = searchParams.get("q") || ""
+  const catParam = searchParams.get("cat") || ""
   
   const [searchInput, setSearchInput] = useState(queryParam)
   const [priceRange, setPriceRange] = useState([0, 50000])
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(catParam ? [catParam] : [])
   const [sortBy, setSortBy] = useState("الأحدث")
 
   useEffect(() => {
     setSearchInput(queryParam)
   }, [queryParam])
+
+  useEffect(() => {
+    if (catParam) {
+      setSelectedCategories([catParam])
+    }
+  }, [catParam])
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -73,8 +95,17 @@ function SearchContent() {
 
   const filteredProducts = useMemo(() => {
     return ALL_PRODUCTS.filter(product => {
-      const matchesSearch = product.title.toLowerCase().includes(searchInput.toLowerCase()) || product.storeName.toLowerCase().includes(searchInput.toLowerCase())
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category)
+      const matchesSearch = !searchInput || product.title.toLowerCase().includes(searchInput.toLowerCase()) || product.storeName.toLowerCase().includes(searchInput.toLowerCase())
+      
+      // Map UI Categories to Data Categories if necessary
+      const matchesCategory = selectedCategories.length === 0 || 
+        selectedCategories.includes(product.category) ||
+        (selectedCategories.includes("الضيافة الشعبية") && product.category === "حلويات") ||
+        (selectedCategories.includes("الضيافة الشعبية") && product.category === "مأكولات بيتية") ||
+        (selectedCategories.includes("المشغولات اليدوية") && product.category === "مشغولات يدوية") ||
+        (selectedCategories.includes("الأزياء التقليدية") && product.category === "أزياء تراثية") ||
+        (selectedCategories.includes("الجلديات والإكسسوارات") && product.category === "إكسسوارات")
+
       const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1]
       return matchesSearch && matchesCategory && matchesPrice
     }).sort((a, b) => {
@@ -86,8 +117,15 @@ function SearchContent() {
 
   const filteredStores = useMemo(() => {
     return ALL_STORES.filter(store => {
-      const matchesSearch = store.name.toLowerCase().includes(searchInput.toLowerCase()) || store.category.toLowerCase().includes(searchInput.toLowerCase())
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(store.category)
+      const matchesSearch = !searchInput || store.name.toLowerCase().includes(searchInput.toLowerCase()) || store.category.toLowerCase().includes(searchInput.toLowerCase())
+      const matchesCategory = selectedCategories.length === 0 || 
+        selectedCategories.includes(store.category) ||
+        (selectedCategories.includes("البن اليمني") && store.category.includes("البن")) ||
+        (selectedCategories.includes("العسل الطبيعي") && store.category.includes("العسل")) ||
+        (selectedCategories.includes("العطور والبخور") && store.category.includes("العطور")) ||
+        (selectedCategories.includes("المشغولات اليدوية") && store.category.includes("الفخار")) ||
+        (selectedCategories.includes("المشغولات اليدوية") && store.category.includes("المشغولات"))
+        
       return matchesSearch && matchesCategory
     })
   }, [searchInput, selectedCategories])
@@ -111,10 +149,14 @@ function SearchContent() {
             placeholder="ابحث عن المنتجات أو المتاجر..." 
             className="h-14 pr-12 pl-12 rounded-xl bg-muted/40 border-none text-base focus-visible:ring-2 focus-visible:ring-primary/20 transition-all shadow-sm"
           />
-          {searchInput && (
+          {(searchInput || selectedCategories.length > 0) && (
             <button 
               type="button"
-              onClick={() => setSearchInput("")}
+              onClick={() => {
+                setSearchInput("")
+                setSelectedCategories([])
+                router.push('/search')
+              }}
               className="absolute left-4 top-1/2 -translate-y-1/2 p-1 hover:bg-muted rounded-full transition-colors"
             >
               <X className="w-4 h-4 text-muted-foreground" />
@@ -130,13 +172,13 @@ function SearchContent() {
               value="products" 
               className="flex-1 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
             >
-              <ShoppingBag className="w-3.5 h-3.5" /> المنتجات
+              <ShoppingBag className="w-3.5 h-3.5" /> المنتجات ({filteredProducts.length})
             </TabsTrigger>
             <TabsTrigger 
               value="stores" 
               className="flex-1 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-lg font-bold text-xs gap-2 transition-all duration-300"
             >
-              <Store className="w-3.5 h-3.5" /> المتاجر
+              <Store className="w-3.5 h-3.5" /> المتاجر ({filteredStores.length})
             </TabsTrigger>
           </TabsList>
 
@@ -160,7 +202,7 @@ function SearchContent() {
                 <div className="space-y-4">
                   <h3 className="font-bold text-sm border-r-4 border-secondary pr-3 leading-none">الفئات</h3>
                   <div className="grid grid-cols-2 gap-3">
-                    {CATEGORIES.map((cat) => (
+                    {CATEGORIES.filter(c => !["حلويات", "مأكولات بيتية", "مشغولات يدوية", "أزياء تراثية", "إكسسوارات"].includes(c)).map((cat) => (
                       <div 
                         key={cat} 
                         onClick={() => toggleCategory(cat)}

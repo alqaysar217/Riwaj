@@ -1,4 +1,6 @@
 
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -33,7 +35,7 @@ export default function CategoriesPage() {
           {CATEGORIES.map((cat) => (
             <Link 
               key={cat.id} 
-              href={`/search?q=${encodeURIComponent(cat.name)}`} 
+              href={`/search?cat=${encodeURIComponent(cat.name)}`} 
               className="group relative block aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500"
             >
               <Image 
