@@ -1,6 +1,7 @@
 
 'use client';
 
+import { usePathname } from "next/navigation";
 import { MerchantBottomNav } from "@/components/navigation/merchant-bottom-nav"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { MerchantSidebar } from "@/components/navigation/merchant-sidebar"
@@ -14,6 +15,22 @@ export default function MerchantLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+  
+  // تحقق مما إذا كان المستخدم في صفحة التهيئة (Onboarding)
+  const isOnboarding = pathname === '/merchant/onboarding';
+
+  // إذا كان في صفحة التهيئة، نعرض المحتوى فقط بدون أشرطة التنقل
+  if (isOnboarding) {
+    return (
+      <div className="min-h-screen bg-background" dir="rtl">
+        <main className="min-h-screen">
+          {children}
+        </main>
+      </div>
+    );
+  }
+
   return (
     <SidebarProvider defaultOpen={true}>
       <div className="flex min-h-screen w-full bg-background" dir="rtl">
