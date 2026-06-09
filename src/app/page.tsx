@@ -24,31 +24,28 @@ const CATEGORIES = [
   { name: "البن اليمني", icon: Coffee, key: "البن اليمني" },
   { name: "العسل الطبيعي", icon: Droplets, key: "العسل الطبيعي" },
   { name: "العطور والبخور", icon: Wind, key: "العطور والبخور" },
-  { name: "المشغولات اليدوية", icon: Palette, key: "المشغولات اليدوية" },
-  { name: "الأزياء التقليدية", icon: Shirt, key: "الأزياء التقليدية" },
-  { name: "الضيافة الشعبية", icon: Utensils, key: "الضيافة الشعبية" },
-  { name: "المجوهرات والحلي", icon: Gem, key: "المجوهرات والحلي" },
-  { name: "الجلديات والإكسسوارات", icon: ShoppingBag, key: "الجلديات والإكسسوارات" },
-  { name: "أخرى", icon: LayoutGrid, key: "أخرى" },
+  { name: "المشغولات اليدوية", icon: Palette, key: "مشغولات يدوية" },
+  { name: "الأزياء التقليدية", icon: Shirt, key: "أزياء تراثية" },
+  { name: "أخرى", icon: LayoutGrid, key: "إكسسوارات" },
 ]
 
 const FEATURED_PRODUCTS = [
   { id: "1", title: "بن خولاني مطري فاخر", price: 5500, rating: 4.9, reviews: 142, category: "البن اليمني", storeName: "محامص الجبال", image: "/products-1.png" },
   { id: "2", title: "عسل سدر حضرمي", price: 12000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", storeName: "رحيق الوادي", image: "/products-2.png" },
-  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-3.png" },
-  { id: "4", title: "ورق عنب محشي", price: 4800, rating: 4.8, reviews: 72, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-4.png" },
-  { id: "5", title: "أواني فخارية صنعانية", price: 2800, rating: 4.5, reviews: 45, category: "المشغولات اليدوية", storeName: "بيت الفخار", image: "/products-5.png" },
-  { id: "6", title: "كيك العسل المنزلي", price: 4200, rating: 4.7, reviews: 60, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-6.png" },
-  { id: "7", title: "معمول بالتمر الهش", price: 3800, rating: 4.8, reviews: 95, category: "الضيافة الشعبية", storeName: "مأكولات الأجداد", image: "/products-7.png" },
-  { id: "8", title: "شال يمني مطرز", price: 9500, rating: 4.9, reviews: 30, category: "الأزياء التقليدية", storeName: "أناقة يمنية", image: "/products-8.png" },
-  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, category: "المشغولات اليدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
-  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, category: "الجلديات والإكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
+  { id: "3", title: "كوكيز بالتمر الفاخر", price: 3500, rating: 4.7, reviews: 56, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-3.png" },
+  { id: "4", title: "ورق عنب محشي", price: 4800, rating: 4.8, reviews: 72, category: "مأكولات بيتية", storeName: "مأكولات الأجداد", image: "/products-4.png" },
+  { id: "5", title: "أواني فخارية صنعانية", price: 2800, rating: 4.5, reviews: 45, category: "مشغولات يدوية", storeName: "بيت الفخار", image: "/products-5.png" },
+  { id: "6", title: "كيك العسل المنزلي", price: 4200, rating: 4.7, reviews: 60, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-6.png" },
+  { id: "7", title: "معمول بالتمر الهش", price: 3800, rating: 4.8, reviews: 95, category: "حلويات", storeName: "مأكولات الأجداد", image: "/products-7.png" },
+  { id: "8", title: "شال يمني مطرز", price: 9500, rating: 4.9, reviews: 30, category: "أزياء تراثية", storeName: "أناقة يمنية", image: "/products-8.png" },
+  { id: "9", title: "جنبية يمنية (خنجر)", price: 28000, rating: 5.0, reviews: 15, category: "مشغولات يدوية", storeName: "سيوف الحرفيين", image: "/products-9.png" },
+  { id: "10", title: "قلادة العقيق اليماني", price: 11000, rating: 4.9, reviews: 50, category: "إكسسوارات", storeName: "صائغ العقيق", image: "/products-10.png" }
 ];
 
 const HERO_SLIDES = [
-  { image: "/Onboarding-1.png" },
-  { image: "/Onboarding-2.png" },
-  { image: "/Onboarding-3.png" },
+  { image: "/hero-1.png" },
+  { image: "/hero-2.png" },
+  { image: "/hero-3.png" },
 ]
 
 export default function Home() {
