@@ -351,7 +351,7 @@ function SearchContent() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 mb-1">
                         <h3 className="font-bold text-sm truncate group-hover:text-primary transition-colors">{store.name}</h3>
-                        {store.verified && <ShieldCheck className="w-3.5 h-3.5 text-green-600" />}
+                        {store.verified && <ShieldCheck className="w-4 h-4 text-green-600" />}
                       </div>
                       <p className="text-[10px] text-muted-foreground mb-2 flex items-center gap-1">
                         <MapPin className="w-3 h-3" /> {store.location}
