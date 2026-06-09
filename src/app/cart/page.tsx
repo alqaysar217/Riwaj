@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -46,7 +46,6 @@ import {
   MapPin,
   PlusCircle
 } from "lucide-react"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 import { cn } from "@/lib/utils"
 import {
   Dialog,
@@ -56,12 +55,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+interface CartItem {
+  id: string
+  title: string
+  price: number
+  quantity: number
+  image: string
+}
+
 export default function CartPage() {
   const { toast } = useToast()
-  const [cartItems, setCartItems] = useState([
-    { id: "1", title: "بن خولاني فاخر - درجة أولى", price: 4500, quantity: 2, image: "/products-1.png" },
-    { id: "2", title: "عسل سدر ملكي - عصيمي", price: 12000, quantity: 1, image: "/products-2.png" },
-  ])
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const [showNote, setShowNote] = useState(false)
   const [showCoupon, setShowCoupon] = useState(false)
@@ -70,6 +75,17 @@ export default function CartPage() {
   const [note, setNote] = useState("")
   const [coupon, setCoupon] = useState("")
   const [walletBalance] = useState(50000)
+
+  useEffect(() => {
+    const loadCart = () => {
+      const savedCart = JSON.parse(localStorage.getItem("cart_items") || "[]")
+      setCartItems(savedCart)
+    }
+    loadCart()
+    setIsLoaded(true)
+    window.addEventListener("cart_updated", loadCart)
+    return () => window.removeEventListener("cart_updated", loadCart)
+  }, [])
 
   const banks = [
     { id: "kuraimi", name: "بنك الكريمي", account: "1234567", owner: "مؤسسة رواج التجارية", logo: "/logo-stores-1.png" },
@@ -88,13 +104,20 @@ export default function CartPage() {
   const total = subtotal + shipping
 
   const updateQuantity = (id: string, delta: number) => {
-    setCartItems(prev => prev.map(item => 
+    const newCart = cartItems.map(item => 
       item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-    ))
+    )
+    setCartItems(newCart)
+    localStorage.setItem("cart_items", JSON.stringify(newCart))
+    window.dispatchEvent(new Event("cart_updated"))
   }
 
   const removeItem = (id: string) => {
-    setCartItems(prev => prev.filter(item => item.id !== id))
+    const newCart = cartItems.filter(item => item.id !== id)
+    setCartItems(newCart)
+    localStorage.setItem("cart_items", JSON.stringify(newCart))
+    window.dispatchEvent(new Event("cart_updated"))
+    toast({ title: "تم الحذف", description: "تمت إزالة المنتج من السلة." })
   }
 
   const copyToClipboard = (text: string) => {
@@ -104,6 +127,8 @@ export default function CartPage() {
       description: `تم نسخ رقم الحساب ${text} إلى الحافظة.`,
     })
   }
+
+  if (!isLoaded) return null
 
   if (cartItems.length === 0) {
     return (
@@ -193,7 +218,7 @@ export default function CartPage() {
                           <div className="p-6 space-y-6">
                             <div className="flex gap-4 bg-muted/20 p-4 rounded-3xl border border-dashed">
                               <div className="relative w-20 h-20 rounded-2xl overflow-hidden border bg-white shrink-0">
-                                <Image src={item.image || ""} alt={item.title} fill className="object-cover" />
+                                <Image src={item.image || "/products-1.png"} alt={item.title} fill className="object-cover" />
                               </div>
                               <div className="flex-1 space-y-1">
                                 <h3 className="font-bold text-xs leading-tight">{item.title}</h3>
@@ -415,17 +440,17 @@ export default function CartPage() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground font-medium">المجموع الفرعي</span>
-                  <span className="font-bold">{subtotal} ر.ي</span>
+                  <span className="font-bold">{subtotal.toLocaleString()} ر.ي</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground font-medium">رسوم التوصيل</span>
-                  <span className="font-bold text-green-600">{shipping} ر.ي</span>
+                  <span className="font-bold text-green-600">{shipping.toLocaleString()} ر.ي</span>
                 </div>
                 <Separator className="my-2" />
                 <div className="flex justify-between items-center pt-2">
                   <span className="font-bold text-lg text-primary">الإجمالي الكلي</span>
                   <div className="text-left">
-                    <span className="font-bold text-primary text-2xl">{total} ر.ي</span>
+                    <span className="font-bold text-primary text-2xl">{total.toLocaleString()} ر.ي</span>
                   </div>
                 </div>
               </div>

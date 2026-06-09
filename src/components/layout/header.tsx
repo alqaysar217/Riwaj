@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -12,7 +12,19 @@ import { Badge } from "@/components/ui/badge"
 
 export function Header() {
   const [searchQuery, setSearchQuery] = useState("")
+  const [cartCount, setCartCount] = useState(0)
   const router = useRouter()
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart_items") || "[]")
+      const count = cart.reduce((acc: number, item: any) => acc + item.quantity, 0)
+      setCartCount(count)
+    }
+    updateCartCount()
+    window.addEventListener("cart_updated", updateCartCount)
+    return () => window.removeEventListener("cart_updated", updateCartCount)
+  }, [])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,9 +77,14 @@ export function Header() {
               <Badge className="absolute top-1 left-1 w-4 h-4 p-0 flex items-center justify-center bg-secondary text-white text-[8px] border-2 border-white">2</Badge>
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl" asChild>
+          <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl" asChild>
             <Link href="/cart">
               <ShoppingCart className="w-5 h-5" />
+              {cartCount > 0 && (
+                <Badge className="absolute -top-1 -right-1 w-4 h-4 p-0 flex items-center justify-center bg-primary text-white text-[8px] border-2 border-white animate-in zoom-in-50">
+                  {cartCount}
+                </Badge>
+              )}
             </Link>
           </Button>
           <div className="hidden sm:block">

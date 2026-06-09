@@ -33,7 +33,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const PRODUCTS = [
     { id: "1", title: "بن خولاني مطري فاخر", price: 5500, originalPrice: 6500, rating: 4.9, reviews: 142, category: "البن اليمني", store: { id: "1", name: "محامص الجبال", rating: 4.8, location: "صعدة" }, narrative: { title: "إرث الجبال العالية", body: "بن خولاني أصيل، قطفناه بعناية من أعالي قمم صعدة ليعطيك نكهة غنية تعكس عبق الأرض وجمال التقاليد.", culturalHighlight: "زراعة البن في خولان موروث متوارث منذ مئات السنين." }, specs: [{ label: "المنطقة", value: "خولان، صعدة" }, { label: "نوع التحميص", value: "متوسط" }, { label: "الوزن", value: "500 جرام" }], image: "/products-1.png" },
     { id: "2", title: "عسل سدر ملكي", price: 12000, originalPrice: 15000, rating: 5.0, reviews: 89, category: "العسل الطبيعي", store: { id: "2", name: "رحيق الوادي", rating: 4.9, location: "حضرموت" }, narrative: { title: "ذهب حضرموت السائل", body: "عسل سدر طبيعي نقي، يمتاز بقوامه الكثيف وفوائده الصحية العظيمة المكتسبة من أشجار السدر المعمرة.", culturalHighlight: "يُعد عسل السدر اليمني الأجود عالمياً بفضل تنوع المراعي." }, specs: [{ label: "المصدر", value: "وديان حضرموت" }, { label: "النوع", value: "سدر ملكي" }, { label: "الوزن", value: "1 كيلو" }], image: "/products-2.png" },
-    // ... بقية المنتجات
   ];
 
   const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
@@ -58,6 +57,31 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     localStorage.setItem("fav_products", JSON.stringify(newFavorites))
     setIsFavorite(!isFavorite)
     window.dispatchEvent(new Event("favorites_updated"))
+  }
+
+  const addToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart_items") || "[]")
+    const existingItemIndex = cart.findIndex((item: any) => item.id === id)
+
+    if (existingItemIndex > -1) {
+      cart[existingItemIndex].quantity += 1
+    } else {
+      cart.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      })
+    }
+
+    localStorage.setItem("cart_items", JSON.stringify(cart))
+    window.dispatchEvent(new Event("cart_updated"))
+    
+    toast({
+      title: "تمت الإضافة للسلة",
+      description: `تم إضافة ${product.title} بنجاح.`,
+    })
   }
 
   return (
@@ -158,7 +182,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                     className="flex-1 bg-primary hover:bg-primary/90 text-white h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20 transition-all active:scale-95"
-                    onClick={() => toast({ title: "تمت الإضافة للسلة" })}
+                    onClick={addToCart}
                 >
                   أضف إلى السلة
                 </Button>

@@ -59,6 +59,36 @@ export function ProductCard({ id, title, price, image, rating, reviews, storeNam
     window.dispatchEvent(new Event("favorites_updated"))
   }
 
+  const addToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const cart = JSON.parse(localStorage.getItem("cart_items") || "[]")
+    const existingItemIndex = cart.findIndex((item: any) => item.id === id)
+
+    if (existingItemIndex > -1) {
+      cart[existingItemIndex].quantity += 1
+    } else {
+      cart.push({
+        id,
+        title,
+        price,
+        image,
+        quantity: 1
+      })
+    }
+
+    localStorage.setItem("cart_items", JSON.stringify(cart))
+    
+    toast({
+      title: "تمت الإضافة للسلة",
+      description: `تم إضافة ${title} إلى سلتك.`,
+    })
+
+    // إرسال حدث لتحديث عداد السلة في الهيدر
+    window.dispatchEvent(new Event("cart_updated"))
+  }
+
   const imageSrc = image || "/products-1.png"
 
   return (
@@ -102,7 +132,7 @@ export function ProductCard({ id, title, price, image, rating, reviews, storeNam
           <Button 
             size="sm" 
             variant="outline" 
-            onClick={() => toast({ title: "تمت الإضافة للسلة", description: `تم إضافة ${title} بنجاح.` })}
+            onClick={addToCart}
             className="h-7 text-[10px] px-2 border-primary/20 text-primary hover:bg-primary hover:text-white"
           >
             أضف للسلة
