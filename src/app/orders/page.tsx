@@ -9,9 +9,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ClipboardList, ChevronLeft, Package, Clock, CheckCircle2 } from "lucide-react"
 
 const ORDERS = [
-  { id: "RW-9021", date: "24 مايو 2024", total: 16500, status: "ongoing", itemsCount: 3, image: "https://picsum.photos/seed/o1/100/100" },
-  { id: "RW-8912", date: "12 مايو 2024", total: 4500, status: "delivered", itemsCount: 1, image: "https://picsum.photos/seed/o2/100/100" },
-  { id: "RW-7856", date: "1 مايو 2024", total: 12000, status: "delivered", itemsCount: 2, image: "https://picsum.photos/seed/o3/100/100" },
+  { id: "RW-9021", date: "24 مايو 2024", total: 16500, status: "ongoing", itemsCount: 3, image: "/products-1.png" },
+  { id: "RW-8912", date: "12 مايو 2024", total: 4500, status: "delivered", itemsCount: 1, image: "/products-3.png" },
+  { id: "RW-7856", date: "1 مايو 2024", total: 12000, status: "delivered", itemsCount: 2, image: "/products-2.png" },
 ]
 
 export default function OrdersPage() {
@@ -73,8 +73,14 @@ function OrderCard({ id, date, total, status, itemsCount, image }: any) {
     <div className="bg-white p-4 rounded-2xl border shadow-sm hover:shadow-md transition-all group">
       <div className="flex justify-between items-start mb-4">
         <div className="flex gap-3">
-          <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-muted">
-            <Image src={image} alt="" fill className="object-cover" />
+          <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-muted border">
+            <Image 
+              src={image} 
+              alt={id} 
+              fill 
+              className="object-cover"
+              sizes="56px"
+            />
           </div>
           <div>
             <h3 className="font-bold text-sm mb-1">طلب رقم: {id}</h3>
