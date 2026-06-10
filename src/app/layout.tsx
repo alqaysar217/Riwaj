@@ -16,6 +16,15 @@ export const metadata: Metadata = {
   description: 'اكتشف أفضل المنتجات اليمنية من البن والعسل والمشغولات اليدوية والبخور في منصة رواج. دعم للأسر المنتجة والحرفيين اليمنيين.',
   keywords: 'اليمن, بن خولاني, عسل سدر, حرف يدوية, بخور عدني, تجارة الكترونية, رواج',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -57,7 +66,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Alegreya:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="apple-touch-icon" href="/logo.png" />
+        {/* Apple specific meta tags for better PWA experience */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="رواج" />
       </head>
       <body className="font-body antialiased bg-background min-h-screen">
         {children}
